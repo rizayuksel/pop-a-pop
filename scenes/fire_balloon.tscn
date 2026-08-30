@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://b5l6ipxxfj30s"]
+
+[ext_resource type="PackedScene" uid="uid://bw8n28q6u2mbb" path="res://scenes/balloon.tscn" id="1_i1cb3"]
+[ext_resource type="Script" uid="uid://bu80f1plu1qi4" path="res://scripts/fire_balloon.gd" id="2_usbk2"]
+
+[node name="Balloon" unique_id=1069062386 instance=ExtResource("1_i1cb3")]
+script = ExtResource("2_usbk2")
+
+[node name="Sprite2D" parent="." index="0" unique_id=141423176]
+modulate = Color(0.7411765, 0.32156864, 0.105882354, 1)

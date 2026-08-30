@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://derdpff0yt5wc"]
+
+[node name="ExplosionEffect" type="Node2D" unique_id=534598594]
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=1652121305]
+emitting = false
+amount = 50
+one_shot = true
+explosiveness = 1.0
+emission_shape = 1
+emission_sphere_radius = 17.0
+gravity = Vector2(0, 0)
