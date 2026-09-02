@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://dguq3upfudmdx"]
+
+[ext_resource type="Script" uid="uid://dbbm5rofm4i45" path="res://scripts/main.gd" id="1_hhfj6"]
+[ext_resource type="Texture2D" uid="uid://dgcweuwinft2x" path="res://icon.svg" id="2_wae8j"]
+[ext_resource type="Script" uid="uid://nvvsupnkt362" path="res://scripts/bow.gd" id="3_ha73p"]
+[ext_resource type="PackedScene" uid="uid://bw8n28q6u2mbb" path="res://scenes/balloon.tscn" id="4_vcx5n"]
+[ext_resource type="PackedScene" uid="uid://cluocltwlltwx" path="res://scenes/ice_balloon.tscn" id="5_56dhn"]
+[ext_resource type="PackedScene" uid="uid://b5l6ipxxfj30s" path="res://scenes/fire_balloon.tscn" id="6_ax3dk"]
+[ext_resource type="PackedScene" uid="uid://32p7ysxh4omg" path="res://scenes/ui.tscn" id="7_q2dsb"]
+
+[node name="Main" type="Node2D" unique_id=202816392]
+script = ExtResource("1_hhfj6")
+level_arrows = 2
+
+[node name="Bow" type="Sprite2D" parent="." unique_id=1068517331]
+position = Vector2(150, 900)
+texture = ExtResource("2_wae8j")
+script = ExtResource("3_ha73p")
+
+[node name="LoadedArrow" type="Sprite2D" parent="Bow" unique_id=1477529943]
+visible = false
+position = Vector2(39, -24)
+scale = Vector2(0.2, 0.5)
+texture = ExtResource("2_wae8j")
+
+[node name="Balloon" parent="." unique_id=1069062386 instance=ExtResource("4_vcx5n")]
+position = Vector2(529, 696)
+
+[node name="Balloon3" parent="." unique_id=580813185 instance=ExtResource("4_vcx5n")]
+position = Vector2(631, 738)
+
+[node name="Balloon2" parent="." unique_id=1234750033 instance=ExtResource("4_vcx5n")]
+position = Vector2(424, 742)
+
+[node name="RubberBand" type="Line2D" parent="." unique_id=918229744]
+default_color = Color(0.7993065, 0.44433373, 0, 1)
+
+[node name="Balloon4" parent="." unique_id=1016218466 instance=ExtResource("5_56dhn")]
+position = Vector2(411, 837)
+
+[node name="Balloon5" parent="." unique_id=1097028430 instance=ExtResource("6_ax3dk")]
+position = Vector2(374, 587)
+
+[node name="UI" parent="." unique_id=1367951368 instance=ExtResource("7_q2dsb")]

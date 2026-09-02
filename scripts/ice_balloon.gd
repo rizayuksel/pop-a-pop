@@ -34,6 +34,7 @@ func apply_freeze_effect():
 					target_balloon.set_deferred("monitorable", false)
 				
 				var static_body = StaticBody2D.new()
+				static_body.name = "IceBarrier"
 				static_body.collision_layer = 1
 				static_body.collision_mask = 1
 				

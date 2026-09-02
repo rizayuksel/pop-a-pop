@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://hho1410i6hrc"]
+
+[ext_resource type="Script" uid="uid://dbbm5rofm4i45" path="res://scripts/main.gd" id="1_y0kc7"]
+[ext_resource type="Texture2D" uid="uid://dgcweuwinft2x" path="res://icon.svg" id="2_ne2mo"]
+[ext_resource type="Script" uid="uid://nvvsupnkt362" path="res://scripts/bow.gd" id="3_6cvei"]
+[ext_resource type="PackedScene" uid="uid://bw8n28q6u2mbb" path="res://scenes/balloon.tscn" id="4_que50"]
+[ext_resource type="PackedScene" uid="uid://cluocltwlltwx" path="res://scenes/ice_balloon.tscn" id="5_hey2k"]
+[ext_resource type="PackedScene" uid="uid://b5l6ipxxfj30s" path="res://scenes/fire_balloon.tscn" id="6_172wr"]
+[ext_resource type="PackedScene" uid="uid://32p7ysxh4omg" path="res://scenes/ui.tscn" id="7_g2hoc"]
+
+[node name="Main" type="Node2D" unique_id=202816392]
+script = ExtResource("1_y0kc7")
+level_arrows = 2
+
+[node name="Bow" type="Sprite2D" parent="." unique_id=1068517331]
+position = Vector2(150, 900)
+texture = ExtResource("2_ne2mo")
+script = ExtResource("3_6cvei")
+
+[node name="LoadedArrow" type="Sprite2D" parent="Bow" unique_id=1477529943]
+visible = false
+position = Vector2(39, -24)
+scale = Vector2(0.2, 0.5)
+texture = ExtResource("2_ne2mo")
+
+[node name="Balloon" parent="." unique_id=1069062386 instance=ExtResource("4_que50")]
+position = Vector2(319, 436)
+
+[node name="Balloon3" parent="." unique_id=580813185 instance=ExtResource("4_que50")]
+position = Vector2(377, 444)
+
+[node name="Balloon2" parent="." unique_id=1234750033 instance=ExtResource("4_que50")]
+position = Vector2(256, 422)
+
+[node name="RubberBand" type="Line2D" parent="." unique_id=918229744]
+default_color = Color(0.7993065, 0.44433373, 0, 1)
+
+[node name="Balloon4" parent="." unique_id=1016218466 instance=ExtResource("5_hey2k")]
+position = Vector2(145, 125)
+
+[node name="Balloon5" parent="." unique_id=1097028430 instance=ExtResource("6_172wr")]
+position = Vector2(308, 527)
+
+[node name="UI" parent="." unique_id=1367951368 instance=ExtResource("7_g2hoc")]

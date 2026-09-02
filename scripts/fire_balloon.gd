@@ -18,8 +18,24 @@ func explode():
 	for target_balloon in all_balloons:
 		if target_balloon != self and is_instance_valid(target_balloon):
 			if global_position.distance_to(target_balloon.global_position) <= explosion_radius:
-				_update_ui_score()
-				target_balloon.queue_free()
+				if target_balloon.has_node("IceBarrier"):
+					_unfreeze_balloon(target_balloon)
+				else:
+					_update_ui_score()
+					target_balloon.queue_free()
+
+func _unfreeze_balloon(balloon):
+	var ice_barrier = balloon.get_node_or_null("IceBarrier")
+	if ice_barrier:
+		ice_barrier.queue_free()
+	
+	balloon.modulate = Color(1, 1, 1, 1)
+	balloon.set_physics_process(true)
+	balloon.set_process(true)
+	
+	if balloon is Area2D:
+		balloon.set_deferred("monitoring", true)
+		balloon.set_deferred("monitorable", true)
 
 func spawn_explosion_effect():
 	var effect = EXPLOSION_SCENE.instantiate()
