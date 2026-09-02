@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bw8n28q6u2mbb" path="res://scenes/balloon.tscn" id="4_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://cluocltwlltwx" path="res://scenes/ice_balloon.tscn" id="5_tefeu"]
 [ext_resource type="PackedScene" uid="uid://b5l6ipxxfj30s" path="res://scenes/fire_balloon.tscn" id="6_o6xl0"]
+[ext_resource type="PackedScene" uid="uid://32p7ysxh4omg" path="res://scenes/ui.tscn" id="7_o6xl0"]
 
 [node name="Main" type="Node2D" unique_id=202816392]
 script = ExtResource("1_sugp2")
@@ -34,7 +35,9 @@ position = Vector2(424, 742)
 default_color = Color(0.7993065, 0.44433373, 0, 1)
 
 [node name="Balloon4" parent="." unique_id=1016218466 instance=ExtResource("5_tefeu")]
-position = Vector2(530, 761)
+position = Vector2(411, 837)
 
 [node name="Balloon5" parent="." unique_id=1097028430 instance=ExtResource("6_o6xl0")]
-position = Vector2(529, 830)
+position = Vector2(374, 587)
+
+[node name="UI" parent="." unique_id=1367951368 instance=ExtResource("7_o6xl0")]

@@ -1,6 +1,14 @@
 [gd_scene format=3 uid="uid://derdpff0yt5wc"]
 
+[ext_resource type="Script" uid="uid://d051hq718ymou" path="res://scripts/explosion_effect.gd" id="1_7i385"]
+
+[sub_resource type="Curve" id="Curve_wjvqx"]
+_data = [Vector2(0.05239521, 1), 0.0, 0.0, 0, 0, Vector2(0.99700606, 0), -2.6594884, 0.0, 0, 0]
+point_count = 2
+
 [node name="ExplosionEffect" type="Node2D" unique_id=534598594]
+z_index = 10
+script = ExtResource("1_7i385")
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=1652121305]
 emitting = false
@@ -9,4 +17,11 @@ one_shot = true
 explosiveness = 1.0
 emission_shape = 1
 emission_sphere_radius = 17.0
+particle_flag_align_y = true
+spread = 180.0
 gravity = Vector2(0, 0)
+initial_velocity_min = 150.0
+initial_velocity_max = 250.0
+scale_amount_min = 5.0
+scale_amount_max = 10.0
+scale_amount_curve = SubResource("Curve_wjvqx")
