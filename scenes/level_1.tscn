@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://b5l6ipxxfj30s" path="res://scenes/fire_balloon.tscn" id="6_o6xl0"]
 [ext_resource type="PackedScene" uid="uid://32p7ysxh4omg" path="res://scenes/ui.tscn" id="7_o6xl0"]
 [ext_resource type="PackedScene" uid="uid://m4wc2udpxngg" path="res://scenes/mud.tscn" id="9_e3sih"]
+[ext_resource type="PackedScene" uid="uid://c61rm7cacm1uf" path="res://scenes/bouncer.tscn" id="10_2y5yt"]
 
 [node name="Main" type="Node2D" unique_id=202816392]
 script = ExtResource("1_sugp2")
@@ -47,4 +48,11 @@ position = Vector2(374, 587)
 [node name="UI" parent="." unique_id=1367951368 instance=ExtResource("7_o6xl0")]
 
 [node name="Mud" parent="." unique_id=1641655694 instance=ExtResource("9_e3sih")]
-position = Vector2(232, 1042)
+position = Vector2(323, 526)
+
+[node name="Bouncer" parent="." unique_id=899775968 instance=ExtResource("10_2y5yt")]
+position = Vector2(297, 414)
+
+[node name="Bouncer2" parent="." unique_id=765628175 instance=ExtResource("10_2y5yt")]
+position = Vector2(586, 939)
+rotation = 1.5553225

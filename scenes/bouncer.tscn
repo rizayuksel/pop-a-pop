@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://c61rm7cacm1uf"]
+
+[ext_resource type="Script" uid="uid://cgh37r2o4jxer" path="res://scripts/bouncer.gd" id="1_q2nta"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_1wysw"]
+bounce = 1.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ikmfy"]
+size = Vector2(99.9993, 19.999964)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_wjvqx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wjvqx"]
+size = Vector2(106, 26)
+
+[node name="Bouncer" type="StaticBody2D" unique_id=899775968]
+physics_material_override = SubResource("PhysicsMaterial_1wysw")
+script = ExtResource("1_q2nta")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=26937276]
+position = Vector2(0, -1.9550323e-05)
+scale = Vector2(0.99999976, 0.99999976)
+shape = SubResource("RectangleShape2D_ikmfy")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1211236098]
+modulate = Color(1, 0.40784314, 1, 1)
+scale = Vector2(100, 20)
+texture = SubResource("CanvasTexture_wjvqx")
+
+[node name="HitDetector" type="Area2D" parent="." unique_id=1022704579]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitDetector" unique_id=1583535619]
+position = Vector2(-0.004748325, -0.5006678)
+shape = SubResource("RectangleShape2D_wjvqx")
