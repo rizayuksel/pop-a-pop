@@ -117,3 +117,8 @@ text = "⌂"
 [node name="SuccessRestartButton" type="Button" parent="BaseControl/LevelCompletePanel/HBoxContainer" unique_id=2065967444]
 layout_mode = 2
 text = "↻"
+
+[node name="FinalStarsLabel" type="Label" parent="BaseControl/LevelCompletePanel" unique_id=1343618756]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0

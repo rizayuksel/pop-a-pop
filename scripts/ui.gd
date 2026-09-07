@@ -1,7 +1,7 @@
 extends CanvasLayer
 
 signal next_level_requested
-signal level_completed # Yöneticimize oyunun kazanıldığını haber vermek için
+signal level_completed
 
 @onready var arrows_label = $BaseControl/ArrowsLabel
 @onready var level_progress_label = $BaseControl/LevelProgressLabel
@@ -14,12 +14,14 @@ signal level_completed # Yöneticimize oyunun kazanıldığını haber vermek i�
 @onready var home_button = $BaseControl/LevelCompletePanel/HBoxContainer/HomeButton
 @onready var success_restart_button = $BaseControl/LevelCompletePanel/HBoxContainer/SuccessRestartButton
 @onready var next_level_button = $BaseControl/LevelCompletePanel/HBoxContainer/NextLevelButton
+@onready var final_stars_label = $BaseControl/LevelCompletePanel/FinalStarsLabel
 
 var arrows_left = 0
 var popped_balloons = 0
 var total_balloons = 0
-var next_star_target = 0
-var is_level_finished = false # Oyunun bitip bitmediğini takip eden şalter
+var star_targets: Array[int] = []
+var earned_stars = 0
+var is_level_finished = false
 
 func _ready():
 	restart_button.pressed.connect(_on_restart_pressed)
@@ -27,11 +29,12 @@ func _ready():
 	success_restart_button.pressed.connect(_on_restart_pressed)
 	home_button.pressed.connect(_on_home_pressed)
 
-func setup_level(total: int, arrows: int, star_target: int):
+func setup_level(total: int, arrows: int, targets: Array[int]):
 	total_balloons = total
 	arrows_left = arrows
-	next_star_target = star_target
+	star_targets = targets
 	popped_balloons = 0
+	earned_stars = 0
 	is_level_finished = false
 	update_ui()
 
@@ -52,15 +55,26 @@ func use_arrow() -> bool:
 		return true
 	return false
 
+func calculate_stars() -> int:
+	var stars = 0
+	for target in star_targets:
+		if popped_balloons >= target:
+			stars += 1
+	return stars
+
 func update_ui():
 	arrows_label.text = str(arrows_left)
 	level_progress_label.text = str(popped_balloons) + "/" + str(total_balloons)
 	
-	var to_next_star = next_star_target - popped_balloons
-	if to_next_star > 0:
-		star_progress_label.text = str(to_next_star)
-	else:
-		star_progress_label.text = "★"
+	earned_stars = calculate_stars()
+	
+	var star_text = ""
+	for i in range(3):
+		if i < earned_stars:
+			star_text += "★"
+		else:
+			star_text += "☆"
+	star_progress_label.text = star_text
 
 func show_game_over():
 	if not is_level_finished:
@@ -70,6 +84,16 @@ func show_game_over():
 func show_level_complete():
 	if not is_level_finished:
 		is_level_finished = true
+		
+		# Format stars for the final panel
+		var final_star_text = ""
+		for i in range(3):
+			if i < earned_stars:
+				final_star_text += "★"
+			else:
+				final_star_text += "☆"
+		
+		final_stars_label.text = final_star_text
 		level_complete_panel.visible = true
 		level_completed.emit()
 
@@ -80,4 +104,4 @@ func _on_next_level_pressed():
 	next_level_requested.emit()
 
 func _on_home_pressed():
-	print("Home menu will be loaded here!")
+	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")

@@ -5,19 +5,15 @@
 [ext_resource type="PackedScene" uid="uid://hho1410i6hrc" path="res://scenes/level_2.tscn" id="2_15mv3"]
 [ext_resource type="Script" uid="uid://nvvsupnkt362" path="res://scripts/bow.gd" id="3_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://bw8n28q6u2mbb" path="res://scenes/balloon.tscn" id="4_jyhfs"]
-[ext_resource type="PackedScene" uid="uid://cluocltwlltwx" path="res://scenes/ice_balloon.tscn" id="5_tefeu"]
-[ext_resource type="PackedScene" uid="uid://b5l6ipxxfj30s" path="res://scenes/fire_balloon.tscn" id="6_o6xl0"]
 [ext_resource type="PackedScene" uid="uid://32p7ysxh4omg" path="res://scenes/ui.tscn" id="7_o6xl0"]
-[ext_resource type="PackedScene" uid="uid://m4wc2udpxngg" path="res://scenes/mud.tscn" id="9_e3sih"]
-[ext_resource type="PackedScene" uid="uid://c61rm7cacm1uf" path="res://scenes/bouncer.tscn" id="10_2y5yt"]
 
 [node name="Main" type="Node2D" unique_id=202816392]
 script = ExtResource("1_sugp2")
-level_arrows = 2
+level_arrows = 3
 next_level_scene = ExtResource("2_15mv3")
 
 [node name="Bow" type="Sprite2D" parent="." unique_id=1068517331]
-position = Vector2(150, 900)
+position = Vector2(109, 705)
 texture = ExtResource("1_0wfyh")
 script = ExtResource("3_jyhfs")
 
@@ -27,32 +23,24 @@ position = Vector2(39, -24)
 scale = Vector2(0.2, 0.5)
 texture = ExtResource("1_0wfyh")
 
+[node name="Line2D" type="Line2D" parent="Bow" unique_id=313548255]
+
 [node name="Balloon" parent="." unique_id=1069062386 instance=ExtResource("4_jyhfs")]
-position = Vector2(529, 696)
+position = Vector2(341, 637)
 
 [node name="Balloon3" parent="." unique_id=580813185 instance=ExtResource("4_jyhfs")]
-position = Vector2(631, 738)
+position = Vector2(489, 603)
 
 [node name="Balloon2" parent="." unique_id=1234750033 instance=ExtResource("4_jyhfs")]
-position = Vector2(424, 742)
+position = Vector2(416, 616)
 
 [node name="RubberBand" type="Line2D" parent="." unique_id=918229744]
 default_color = Color(0.7993065, 0.44433373, 0, 1)
 
-[node name="Balloon4" parent="." unique_id=1016218466 instance=ExtResource("5_tefeu")]
-position = Vector2(411, 837)
-
-[node name="Balloon5" parent="." unique_id=1097028430 instance=ExtResource("6_o6xl0")]
-position = Vector2(374, 587)
-
 [node name="UI" parent="." unique_id=1367951368 instance=ExtResource("7_o6xl0")]
 
-[node name="Mud" parent="." unique_id=1641655694 instance=ExtResource("9_e3sih")]
-position = Vector2(323, 526)
+[node name="Balloon4" parent="." unique_id=2141532563 instance=ExtResource("4_jyhfs")]
+position = Vector2(561, 616)
 
-[node name="Bouncer" parent="." unique_id=899775968 instance=ExtResource("10_2y5yt")]
-position = Vector2(297, 414)
-
-[node name="Bouncer2" parent="." unique_id=765628175 instance=ExtResource("10_2y5yt")]
-position = Vector2(586, 939)
-rotation = 1.5553225
+[node name="Balloon5" parent="." unique_id=1208574902 instance=ExtResource("4_jyhfs")]
+position = Vector2(634, 637)
