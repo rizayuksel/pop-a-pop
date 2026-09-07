@@ -1,0 +1,59 @@
+[gd_scene format=3 uid="uid://dfl3k3rwpa6pl"]
+
+[ext_resource type="Script" uid="uid://c6d4iaksk6jfl" path="res://scripts/level_button.gd" id="1_i0sit"]
+[ext_resource type="Texture2D" uid="uid://dgcweuwinft2x" path="res://icon.svg" id="2_o8246"]
+
+[node name="LevelButton" type="TextureButton" unique_id=1512264420]
+custom_minimum_size = Vector2(150, 150)
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_i0sit")
+
+[node name="Thumbnail" type="TextureRect" parent="." unique_id=1611625403]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_o8246")
+expand_mode = 1
+
+[node name="LockIcon" type="TextureRect" parent="." unique_id=513004506]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="StarLabel" type="Label" parent="." unique_id=1821330457]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 5.0
+offset_right = 50.0
+offset_bottom = 28.0
+theme_override_font_sizes/font_size = 24
+
+[node name="LevelNumberLabel" type="Label" parent="." unique_id=1947258572]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = 40.0
+offset_right = 20.0
+offset_bottom = 70.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 22
+horizontal_alignment = 1
