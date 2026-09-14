@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://drirq8wiqk5ri"]
+
+[ext_resource type="Script" uid="uid://cvwsoyktppvks" path="res://scripts/spike.gd" id="1_ljd5v"]
+[ext_resource type="Texture2D" uid="uid://bm3pxlep4g66w" path="res://assets/SpikeBall.png" id="2_7a7y0"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wjvqx"]
+radius = 13.0
+
+[node name="Spike" type="Area2D" unique_id=1104277886]
+script = ExtResource("1_ljd5v")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=133472836]
+shape = SubResource("CircleShape2D_wjvqx")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=237516862]
+scale = Vector2(0.02, 0.02)
+texture = ExtResource("2_7a7y0")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

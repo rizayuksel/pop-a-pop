@@ -8,10 +8,13 @@ func _ready():
 
 func _on_body_entered(body):
 	if body is RigidBody2D:
-		_update_ui_score()
-		explode()
-		spawn_explosion_effect()
-		queue_free()
+		pop()
+
+func pop():
+	_update_ui_score()
+	explode()
+	spawn_explosion_effect()
+	queue_free()
 
 func explode():
 	var all_balloons = get_tree().get_nodes_in_group("balloons")

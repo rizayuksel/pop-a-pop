@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://dee2qly6qqq25"]
+
+[ext_resource type="Script" uid="uid://cxnqyddeam16" path="res://scripts/spiked_balloon.gd" id="1_fibnh"]
+[ext_resource type="Texture2D" uid="uid://dgcweuwinft2x" path="res://icon.svg" id="2_fibnh"]
+[ext_resource type="Texture2D" uid="uid://bm3pxlep4g66w" path="res://assets/SpikeBall.png" id="3_kvqmn"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wjvqx"]
+radius = 65.03076
+
+[node name="SpikedBalloon" type="Area2D" unique_id=1069062386 groups=["balloons"]]
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_fibnh")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=141423176]
+modulate = Color(0.7562531, 0.09917589, 0.5104212, 1)
+texture = ExtResource("2_fibnh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1534589566]
+shape = SubResource("CircleShape2D_wjvqx")
+
+[node name="SpikeIndicator1" type="Sprite2D" parent="." unique_id=666296335]
+position = Vector2(0, -64)
+scale = Vector2(0.02, 0.02)
+texture = ExtResource("3_kvqmn")
+
+[node name="SpikeIndicator5" type="Sprite2D" parent="." unique_id=1321563002]
+position = Vector2(-64, -32)
+scale = Vector2(0.02, 0.02)
+texture = ExtResource("3_kvqmn")
+
+[node name="SpikeIndicator4" type="Sprite2D" parent="." unique_id=1308234053]
+position = Vector2(-64, 32)
+scale = Vector2(0.02, 0.02)
+texture = ExtResource("3_kvqmn")
+
+[node name="SpikeIndicator3" type="Sprite2D" parent="." unique_id=389129927]
+position = Vector2(64, 32)
+scale = Vector2(0.02, 0.02)
+texture = ExtResource("3_kvqmn")
+
+[node name="SpikeIndicator2" type="Sprite2D" parent="." unique_id=1321223026]
+position = Vector2(64, -32)
+scale = Vector2(0.02, 0.02)
+texture = ExtResource("3_kvqmn")

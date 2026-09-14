@@ -14,3 +14,6 @@ func _on_body_entered(body):
 		if is_instance_valid(body):
 			body.queue_free()
 		queue_free()
+
+func pop():
+	queue_free()

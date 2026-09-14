@@ -6,12 +6,15 @@ func _ready():
 	body_entered.connect(_on_body_entered)
 	area_entered.connect(_on_area_entered)
 
-func _on_body_entered(_body):
-	_update_ui_score()
-	apply_freeze_effect()
-	queue_free()
+func _on_body_entered(body):
+	if body is RigidBody2D:
+		pop()
 
-func _on_area_entered(_area):
+func _on_area_entered(area):
+	if area is RigidBody2D:
+		pop()
+
+func pop():
 	_update_ui_score()
 	apply_freeze_effect()
 	queue_free()
