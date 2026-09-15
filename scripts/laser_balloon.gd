@@ -16,6 +16,11 @@ func _on_body_entered(body):
 
 func pop():
 	_update_ui_score()
+
+	var main_scene = get_tree().current_scene
+	if main_scene.has_node("UI") and main_scene.get_node("UI").has_method("play_laser_sound"):
+		main_scene.get_node("UI").play_laser_sound()
+		
 	fire_lasers()
 
 	$Sprite2D.visible = false
