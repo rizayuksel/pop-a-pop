@@ -22,6 +22,7 @@ var total_balloons = 0
 var star_targets: Array[int] = []
 var earned_stars = 0
 var is_level_finished = false
+var shake_tween: Tween
 
 func _ready():
 	restart_button.pressed.connect(_on_restart_pressed)
@@ -85,7 +86,6 @@ func show_level_complete():
 	if not is_level_finished:
 		is_level_finished = true
 		
-		# Format stars for the final panel
 		var final_star_text = ""
 		for i in range(3):
 			if i < earned_stars:
@@ -107,4 +107,30 @@ func _on_home_pressed():
 	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
 
 func play_laser_sound():
-	$LaserSound.play()
+	if has_node("LaserSound"):
+		$LaserSound.play()
+
+func play_fire_sound():
+	if has_node("FireSound"):
+		$FireSound.play()
+
+func play_ice_sound():
+	if has_node("IceSound"):
+		$IceSound.play()
+
+func shake_camera(intensity: float = 12.0, duration: float = 0.25):
+	var camera = get_viewport().get_camera_2d()
+	if not camera:
+		return
+		
+	if shake_tween:
+		shake_tween.kill()
+		
+	shake_tween = create_tween()
+	var step_time = duration / 5.0
+	
+	for i in range(4):
+		var random_offset = Vector2(randf_range(-intensity, intensity), randf_range(-intensity, intensity))
+		shake_tween.tween_property(camera, "offset", random_offset, step_time)
+		
+	shake_tween.tween_property(camera, "offset", Vector2.ZERO, step_time)

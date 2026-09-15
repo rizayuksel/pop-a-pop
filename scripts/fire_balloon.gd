@@ -1,7 +1,7 @@
 extends Area2D
 
 const EXPLOSION_SCENE = preload("res://scenes/explosion_effect.tscn")
-var explosion_radius = 200.0 
+@export var explosion_radius = 200.0 
 
 func _ready():
 	body_entered.connect(_on_body_entered)
@@ -12,6 +12,15 @@ func _on_body_entered(body):
 
 func pop():
 	_update_ui_score()
+	
+	var main_scene = get_tree().current_scene
+	var ui = main_scene.get_node_or_null("UI")
+	if ui:
+		if ui.has_method("play_fire_sound"):
+			ui.play_fire_sound()
+		if ui.has_method("shake_camera"):
+			ui.shake_camera(18.0, 0.3)
+			
 	explode()
 	spawn_explosion_effect()
 	queue_free()
@@ -43,7 +52,7 @@ func _unfreeze_balloon(balloon):
 func spawn_explosion_effect():
 	var effect = EXPLOSION_SCENE.instantiate()
 	effect.global_position = global_position
-	get_tree().current_scene.add_child(effect)
+	get_tree().current_scene.call_deferred("add_child", effect)
 
 func _update_ui_score():
 	var main_scene = get_tree().current_scene

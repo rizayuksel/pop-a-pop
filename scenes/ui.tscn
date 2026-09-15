@@ -2,6 +2,8 @@
 
 [ext_resource type="Script" uid="uid://cptk5lcdtp0rv" path="res://scripts/ui.gd" id="1_nt7q6"]
 [ext_resource type="AudioStream" uid="uid://q5fhnbchn10r" path="res://assets/LaserShoot.wav" id="2_x4jx1"]
+[ext_resource type="AudioStream" uid="uid://bk8m0volylg0e" path="res://assets/FireShoot.wav" id="3_gdt2y"]
+[ext_resource type="AudioStream" uid="uid://b4ytpq8ur02wi" path="res://assets/IceShoot.wav" id="4_wm3ai"]
 
 [sub_resource type="Environment" id="Environment_wjvqx"]
 background_mode = 3
@@ -134,3 +136,9 @@ environment = SubResource("Environment_wjvqx")
 
 [node name="LaserSound" type="AudioStreamPlayer" parent="." unique_id=389653685]
 stream = ExtResource("2_x4jx1")
+
+[node name="FireSound" type="AudioStreamPlayer" parent="." unique_id=1320170428]
+stream = ExtResource("3_gdt2y")
+
+[node name="IceSound" type="AudioStreamPlayer" parent="." unique_id=337964969]
+stream = ExtResource("4_wm3ai")

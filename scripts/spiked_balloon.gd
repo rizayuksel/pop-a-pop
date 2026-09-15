@@ -8,7 +8,10 @@ func _ready():
 
 func _on_body_entered(body):
 	if body is RigidBody2D:
-		pop()
+		if has_node("IceBarrier"):
+			_play_ice_sound()
+		else:
+			pop()
 
 func pop():
 	var main_scene = get_tree().current_scene
@@ -20,7 +23,6 @@ func pop():
 	for i in range(SPIKE_COUNT):
 		var spike = spike_scene.instantiate()
 		
-		# 0 derecenin sağa bakması sorununu çözmek için -90 ekledik
 		var fire_angle = deg_to_rad((i * angle_step) - 90.0) + global_rotation
 		
 		spike.global_position = global_position
@@ -29,3 +31,8 @@ func pop():
 		get_tree().current_scene.call_deferred("add_child", spike)
 		
 	queue_free()
+
+func _play_ice_sound():
+	var main_scene = get_tree().current_scene
+	if main_scene.has_node("UI") and main_scene.get_node("UI").has_method("play_ice_sound"):
+		main_scene.get_node("UI").play_ice_sound()

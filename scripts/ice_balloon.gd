@@ -32,10 +32,6 @@ func apply_freeze_effect():
 				target_balloon.set_physics_process(false)
 				target_balloon.set_process(false)
 				
-				if target_balloon is Area2D:
-					target_balloon.set_deferred("monitoring", false)
-					target_balloon.set_deferred("monitorable", false)
-				
 				var static_body = StaticBody2D.new()
 				static_body.name = "IceBarrier"
 				static_body.collision_layer = 1
