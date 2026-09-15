@@ -2,6 +2,11 @@
 
 [ext_resource type="Script" uid="uid://cptk5lcdtp0rv" path="res://scripts/ui.gd" id="1_nt7q6"]
 
+[sub_resource type="Environment" id="Environment_wjvqx"]
+background_mode = 3
+glow_enabled = true
+glow_intensity = 1.5
+
 [node name="UI" type="CanvasLayer" unique_id=1367951368]
 script = ExtResource("1_nt7q6")
 
@@ -122,3 +127,6 @@ text = "↻"
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=779814329]
+environment = SubResource("Environment_wjvqx")

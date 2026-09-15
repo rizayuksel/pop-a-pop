@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://b5l6ipxxfj30s" path="res://scenes/fire_balloon.tscn" id="6_172wr"]
 [ext_resource type="PackedScene" uid="uid://32p7ysxh4omg" path="res://scenes/ui.tscn" id="7_g2hoc"]
 [ext_resource type="PackedScene" uid="uid://m4wc2udpxngg" path="res://scenes/mud.tscn" id="9_6cvei"]
+[ext_resource type="PackedScene" uid="uid://naewmtyhfful" path="res://scenes/laser_balloon.tscn" id="10_que50"]
 
 [node name="Main" type="Node2D" unique_id=202816392]
 script = ExtResource("1_y0kc7")
@@ -31,7 +32,7 @@ texture = ExtResource("2_ne2mo")
 position = Vector2(319, 436)
 
 [node name="Balloon3" parent="." unique_id=580813185 instance=ExtResource("4_que50")]
-position = Vector2(451, 344)
+position = Vector2(454, 387)
 
 [node name="Balloon2" parent="." unique_id=1234750033 instance=ExtResource("4_que50")]
 position = Vector2(256, 422)
@@ -43,7 +44,7 @@ default_color = Color(0.7993065, 0.44433373, 0, 1)
 position = Vector2(145, 125)
 
 [node name="Balloon5" parent="." unique_id=1097028430 instance=ExtResource("6_172wr")]
-position = Vector2(216, 587)
+position = Vector2(455, 589)
 
 [node name="UI" parent="." unique_id=1367951368 instance=ExtResource("7_g2hoc")]
 
@@ -51,4 +52,21 @@ position = Vector2(216, 587)
 position = Vector2(457, 673)
 
 [node name="Mud" parent="." unique_id=1641655694 instance=ExtResource("9_6cvei")]
-position = Vector2(582, 782)
+position = Vector2(452, 508)
+
+[node name="LaserBalloon" parent="." unique_id=190980830 instance=ExtResource("10_que50")]
+position = Vector2(458, 787)
+
+[node name="IceBalloon" parent="." unique_id=226366803 instance=ExtResource("5_hey2k")]
+position = Vector2(460, 890)
+
+[node name="LaserBalloon2" parent="." unique_id=1531495307 instance=ExtResource("10_que50")]
+position = Vector2(133, 431)
+laser_type = 0
+
+[node name="LaserBalloon3" parent="." unique_id=904643785 instance=ExtResource("10_que50")]
+position = Vector2(48, 433)
+
+[node name="LaserBalloon4" parent="." unique_id=302058814 instance=ExtResource("10_que50")]
+position = Vector2(454, 452)
+laser_type = 2

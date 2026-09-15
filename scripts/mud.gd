@@ -8,11 +8,14 @@ func _on_body_entered(body):
 		body.linear_velocity = Vector2.ZERO
 		body.angular_velocity = 0.0
 		body.gravity_scale = 0.0
-		
-		await get_tree().create_timer(0.3).timeout
-		
-		if is_instance_valid(body):
-			body.queue_free()
+
+		var timer = get_tree().create_timer(0.3)
+		timer.timeout.connect(func():
+			if is_instance_valid(body):
+				body.queue_free()
+		)
+
+		await timer.timeout
 		queue_free()
 
 func pop():

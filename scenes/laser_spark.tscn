@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://coxvonwcbrbk1"]
+
+[ext_resource type="Script" uid="uid://oga6t5doi73x" path="res://scripts/laser_spark.gd" id="1_nxxco"]
+
+[node name="LaserSpark" type="CPUParticles2D" unique_id=178174841]
+emitting = false
+amount = 20
+one_shot = true
+explosiveness = 1.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_max = 400.0
+scale_amount_max = 4.0
+color = Color(0, 1, 1, 1)
+script = ExtResource("1_nxxco")
