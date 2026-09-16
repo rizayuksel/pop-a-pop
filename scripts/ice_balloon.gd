@@ -16,6 +16,11 @@ func _on_area_entered(area):
 
 func pop():
 	_update_ui_score()
+
+	var main_scene = get_tree().current_scene
+	if main_scene.has_node("UI") and main_scene.get_node("UI").has_method("play_ice_sound"):
+		main_scene.get_node("UI").play_ice_sound()
+		
 	apply_freeze_effect()
 	queue_free()
 

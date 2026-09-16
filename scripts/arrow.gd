@@ -1,12 +1,10 @@
 extends RigidBody2D
 
 func _ready():
-	# Prevent the arrow from tunneling through objects at high speeds
-	continuous_cd = 1
-	
-	# Force the arrow to physically recognize and collide with Layer 1
+	# continuous_cd = RigidBody2D.CCD_MODE_CAST_SHAPE
 	collision_mask = 1
 
 func _process(_delta):
 	if linear_velocity.length() > 0:
-		rotation = linear_velocity.angle()
+		if has_node("Sprite2D"):
+			$Sprite2D.rotation = linear_velocity.angle()

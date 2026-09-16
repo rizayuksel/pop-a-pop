@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://chsi1q1fyhs4q"]
+
+[ext_resource type="Texture2D" uid="uid://dgcweuwinft2x" path="res://icon.svg" id="1_prjx1"]
+[ext_resource type="Script" uid="uid://nvvsupnkt362" path="res://scripts/bow.gd" id="2_rivji"]
+
+[node name="Bow" type="Sprite2D" unique_id=1965107452]
+texture = ExtResource("1_prjx1")
+script = ExtResource("2_rivji")
+trajectory_length = 250
+
+[node name="LoadedArrow" type="Sprite2D" parent="." unique_id=1140156973]
+visible = false
+position = Vector2(39, -24)
+scale = Vector2(0.2, 0.5)
+texture = ExtResource("1_prjx1")
+
+[node name="Line2D" type="Line2D" parent="." unique_id=1532847784]
+width = 3.0

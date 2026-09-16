@@ -1,21 +1,19 @@
 [gd_scene format=3 uid="uid://m4wc2udpxngg"]
 
 [ext_resource type="Script" uid="uid://b08tocu2jeqk7" path="res://scripts/mud.gd" id="1_7hsp0"]
+[ext_resource type="Texture2D" uid="uid://nus1ljw5yef" path="res://assets/Mud.png" id="2_ybdg7"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ybdg7"]
-size = Vector2(49, 49)
-
-[sub_resource type="CanvasTexture" id="CanvasTexture_m4qh5"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_p6vls"]
+radius = 33.0
 
 [node name="Mud" type="Area2D" unique_id=1641655694]
 script = ExtResource("1_7hsp0")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2136227320]
-position = Vector2(2.5, 2.5)
-shape = SubResource("RectangleShape2D_ybdg7")
-
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=315300746]
-modulate = Color(0.54568535, 0.30799237, 0.10761193, 1)
 position = Vector2(2.25, 2.25)
-scale = Vector2(50, 50)
-texture = SubResource("CanvasTexture_m4qh5")
+scale = Vector2(0.09, 0.09)
+texture = ExtResource("2_ybdg7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2136227320]
+position = Vector2(3, 2)
+shape = SubResource("CircleShape2D_p6vls")

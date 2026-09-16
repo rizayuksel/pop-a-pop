@@ -4,6 +4,11 @@
 [ext_resource type="AudioStream" uid="uid://q5fhnbchn10r" path="res://assets/LaserShoot.wav" id="2_x4jx1"]
 [ext_resource type="AudioStream" uid="uid://bk8m0volylg0e" path="res://assets/FireShoot.wav" id="3_gdt2y"]
 [ext_resource type="AudioStream" uid="uid://b4ytpq8ur02wi" path="res://assets/IceShoot.wav" id="4_wm3ai"]
+[ext_resource type="AudioStream" uid="uid://cs5w6cxtxxjuy" path="res://assets/IceHit.wav" id="5_wm3ai"]
+[ext_resource type="AudioStream" uid="uid://dsicjsnmf8n6g" path="res://assets/BalloonPop.wav" id="6_8dubc"]
+[ext_resource type="AudioStream" uid="uid://bbqjs4otra7mv" path="res://assets/Arrow.wav" id="7_p7vwb"]
+[ext_resource type="AudioStream" uid="uid://dglg1omc3o5qh" path="res://assets/Spike.wav" id="8_ktti3"]
+[ext_resource type="AudioStream" uid="uid://cps2xcct21vs0" path="res://assets/Bounce.wav" id="9_cgfq5"]
 
 [sub_resource type="Environment" id="Environment_wjvqx"]
 background_mode = 3
@@ -142,3 +147,18 @@ stream = ExtResource("3_gdt2y")
 
 [node name="IceSound" type="AudioStreamPlayer" parent="." unique_id=337964969]
 stream = ExtResource("4_wm3ai")
+
+[node name="IceHitSound" type="AudioStreamPlayer" parent="." unique_id=99844208]
+stream = ExtResource("5_wm3ai")
+
+[node name="PopSound" type="AudioStreamPlayer" parent="." unique_id=1105490033]
+stream = ExtResource("6_8dubc")
+
+[node name="ShootSound" type="AudioStreamPlayer" parent="." unique_id=928699190]
+stream = ExtResource("7_p7vwb")
+
+[node name="SpikeSound" type="AudioStreamPlayer" parent="." unique_id=2122604129]
+stream = ExtResource("8_ktti3")
+
+[node name="BouncerSound" type="AudioStreamPlayer" parent="." unique_id=849304436]
+stream = ExtResource("9_cgfq5")

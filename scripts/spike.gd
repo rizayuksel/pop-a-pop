@@ -46,3 +46,8 @@ func _deflect_spike():
 	var main_scene = get_tree().current_scene
 	if main_scene.has_node("UI") and main_scene.get_node("UI").has_method("play_ice_sound"):
 		main_scene.get_node("UI").play_ice_sound()
+
+func _play_ice_hit_sound():
+	var main_scene = get_tree().current_scene
+	if main_scene.has_node("UI") and main_scene.get_node("UI").has_method("play_ice_hit_sound"):
+		main_scene.get_node("UI").play_ice_hit_sound()

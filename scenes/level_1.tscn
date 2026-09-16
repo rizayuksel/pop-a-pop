@@ -1,9 +1,8 @@
 [gd_scene format=3 uid="uid://crfgrx32617n2"]
 
-[ext_resource type="Texture2D" uid="uid://dgcweuwinft2x" path="res://icon.svg" id="1_0wfyh"]
 [ext_resource type="Script" uid="uid://dbbm5rofm4i45" path="res://scripts/main.gd" id="1_sugp2"]
 [ext_resource type="PackedScene" uid="uid://hho1410i6hrc" path="res://scenes/level_2.tscn" id="2_15mv3"]
-[ext_resource type="Script" uid="uid://nvvsupnkt362" path="res://scripts/bow.gd" id="3_jyhfs"]
+[ext_resource type="PackedScene" uid="uid://chsi1q1fyhs4q" path="res://scenes/bow.tscn" id="3_4nkto"]
 [ext_resource type="PackedScene" uid="uid://bw8n28q6u2mbb" path="res://scenes/balloon.tscn" id="4_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://32p7ysxh4omg" path="res://scenes/ui.tscn" id="7_o6xl0"]
 
@@ -12,18 +11,8 @@ script = ExtResource("1_sugp2")
 level_arrows = 3
 next_level_scene = ExtResource("2_15mv3")
 
-[node name="Bow" type="Sprite2D" parent="." unique_id=1068517331]
+[node name="Bow" parent="." unique_id=1965107452 instance=ExtResource("3_4nkto")]
 position = Vector2(109, 705)
-texture = ExtResource("1_0wfyh")
-script = ExtResource("3_jyhfs")
-
-[node name="LoadedArrow" type="Sprite2D" parent="Bow" unique_id=1477529943]
-visible = false
-position = Vector2(39, -24)
-scale = Vector2(0.2, 0.5)
-texture = ExtResource("1_0wfyh")
-
-[node name="Line2D" type="Line2D" parent="Bow" unique_id=313548255]
 
 [node name="Balloon" parent="." unique_id=1069062386 instance=ExtResource("4_jyhfs")]
 position = Vector2(341, 637)

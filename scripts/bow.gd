@@ -8,12 +8,12 @@ const MAX_DRAG_LENGTH = 150.0
 var is_dragging = false
 var drag_start_position = Vector2.ZERO
 var is_active = true
-var trajectory_length: int = 30
-var time_step: float = 0.05
+var time_step: float = 0.016
 
 @onready var rubber_band = $"../RubberBand"
 @onready var loaded_arrow = $LoadedArrow
 @onready var trajectory_line = $Line2D
+@export var trajectory_length: int = 80
 
 func _ready():
 	trajectory_line.top_level = true
@@ -79,17 +79,41 @@ func _shoot_arrow(start_pos, end_pos):
 	
 	var direction = drag_vector.normalized()
 	var speed = pull_distance * 10.0
-	arrow.apply_central_impulse(direction * speed)
+	arrow.linear_velocity = direction * speed
+	
+	var main_scene = get_tree().current_scene
+	if main_scene.has_node("UI") and main_scene.get_node("UI").has_method("play_shoot_sound"):
+		main_scene.get_node("UI").play_shoot_sound()
 	
 	emit_signal("arrow_shot")
 
 func update_trajectory(start_pos: Vector2, initial_velocity: Vector2, gravity: float):
 	trajectory_line.clear_points()
-	
+	trajectory_line.add_point(start_pos)
+
+	var current_pos = start_pos
+	var current_vel = initial_velocity
+	var space_state = get_world_2d().direct_space_state
+
+	var dt = get_physics_process_delta_time() 
+
 	for i in range(trajectory_length):
-		var t = i * time_step
-		var current_point = start_pos + (initial_velocity * t) + (0.5 * Vector2(0, gravity) * t * t)
-		trajectory_line.add_point(current_point)
+		var next_vel = current_vel + Vector2(0, gravity) * dt
+		var next_pos = current_pos + next_vel * dt 
+		
+		var query = PhysicsRayQueryParameters2D.create(current_pos, next_pos)
+		query.collision_mask = 1
+		
+		var result = space_state.intersect_ray(query)
+		
+		if result:
+			trajectory_line.add_point(result.position)
+			current_vel = current_vel.bounce(result.normal)
+			current_pos = result.position
+		else:
+			trajectory_line.add_point(next_pos)
+			current_pos = next_pos
+			current_vel = next_vel
 
 func hide_trajectory():
 	trajectory_line.clear_points()

@@ -3,12 +3,19 @@
 [ext_resource type="Script" uid="uid://bnwjmntjo23kc" path="res://scripts/arrow.gd" id="1_23jat"]
 [ext_resource type="Texture2D" uid="uid://dgcweuwinft2x" path="res://icon.svg" id="1_umosx"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_wjvqx"]
-size = Vector2(26, 64)
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_wjvqx"]
+friction = 0.0
+bounce = 1.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_x7blo"]
+radius = 2.0
 
 [node name="Arrow" type="RigidBody2D" unique_id=430176481]
 collision_mask = 0
+physics_material_override = SubResource("PhysicsMaterial_wjvqx")
 can_sleep = false
+lock_rotation = true
+linear_damp_mode = 1
 script = ExtResource("1_23jat")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1836596122]
@@ -16,4 +23,4 @@ scale = Vector2(0.2, 0.5)
 texture = ExtResource("1_umosx")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1834616127]
-shape = SubResource("RectangleShape2D_wjvqx")
+shape = SubResource("CircleShape2D_x7blo")

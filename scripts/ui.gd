@@ -134,3 +134,23 @@ func shake_camera(intensity: float = 12.0, duration: float = 0.25):
 		shake_tween.tween_property(camera, "offset", random_offset, step_time)
 		
 	shake_tween.tween_property(camera, "offset", Vector2.ZERO, step_time)
+
+func play_ice_hit_sound():
+	if has_node("IceHitSound"):
+		$IceHitSound.play()
+
+func play_pop_sound():
+	if has_node("PopSound"):
+		$PopSound.play()
+
+func play_shoot_sound():
+	if has_node("ShootSound"):
+		$ShootSound.play()
+
+func play_spike_sound():
+	if has_node("SpikeSound"):
+		$SpikeSound.play()
+
+func play_bouncer_sound():
+	if has_node("BouncerSound"):
+		$BouncerSound.play()

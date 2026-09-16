@@ -17,6 +17,9 @@ func pop():
 	var main_scene = get_tree().current_scene
 	if main_scene.has_node("UI"):
 		main_scene.get_node("UI").add_popped_balloon()
+
+		if main_scene.get_node("UI").has_method("play_spike_sound"):
+			main_scene.get_node("UI").play_spike_sound()
 		
 	var angle_step = 360.0 / SPIKE_COUNT
 
@@ -34,5 +37,5 @@ func pop():
 
 func _play_ice_sound():
 	var main_scene = get_tree().current_scene
-	if main_scene.has_node("UI") and main_scene.get_node("UI").has_method("play_ice_sound"):
-		main_scene.get_node("UI").play_ice_sound()
+	if main_scene.has_node("UI") and main_scene.get_node("UI").has_method("play_ice_hit_sound"):
+		main_scene.get_node("UI").play_ice_hit_sound()

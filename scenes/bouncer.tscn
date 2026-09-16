@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://cgh37r2o4jxer" path="res://scripts/bouncer.gd" id="1_q2nta"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_1wysw"]
+friction = 0.0
 bounce = 1.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ikmfy"]
@@ -10,8 +11,9 @@ size = Vector2(99.9993, 19.999964)
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_wjvqx"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_wjvqx"]
-size = Vector2(106, 26)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_q2nta"]
+radius = 10.17
+height = 100.0
 
 [node name="Bouncer" type="StaticBody2D" unique_id=899775968]
 physics_material_override = SubResource("PhysicsMaterial_1wysw")
@@ -30,5 +32,5 @@ texture = SubResource("CanvasTexture_wjvqx")
 [node name="HitDetector" type="Area2D" parent="." unique_id=1022704579]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitDetector" unique_id=1583535619]
-position = Vector2(-0.004748325, -0.5006678)
-shape = SubResource("RectangleShape2D_wjvqx")
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_q2nta")
