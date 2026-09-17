@@ -1,6 +1,6 @@
 extends Area2D
 
-const EXPLOSION_SCENE = preload("res://scenes/explosion_effect.tscn")
+const EXPLOSION_SCENE = preload("res://scenes/objects/explosion_effect.tscn")
 @export var explosion_radius = 120.0 
 
 func _ready():

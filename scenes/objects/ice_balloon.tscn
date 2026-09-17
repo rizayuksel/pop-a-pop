@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://cluocltwlltwx"]
+
+[ext_resource type="PackedScene" uid="uid://bw8n28q6u2mbb" path="res://scenes/objects/balloon.tscn" id="1_uvwqh"]
+[ext_resource type="Script" uid="uid://d017eyqgwmdm1" path="res://scripts/ice_balloon.gd" id="2_m0xd0"]
+[ext_resource type="Texture2D" uid="uid://cnquxb861u27l" path="res://assets/textures/IceBalloon.png" id="3_sipxl"]
+
+[node name="IceBalloon" unique_id=1069062386 instance=ExtResource("1_uvwqh")]
+script = ExtResource("2_m0xd0")
+
+[node name="Sprite2D" parent="." index="0" unique_id=141423176]
+modulate = Color(0.9918929, 0.8601453, 0.9184557, 1)
+texture = ExtResource("3_sipxl")

@@ -1,7 +1,7 @@
 extends Area2D 
 
 const SPIKE_COUNT = 5
-var spike_scene = preload("res://scenes/spike.tscn")
+var spike_scene = preload("res://scenes/objects/spike.tscn")
 
 func _ready():
 	body_entered.connect(_on_body_entered)

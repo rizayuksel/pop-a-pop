@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://bw8n28q6u2mbb"]
+
+[ext_resource type="Script" uid="uid://dic0ur1s2mqqd" path="res://scripts/balloon.gd" id="1_1eawp"]
+[ext_resource type="Texture2D" uid="uid://cyr03yqv5dqu4" path="res://assets/textures/Balloon.png" id="2_1eawp"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wo48x"]
+radius = 58.0
+height = 136.0
+
+[node name="Balloon" type="Area2D" unique_id=1069062386 groups=["balloons"]]
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_1eawp")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=141423176]
+modulate = Color(0.7562531, 0.09917589, 0.5104212, 1)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_1eawp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1534589566]
+position = Vector2(2, -12)
+shape = SubResource("CapsuleShape2D_wo48x")

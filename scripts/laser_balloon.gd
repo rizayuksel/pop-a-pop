@@ -3,9 +3,9 @@ extends Area2D
 
 enum LaserType { HORIZONTAL, VERTICAL, CROSS }
 
-const TEX_HORIZONTAL = preload("res://assets/LaserBalloon1.png") 
-const TEX_VERTICAL = preload("res://assets/LaserBalloon2.png")
-const TEX_CROSS = preload("res://assets/LaserBalloon3.png")
+const TEX_HORIZONTAL = preload("res://assets/textures/LaserBalloon1.png") 
+const TEX_VERTICAL = preload("res://assets/textures/LaserBalloon2.png")
+const TEX_CROSS = preload("res://assets/textures/LaserBalloon3.png")
 
 @export var laser_type: LaserType = LaserType.HORIZONTAL:
 	set(value):
@@ -14,7 +14,7 @@ const TEX_CROSS = preload("res://assets/LaserBalloon3.png")
 
 @export var laser_range: float = 2000.0
 
-const SPARK_SCENE = preload("res://scenes/laser_spark.tscn")
+const SPARK_SCENE = preload("res://scenes/objects/laser_spark.tscn")
 
 func _ready():
 	if not Engine.is_editor_hint():

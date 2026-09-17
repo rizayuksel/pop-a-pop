@@ -2,7 +2,7 @@ extends Sprite2D
 
 signal arrow_shot
 
-const ARROW_SCENE = preload("res://scenes/arrow.tscn")
+const ARROW_SCENE = preload("res://scenes/objects/arrow.tscn")
 const MAX_DRAG_LENGTH = 150.0
 
 var is_dragging = false
