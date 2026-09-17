@@ -1,6 +1,6 @@
 extends Area2D
 
-var freeze_radius = 200.0
+@export var freeze_radius = 120.0
 
 func _ready():
 	body_entered.connect(_on_body_entered)

@@ -8,17 +8,29 @@ const MAX_DRAG_LENGTH = 150.0
 var is_dragging = false
 var drag_start_position = Vector2.ZERO
 var is_active = true
-var time_step: float = 0.016
+var base_scale = Vector2.ONE
 
-@onready var rubber_band = $"../RubberBand"
+@onready var bow_string = $BowString
 @onready var loaded_arrow = $LoadedArrow
 @onready var trajectory_line = $Line2D
 @export var trajectory_length: int = 80
 
+var top_tip = Vector2(-20, -130) 
+var bottom_tip = Vector2(-20, 120)
+
 func _ready():
+	base_scale = scale
 	trajectory_line.top_level = true
 	trajectory_line.global_position = Vector2.ZERO
 	hide_trajectory()
+	
+	_reset_bow_string()
+
+func _reset_bow_string():
+	bow_string.clear_points()
+	bow_string.add_point(top_tip)
+	bow_string.add_point(Vector2(-20, 0))
+	bow_string.add_point(bottom_tip)
 
 func _unhandled_input(event):
 	if not is_active:
@@ -32,10 +44,15 @@ func _unhandled_input(event):
 		elif is_dragging:
 			is_dragging = false
 			loaded_arrow.visible = false
-			rubber_band.clear_points()
 			var drag_end_position = get_global_mouse_position()
 			_shoot_arrow(drag_start_position, drag_end_position)
 			hide_trajectory()
+
+			_reset_bow_string()
+
+			var tween = get_tree().create_tween()
+			tween.tween_property(self, "scale", base_scale * Vector2(0.8, 1.2), 0.05)
+			tween.tween_property(self, "scale", base_scale, 0.3).set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
 
 func _process(_delta):
 	if is_dragging and is_active:
@@ -43,24 +60,19 @@ func _process(_delta):
 		var drag_vector = drag_start_position - current_mouse_pos
 		
 		drag_vector = drag_vector.limit_length(MAX_DRAG_LENGTH)
-		look_at(position + drag_vector)
+		look_at(global_position + drag_vector)
 		
 		var pull_distance = drag_vector.length()
-		var draw_point = position - drag_vector
 		
-		rubber_band.clear_points()
-		rubber_band.add_point(position)
-		rubber_band.add_point(draw_point)
-		
+		bow_string.set_point_position(1, Vector2(-pull_distance, 0))
 		loaded_arrow.position = Vector2(-pull_distance, 0)
 		
 		if pull_distance >= 80.0:
 			var direction = drag_vector.normalized()
 			var speed = pull_distance * 10.0
-			var initial_velocity = direction * speed
 			var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 			
-			update_trajectory(global_position, initial_velocity, gravity)
+			update_trajectory(global_position, direction * speed, gravity)
 		else:
 			hide_trajectory()
 
@@ -73,7 +85,7 @@ func _shoot_arrow(start_pos, end_pos):
 		return
 		
 	var arrow = ARROW_SCENE.instantiate()
-	arrow.position = position
+	arrow.position = global_position 
 	arrow.rotation = drag_vector.angle()
 	get_tree().current_scene.add_child(arrow)
 	
@@ -94,7 +106,6 @@ func update_trajectory(start_pos: Vector2, initial_velocity: Vector2, gravity: f
 	var current_pos = start_pos
 	var current_vel = initial_velocity
 	var space_state = get_world_2d().direct_space_state
-
 	var dt = get_physics_process_delta_time() 
 
 	for i in range(trajectory_length):
@@ -103,7 +114,6 @@ func update_trajectory(start_pos: Vector2, initial_velocity: Vector2, gravity: f
 		
 		var query = PhysicsRayQueryParameters2D.create(current_pos, next_pos)
 		query.collision_mask = 1
-		
 		var result = space_state.intersect_ray(query)
 		
 		if result:

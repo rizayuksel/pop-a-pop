@@ -9,6 +9,8 @@
 
 [node name="Main" type="Node2D" unique_id=202816392]
 script = ExtResource("1_hhfj6")
+level_arrows = 3
+star_targets = Array[int]([3, 6, 8])
 next_level_scene = ExtResource("2_hhfj6")
 level_id = "level_3"
 
@@ -42,6 +44,7 @@ position = Vector2(536, 800)
 
 [node name="Bow" parent="." unique_id=1965107452 instance=ExtResource("6_p6vls")]
 position = Vector2(168, 232)
+trajectory_length = 300
 
 [node name="Bouncer3" parent="." unique_id=816586865 instance=ExtResource("7_wae8j")]
 position = Vector2(608, 904)

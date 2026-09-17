@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bgicm1vcrio1b"]
 
 [ext_resource type="Script" uid="uid://bnwjmntjo23kc" path="res://scripts/arrow.gd" id="1_23jat"]
-[ext_resource type="Texture2D" uid="uid://dgcweuwinft2x" path="res://icon.svg" id="1_umosx"]
+[ext_resource type="Texture2D" uid="uid://b57srdavv4ip8" path="res://assets/Arrow.png" id="2_23jat"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_wjvqx"]
 friction = 0.0
@@ -19,8 +19,9 @@ linear_damp_mode = 1
 script = ExtResource("1_23jat")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1836596122]
-scale = Vector2(0.2, 0.5)
-texture = ExtResource("1_umosx")
+position = Vector2(-87, 0)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("2_23jat")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1834616127]
 shape = SubResource("CircleShape2D_x7blo")

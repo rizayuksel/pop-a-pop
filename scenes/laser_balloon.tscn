@@ -1,10 +1,11 @@
 [gd_scene format=3 uid="uid://naewmtyhfful"]
 
 [ext_resource type="Script" uid="uid://i8njrjalqu8c" path="res://scripts/laser_balloon.gd" id="1_yh615"]
-[ext_resource type="Texture2D" uid="uid://dgcweuwinft2x" path="res://icon.svg" id="2_8yew3"]
+[ext_resource type="Texture2D" uid="uid://cicx8hl5dybyb" path="res://assets/LaserBalloon1.png" id="2_yh615"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_wjvqx"]
-radius = 65.03076
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_isi3j"]
+radius = 60.0
+height = 144.0
 
 [node name="LaserBalloon" type="Area2D" unique_id=1069062386 groups=["balloons"]]
 scale = Vector2(0.5, 0.5)
@@ -13,10 +14,12 @@ laser_type = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=141423176]
 modulate = Color(0.75686276, 1, 0.50980395, 1)
-texture = ExtResource("2_8yew3")
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_yh615")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1534589566]
-shape = SubResource("CircleShape2D_wjvqx")
+position = Vector2(2, -10)
+shape = SubResource("CapsuleShape2D_isi3j")
 
 [node name="LaserBeam" type="Line2D" parent="." unique_id=2075205172]
 begin_cap_mode = 2

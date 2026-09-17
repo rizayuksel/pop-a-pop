@@ -1,14 +1,40 @@
+@tool
 extends Area2D
 
 enum LaserType { HORIZONTAL, VERTICAL, CROSS }
-@export var laser_type: LaserType = LaserType.HORIZONTAL
+
+const TEX_HORIZONTAL = preload("res://assets/LaserBalloon1.png") 
+const TEX_VERTICAL = preload("res://assets/LaserBalloon2.png")
+const TEX_CROSS = preload("res://assets/LaserBalloon3.png")
+
+@export var laser_type: LaserType = LaserType.HORIZONTAL:
+	set(value):
+		laser_type = value
+		_update_texture()
+
 @export var laser_range: float = 2000.0
 
 const SPARK_SCENE = preload("res://scenes/laser_spark.tscn")
 
 func _ready():
-	body_entered.connect(_on_body_entered)
-	$LaserBeam.visible = false
+	if not Engine.is_editor_hint():
+		body_entered.connect(_on_body_entered)
+		if has_node("LaserBeam"):
+			$LaserBeam.visible = false
+	
+	_update_texture()
+
+func _update_texture():
+	if not has_node("Sprite2D"):
+		return
+		
+	match laser_type:
+		LaserType.HORIZONTAL:
+			$Sprite2D.texture = TEX_HORIZONTAL
+		LaserType.VERTICAL:
+			$Sprite2D.texture = TEX_VERTICAL
+		LaserType.CROSS:
+			$Sprite2D.texture = TEX_CROSS
 
 func _on_body_entered(body):
 	if body is RigidBody2D:

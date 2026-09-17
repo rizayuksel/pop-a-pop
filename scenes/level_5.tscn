@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://b8yuht8vr37ya"]
+
+[ext_resource type="Script" uid="uid://dbbm5rofm4i45" path="res://scripts/main.gd" id="1_cynta"]
+[ext_resource type="PackedScene" uid="uid://bw8n28q6u2mbb" path="res://scenes/balloon.tscn" id="2_ak5vt"]
+[ext_resource type="PackedScene" uid="uid://dcsq7ylt0st63" path="res://scenes/level_6.tscn" id="2_wcwf6"]
+[ext_resource type="PackedScene" uid="uid://cluocltwlltwx" path="res://scenes/ice_balloon.tscn" id="3_ij176"]
+[ext_resource type="PackedScene" uid="uid://b5l6ipxxfj30s" path="res://scenes/fire_balloon.tscn" id="4_uva14"]
+[ext_resource type="PackedScene" uid="uid://32p7ysxh4omg" path="res://scenes/ui.tscn" id="5_vqwqk"]
+[ext_resource type="PackedScene" uid="uid://chsi1q1fyhs4q" path="res://scenes/bow.tscn" id="6_1q3ip"]
+[ext_resource type="PackedScene" uid="uid://m4wc2udpxngg" path="res://scenes/mud.tscn" id="6_ij176"]
+
+[node name="Main" type="Node2D" unique_id=202816392]
+script = ExtResource("1_cynta")
+star_targets = Array[int]([2, 3, 4])
+next_level_scene = ExtResource("2_wcwf6")
+level_id = "level_5"
+
+[node name="RubberBand" type="Line2D" parent="." unique_id=918229744]
+default_color = Color(0.7993065, 0.44433373, 0, 1)
+
+[node name="UI" parent="." unique_id=1367951368 instance=ExtResource("5_vqwqk")]
+
+[node name="Bow" parent="." unique_id=1965107452 instance=ExtResource("6_1q3ip")]
+position = Vector2(144, 664)
+trajectory_length = 300
+
+[node name="Mud" parent="." unique_id=1641655694 instance=ExtResource("6_ij176")]
+position = Vector2(480, 296)
+
+[node name="Mud2" parent="." unique_id=1081660626 instance=ExtResource("6_ij176")]
+position = Vector2(408, 296)
+
+[node name="Mud3" parent="." unique_id=1540688414 instance=ExtResource("6_ij176")]
+position = Vector2(336, 296)
+
+[node name="Balloon2" parent="." unique_id=225760875 instance=ExtResource("2_ak5vt")]
+position = Vector2(376, 384)
+
+[node name="Balloon3" parent="." unique_id=118734724 instance=ExtResource("2_ak5vt")]
+position = Vector2(448, 384)
+
+[node name="IceBalloon" parent="." unique_id=343957057 instance=ExtResource("3_ij176")]
+position = Vector2(296, 504)
+freeze_radius = 200.0
+
+[node name="FireBalloon" parent="." unique_id=1069062386 instance=ExtResource("4_uva14")]
+position = Vector2(424, 216)
+explosion_radius = 200.0

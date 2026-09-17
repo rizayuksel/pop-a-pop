@@ -162,3 +162,4 @@ stream = ExtResource("8_ktti3")
 
 [node name="BouncerSound" type="AudioStreamPlayer" parent="." unique_id=849304436]
 stream = ExtResource("9_cgfq5")
+max_polyphony = 5

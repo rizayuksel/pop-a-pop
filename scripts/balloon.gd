@@ -1,6 +1,17 @@
 extends Area2D
 
+var colors = [
+	Color("8A9A5B"), # Green
+	Color("87CEEB"), # Blue
+	Color("E35335"), # Red
+	Color("F4C430"), # Yellow
+	Color("F8C8DC"), # Pink
+	Color("DA70D6"), # Purple
+	Color("F5DEB3")  # Brown
+]
+
 func _ready():
+	$Sprite2D.modulate = colors.pick_random()
 	body_entered.connect(_on_body_entered)
 
 func _on_body_entered(body):
