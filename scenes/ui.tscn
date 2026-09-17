@@ -150,6 +150,7 @@ stream = ExtResource("4_wm3ai")
 
 [node name="IceHitSound" type="AudioStreamPlayer" parent="." unique_id=99844208]
 stream = ExtResource("5_wm3ai")
+max_polyphony = 8
 
 [node name="PopSound" type="AudioStreamPlayer" parent="." unique_id=1105490033]
 stream = ExtResource("6_8dubc")

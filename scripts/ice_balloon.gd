@@ -29,6 +29,11 @@ func apply_freeze_effect():
 	
 	for target_balloon in all_balloons:
 		if target_balloon != self and is_instance_valid(target_balloon):
+
+			var script = target_balloon.get_script()
+			if script != null and script.resource_path.get_file() == "ice_balloon.gd":
+				continue
+				
 			var dist = global_position.distance_to(target_balloon.global_position)
 			
 			if dist <= freeze_radius:
@@ -47,8 +52,8 @@ func apply_freeze_effect():
 				static_body.physics_material_override = physics_mat
 				
 				var new_col = CollisionShape2D.new()
-				
 				var existing_col = target_balloon.get_node_or_null("CollisionShape2D")
+				
 				if existing_col != null and existing_col.shape != null:
 					new_col.shape = existing_col.shape
 				else:
@@ -57,6 +62,31 @@ func apply_freeze_effect():
 					new_col.shape = fallback_shape
 				
 				static_body.add_child(new_col)
+
+				var hit_detector = Area2D.new()
+				hit_detector.name = "IceHitDetector"
+				var hit_col = CollisionShape2D.new()
+
+				if new_col.shape is CircleShape2D:
+					var inflated_shape = CircleShape2D.new()
+					inflated_shape.radius = new_col.shape.radius + 2.0
+					hit_col.shape = inflated_shape
+				else:
+					hit_col.shape = new_col.shape
+					
+				hit_detector.add_child(hit_col)
+
+				hit_detector.body_entered.connect(func(body):
+					if body is RigidBody2D:
+						var main = target_balloon.get_tree().current_scene
+						if main.has_node("UI"):
+							if main.get_node("UI").has_method("play_ice_hit_sound"):
+								main.get_node("UI").play_ice_hit_sound()
+							elif main.get_node("UI").has_method("play_ice_sound"):
+								main.get_node("UI").play_ice_sound()
+				)
+				
+				static_body.add_child(hit_detector)
 				target_balloon.call_deferred("add_child", static_body)
 
 func _update_ui_score():

@@ -9,6 +9,12 @@
 [ext_resource type="PackedScene" uid="uid://m4wc2udpxngg" path="res://scenes/mud.tscn" id="7_2q8u2"]
 [ext_resource type="PackedScene" uid="uid://dee2qly6qqq25" path="res://scenes/spiked_balloon.tscn" id="8_wicpl"]
 
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ikmfy"]
+bounce = 1.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wjvqx"]
+size = Vector2(10, 722)
+
 [node name="Main" type="Node2D" unique_id=202816392]
 script = ExtResource("1_npjya")
 level_arrows = 6
@@ -151,3 +157,10 @@ position = Vector2(195.1, 824)
 
 [node name="SpikedBalloon" parent="." unique_id=1550267909 instance=ExtResource("8_wicpl")]
 position = Vector2(195.1, 424)
+
+[node name="InvisibleBouncerWall" type="StaticBody2D" parent="." unique_id=1163527180]
+position = Vector2(640, 488)
+physics_material_override = SubResource("PhysicsMaterial_ikmfy")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InvisibleBouncerWall" unique_id=672017640]
+shape = SubResource("RectangleShape2D_wjvqx")

@@ -10,7 +10,7 @@
 [node name="Main" type="Node2D" unique_id=202816392]
 script = ExtResource("1_hhfj6")
 level_arrows = 3
-star_targets = Array[int]([3, 6, 8])
+star_targets = Array[int]([3, 6, 9])
 next_level_scene = ExtResource("2_hhfj6")
 level_id = "level_3"
 
@@ -47,17 +47,20 @@ position = Vector2(168, 232)
 trajectory_length = 300
 
 [node name="Bouncer3" parent="." unique_id=816586865 instance=ExtResource("7_wae8j")]
-position = Vector2(608, 904)
+position = Vector2(608, 856)
 rotation = 1.5707964
 
 [node name="Balloon6" parent="." unique_id=1064807972 instance=ExtResource("4_vcx5n")]
-position = Vector2(504, 992)
+position = Vector2(504, 960)
 
 [node name="Balloon7" parent="." unique_id=1556176033 instance=ExtResource("4_vcx5n")]
-position = Vector2(416, 1072)
+position = Vector2(416, 1048)
 
 [node name="Bouncer4" parent="." unique_id=2101682174 instance=ExtResource("7_wae8j")]
-position = Vector2(304, 1168)
+position = Vector2(344, 1144)
 
 [node name="Balloon8" parent="." unique_id=1756893270 instance=ExtResource("4_vcx5n")]
-position = Vector2(216, 1064)
+position = Vector2(216, 1048)
+
+[node name="Balloon9" parent="." unique_id=1102408424 instance=ExtResource("4_vcx5n")]
+position = Vector2(152, 960)

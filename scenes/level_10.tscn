@@ -8,6 +8,15 @@
 [ext_resource type="PackedScene" uid="uid://bw8n28q6u2mbb" path="res://scenes/balloon.tscn" id="6_uk14l"]
 [ext_resource type="PackedScene" uid="uid://naewmtyhfful" path="res://scenes/laser_balloon.tscn" id="7_uk14l"]
 
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_uk14l"]
+bounce = 1.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uk14l"]
+size = Vector2(10, 616)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ng28g"]
+size = Vector2(10, 516.5)
+
 [node name="Main" type="Node2D" unique_id=202816392]
 script = ExtResource("1_ofuys")
 level_arrows = 4
@@ -210,3 +219,15 @@ position = Vector2(600, 1024)
 [node name="LaserBalloon" parent="." unique_id=280566144 instance=ExtResource("7_uk14l")]
 position = Vector2(408, 784)
 laser_type = 2
+
+[node name="InvisibleBouncerWall" type="StaticBody2D" parent="." unique_id=1552061257]
+position = Vector2(672, 776)
+physics_material_override = SubResource("PhysicsMaterial_uk14l")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InvisibleBouncerWall" unique_id=1694497189]
+shape = SubResource("RectangleShape2D_uk14l")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="InvisibleBouncerWall" unique_id=942266994]
+position = Vector2(-264, 328)
+rotation = 1.5707964
+shape = SubResource("RectangleShape2D_ng28g")

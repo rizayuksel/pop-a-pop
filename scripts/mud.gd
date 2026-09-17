@@ -5,9 +5,12 @@ func _ready():
 
 func _on_body_entered(body):
 	if body is RigidBody2D:
-		body.linear_velocity = Vector2.ZERO
-		body.angular_velocity = 0.0
-		body.gravity_scale = 0.0
+		if body.has_method("stick"):
+			body.stick()
+			
+		body.set_deferred("linear_velocity", Vector2.ZERO)
+		body.set_deferred("angular_velocity", 0.0)
+		body.set_deferred("gravity_scale", 0.0)
 
 		var timer = get_tree().create_timer(0.3)
 		timer.timeout.connect(func():

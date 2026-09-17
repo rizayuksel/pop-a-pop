@@ -8,6 +8,18 @@
 [ext_resource type="PackedScene" uid="uid://m4wc2udpxngg" path="res://scenes/mud.tscn" id="6_nwg0r"]
 [ext_resource type="PackedScene" uid="uid://bw8n28q6u2mbb" path="res://scenes/balloon.tscn" id="7_nwg0r"]
 
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_nwg0r"]
+bounce = 1.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nwg0r"]
+size = Vector2(10, 928)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ikv2i"]
+size = Vector2(10, 408)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uoigy"]
+size = Vector2(10, 408)
+
 [node name="Main" type="Node2D" unique_id=202816392]
 script = ExtResource("1_e70vc")
 level_arrows = 6
@@ -263,3 +275,20 @@ position = Vector2(536, 1008)
 
 [node name="Balloon50" parent="." unique_id=1519959686 instance=ExtResource("7_nwg0r")]
 position = Vector2(600, 1008)
+
+[node name="InvisibleBouncerWall" type="StaticBody2D" parent="." unique_id=690798129]
+position = Vector2(680, 608)
+physics_material_override = SubResource("PhysicsMaterial_nwg0r")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InvisibleBouncerWall" unique_id=2058285039]
+shape = SubResource("RectangleShape2D_nwg0r")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="InvisibleBouncerWall" unique_id=781211788]
+position = Vector2(-204, 480)
+rotation = 1.5707964
+shape = SubResource("RectangleShape2D_ikv2i")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="InvisibleBouncerWall" unique_id=819783177]
+position = Vector2(-200, -480)
+rotation = 1.5707964
+shape = SubResource("RectangleShape2D_uoigy")

@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://ctjy5hnjd3xb7"]
+
+[ext_resource type="AudioStream" uid="uid://ki4pccx0iho3" path="res://assets/KimLightyear-NightRunner.mp3" id="1_ndvwh"]
+
+[node name="LevelMusic" type="AudioStreamPlayer" unique_id=785035693]
+stream = ExtResource("1_ndvwh")
+autoplay = true
