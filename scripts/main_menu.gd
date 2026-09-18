@@ -1,15 +1,23 @@
 extends Control
 
 const TOTAL_LEVELS = 20
+const MENU_BALLOON_SCENE = preload("res://scenes/ui/menu_balloon.tscn")
 
-@onready var play_button = $VBoxContainer/PlayButton
-@onready var level_select_button = $VBoxContainer/LevelSelectButton
-@onready var quit_button = $VBoxContainer/QuitButton
+@onready var play_button = $VBoxContainer/Row1/PlayButton
+@onready var level_select_button = $VBoxContainer/Row1/LevelSelectButton
+@onready var settings_button = $VBoxContainer/Row2/SettingsButton
+@onready var credits_button = $VBoxContainer/Row2/CreditsButton
+@onready var quit_button = $VBoxContainer/Row3/QuitButton
+@onready var balloon_timer = $Timer
 
 func _ready():
 	play_button.pressed.connect(_on_play_pressed)
 	level_select_button.pressed.connect(_on_level_select_pressed)
+	settings_button.pressed.connect(_on_settings_pressed)
+	credits_button.pressed.connect(_on_credits_pressed)
 	quit_button.pressed.connect(_on_quit_pressed)
+	
+	balloon_timer.timeout.connect(_on_spawn_balloon)
 
 func get_latest_level() -> int:
 	var latest = 1
@@ -20,16 +28,44 @@ func get_latest_level() -> int:
 
 func _on_play_pressed():
 	var latest_level = get_latest_level()
-	var level_path = "res://scenes/level_" + str(latest_level) + ".tscn"
+	var level_path = "res://scenes/levels/level_" + str(latest_level) + ".tscn"
 	
-	# Check if the scene file exists before loading
 	if ResourceLoader.exists(level_path):
 		get_tree().change_scene_to_file(level_path)
 	else:
 		print("Scene not found: ", level_path)
 
 func _on_level_select_pressed():
-	get_tree().change_scene_to_file("res://scenes/level_select.tscn")
+	get_tree().change_scene_to_file("res://scenes/ui/level_select.tscn")
+
+func _on_settings_pressed():
+	print("Settings menüsü henüz hazır değil")
+
+func _on_credits_pressed():
+	get_tree().change_scene_to_file("res://scenes/ui/credits_screen.tscn")
 
 func _on_quit_pressed():
 	get_tree().quit()
+
+func _on_spawn_balloon():
+	var balloon = MENU_BALLOON_SCENE.instantiate()
+	
+	var screen_width = get_viewport_rect().size.x
+	var random_x = randf_range(50.0, screen_width - 50.0)
+	var spawn_y = get_viewport_rect().size.y + 50.0
+	
+	balloon.position = Vector2(random_x, spawn_y)
+	
+	var colors = [
+		Color("8A9A5B"), # Green
+		Color("87CEEB"), # Blue
+		Color("E35335"), # Red
+		Color("F4C430"), # Yellow
+		Color("F8C8DC"), # Pink
+		Color("DA70D6"), # Purple
+		Color("F5DEB3")  # Brown
+	]
+	balloon.modulate = colors.pick_random()
+	
+	add_child(balloon)
+	move_child(balloon, 0)

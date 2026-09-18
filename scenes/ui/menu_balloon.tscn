@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://0qh4h13lj6lf"]
+
+[ext_resource type="Script" uid="uid://brxe37kyyq284" path="res://scripts/menu_balloon.gd" id="1_gp643"]
+[ext_resource type="Texture2D" uid="uid://cyr03yqv5dqu4" path="res://assets/textures/Balloon.png" id="2_racnj"]
+[ext_resource type="AudioStream" uid="uid://dsicjsnmf8n6g" path="res://assets/audio/sfx/BalloonPop.wav" id="3_a3jm1"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wjvqx"]
+radius = 41.0
+height = 100.0
+
+[node name="MenuBalloon" type="Area2D" unique_id=2009980290]
+script = ExtResource("1_gp643")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1316045864]
+scale = Vector2(0.07, 0.07)
+texture = ExtResource("2_racnj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1181330991]
+position = Vector2(0, -6)
+shape = SubResource("CapsuleShape2D_wjvqx")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1149725676]
+stream = ExtResource("3_a3jm1")
+volume_db = 6.0

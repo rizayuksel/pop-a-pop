@@ -1,7 +1,32 @@
 [gd_scene format=3 uid="uid://djbrf26740nxc"]
 
 [ext_resource type="Script" uid="uid://ba1jqvffmcrxh" path="res://scripts/main_menu.gd" id="1_l6cm7"]
+[ext_resource type="Texture2D" uid="uid://b5wnw3acvx6pt" path="res://assets/textures/ButtonPlay.png" id="2_btxxm"]
 [ext_resource type="Texture2D" uid="uid://b6o8aa2i25ek7" path="res://assets/textures/GameLogo.png" id="2_ekxnf"]
+[ext_resource type="Texture2D" uid="uid://w00sigyc6lpu" path="res://assets/textures/ButtonLevels.png" id="3_wb0q5"]
+[ext_resource type="Texture2D" uid="uid://dj804uimqwspg" path="res://assets/textures/ButtonSettings.png" id="4_q85j6"]
+[ext_resource type="Texture2D" uid="uid://r5pkyhvmmxaw" path="res://assets/textures/ButtonCredits.png" id="5_8g5eo"]
+[ext_resource type="Texture2D" uid="uid://dvfbjtyrc1vot" path="res://assets/textures/ButtonQuit.png" id="6_7suek"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wjvqx"]
+atlas = ExtResource("2_btxxm")
+region = Rect2(4.5099487, 9.147419, 182.66823, 184.60327)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ikmfy"]
+atlas = ExtResource("3_wb0q5")
+region = Rect2(7.056015, 5.2179527, 204.72774, 208.98483)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l768d"]
+atlas = ExtResource("4_q85j6")
+region = Rect2(14.894989, 11.99197, 205.88876, 213.62894)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j2ira"]
+atlas = ExtResource("5_8g5eo")
+region = Rect2(9.507965, 8.604961, 203.56673, 210.14586)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8suk2"]
+atlas = ExtResource("6_7suek")
+region = Rect2(13.76506, 13.088043, 201.63168, 208.98483)
 
 [node name="MainMenu" type="Control" unique_id=1674341012]
 layout_mode = 3
@@ -13,6 +38,7 @@ grow_vertical = 2
 script = ExtResource("1_l6cm7")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=581223450]
+z_index = -2
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -36,24 +62,76 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 40
 
-[node name="GameLogo" type="TextureRect" parent="VBoxContainer" unique_id=1103653739]
-custom_minimum_size = Vector2(600, 200)
+[node name="Row1" type="HBoxContainer" parent="VBoxContainer" unique_id=167902620]
 layout_mode = 2
-size_flags_vertical = 0
+theme_override_constants/separation = 40
+alignment = 1
+
+[node name="PlayButton" type="TextureButton" parent="VBoxContainer/Row1" unique_id=1917725270]
+texture_filter = 1
+custom_minimum_size = Vector2(120, 120)
+layout_mode = 2
+texture_normal = SubResource("AtlasTexture_wjvqx")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="LevelSelectButton" type="TextureButton" parent="VBoxContainer/Row1" unique_id=285066990]
+texture_filter = 1
+custom_minimum_size = Vector2(120, 120)
+layout_mode = 2
+texture_normal = SubResource("AtlasTexture_ikmfy")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="Row2" type="HBoxContainer" parent="VBoxContainer" unique_id=1723167265]
+layout_mode = 2
+theme_override_constants/separation = 40
+alignment = 1
+
+[node name="SettingsButton" type="TextureButton" parent="VBoxContainer/Row2" unique_id=386405898]
+texture_filter = 1
+custom_minimum_size = Vector2(120, 120)
+layout_mode = 2
+texture_normal = SubResource("AtlasTexture_l768d")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="CreditsButton" type="TextureButton" parent="VBoxContainer/Row2" unique_id=1875862444]
+texture_filter = 1
+custom_minimum_size = Vector2(120, 120)
+layout_mode = 2
+texture_normal = SubResource("AtlasTexture_j2ira")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="Row3" type="HBoxContainer" parent="VBoxContainer" unique_id=373476162]
+layout_mode = 2
+alignment = 1
+
+[node name="QuitButton" type="TextureButton" parent="VBoxContainer/Row3" unique_id=1689659148]
+texture_filter = 1
+custom_minimum_size = Vector2(120, 120)
+layout_mode = 2
+texture_normal = SubResource("AtlasTexture_8suk2")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="GameLogo" type="TextureRect" parent="." unique_id=632744179]
+custom_minimum_size = Vector2(600, 200)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -616.0
+offset_right = 300.0
+offset_bottom = -416.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("2_ekxnf")
 expand_mode = 1
 
-[node name="PlayButton" type="Button" parent="VBoxContainer" unique_id=878573542]
-custom_minimum_size = Vector2(0, 80)
-layout_mode = 2
-text = "Play"
-
-[node name="LevelSelectButton" type="Button" parent="VBoxContainer" unique_id=1522520920]
-custom_minimum_size = Vector2(0, 80)
-layout_mode = 2
-text = "Levels"
-
-[node name="QuitButton" type="Button" parent="VBoxContainer" unique_id=1576209740]
-custom_minimum_size = Vector2(0, 80)
-layout_mode = 2
-text = "Quit"
+[node name="Timer" type="Timer" parent="." unique_id=1333650640]
+autostart = true

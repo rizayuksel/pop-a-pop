@@ -1,0 +1,133 @@
+[gd_scene format=3 uid="uid://85asl340mhoh"]
+
+[ext_resource type="Script" uid="uid://nprm3nug374u" path="res://scripts/credits_screen.gd" id="1_uklmw"]
+[ext_resource type="Texture2D" uid="uid://ct4cmj4s3qg5k" path="res://assets/textures/CreditMusic.png" id="1_uwft3"]
+[ext_resource type="Texture2D" uid="uid://dvxyl655aavbc" path="res://assets/textures/CreditDev.png" id="2_h6ve6"]
+[ext_resource type="Texture2D" uid="uid://b6o8aa2i25ek7" path="res://assets/textures/GameLogo.png" id="3_0irp7"]
+[ext_resource type="Texture2D" uid="uid://b437n6mitvv2n" path="res://assets/textures/GodotLogo.png" id="4_helb1"]
+[ext_resource type="Texture2D" uid="uid://dbllq3r27t260" path="res://assets/textures/ButtonHome.png" id="4_uklmw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wjvqx"]
+atlas = ExtResource("4_uklmw")
+region = Rect2(11, 9.25, 201.5, 212.5)
+
+[node name="CreditsScreen" type="Control" unique_id=54516544]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_uklmw")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=141199838]
+z_index = -2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.5316765, 0.7128957, 0.6438691, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=19652969]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer" unique_id=2117066005]
+layout_mode = 2
+theme_override_constants/separation = 40
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer" unique_id=863030071]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer/VBoxContainer/HBoxContainer" unique_id=1405525382]
+texture_filter = 1
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+texture = ExtResource("1_uwft3")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer" unique_id=1139239677]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+text = "“Night Runner (Chiptune Edit)”
+“Legends”
+“Hey!”
+
+by Kim Lightyear
+Licensed under CC BY 3.0
+creativecommons.org/licenses/by/3.0/"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CenterContainer/VBoxContainer" unique_id=1892138049]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer/VBoxContainer/HBoxContainer2" unique_id=1594041717]
+texture_filter = 1
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+texture = ExtResource("2_h6ve6")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer2" unique_id=198324510]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+text = "Rıza Yüksel"
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer/VBoxContainer" unique_id=95370825]
+texture_filter = 1
+custom_minimum_size = Vector2(130, 130)
+layout_mode = 2
+texture = ExtResource("4_helb1")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="GameLogo" type="TextureRect" parent="." unique_id=1137372280]
+custom_minimum_size = Vector2(600, 200)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -616.0
+offset_right = 300.0
+offset_bottom = -416.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_0irp7")
+expand_mode = 1
+
+[node name="HomeButton" type="TextureButton" parent="." unique_id=1456194588]
+texture_filter = 1
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -144.0
+offset_right = 40.0
+offset_bottom = -64.0
+grow_horizontal = 2
+grow_vertical = 0
+texture_normal = SubResource("AtlasTexture_wjvqx")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="Timer" type="Timer" parent="." unique_id=797064168]
+autostart = true
+
+[connection signal="pressed" from="HomeButton" to="." method="_on_home_button_pressed"]

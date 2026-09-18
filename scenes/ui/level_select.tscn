@@ -2,8 +2,16 @@
 
 [ext_resource type="Script" uid="uid://coaaeklhqu6wy" path="res://scripts/level_select.gd" id="1_p0wlc"]
 [ext_resource type="Texture2D" uid="uid://b6o8aa2i25ek7" path="res://assets/textures/GameLogo.png" id="2_2epne"]
+[ext_resource type="Texture2D" uid="uid://d1jsaqkafn0ck" path="res://assets/textures/ButtonLeft.png" id="3_swyxg"]
+[ext_resource type="Texture2D" uid="uid://dmup0i3y1xx7a" path="res://assets/textures/ButtonRight.png" id="4_8yp2s"]
+[ext_resource type="Texture2D" uid="uid://dbllq3r27t260" path="res://assets/textures/ButtonHome.png" id="5_8ehll"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i7y2i"]
+atlas = ExtResource("5_8ehll")
+region = Rect2(11, 9.25, 201.5, 212.5)
 
 [node name="LevelSelect" type="Control" unique_id=1859500899]
+z_index = -2
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -38,20 +46,8 @@ grow_vertical = 2
 texture = ExtResource("2_2epne")
 expand_mode = 1
 
-[node name="HomeButton" type="Button" parent="." unique_id=1558806007]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -86.0
-offset_top = 246.0
-offset_right = -31.0
-offset_bottom = 277.0
-grow_horizontal = 0
-text = "Home
-"
-
-[node name="LeftButton" type="Button" parent="." unique_id=617292885]
+[node name="LeftButton" type="TextureButton" parent="." unique_id=376683610]
+texture_filter = 1
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -61,10 +57,13 @@ offset_top = -15.0
 offset_right = 76.0
 offset_bottom = 16.0
 grow_vertical = 2
-text = "LEFT
-"
+scale = Vector2(1.2, 1.2)
+texture_normal = ExtResource("3_swyxg")
+ignore_texture_size = true
+stretch_mode = 5
 
-[node name="RightButton" type="Button" parent="." unique_id=1712469141]
+[node name="RightButton" type="TextureButton" parent="." unique_id=1927682669]
+texture_filter = 1
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -77,7 +76,9 @@ offset_right = -30.0
 offset_bottom = 16.0
 grow_horizontal = 0
 grow_vertical = 2
-text = "RİGHT"
+texture_normal = ExtResource("4_8yp2s")
+ignore_texture_size = true
+stretch_mode = 5
 
 [node name="PagesContainer" type="CenterContainer" parent="." unique_id=1393696393]
 layout_mode = 1
@@ -87,8 +88,30 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -222.0
-offset_top = -355.0
+offset_top = -405.0
 offset_right = 225.0
-offset_bottom = 485.0
+offset_bottom = 435.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="Timer" type="Timer" parent="." unique_id=1235523334]
+autostart = true
+
+[node name="HomeButton" type="TextureButton" parent="." unique_id=626116100]
+texture_filter = 1
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -144.0
+offset_right = 40.0
+offset_bottom = -64.0
+grow_horizontal = 2
+grow_vertical = 0
+texture_normal = SubResource("AtlasTexture_i7y2i")
+ignore_texture_size = true
+stretch_mode = 4

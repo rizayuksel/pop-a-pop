@@ -104,7 +104,7 @@ func _on_next_level_pressed():
 	next_level_requested.emit()
 
 func _on_home_pressed():
-	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
+	get_tree().change_scene_to_file("res://scenes/ui/main_menu.tscn")
 
 func play_laser_sound():
 	if has_node("LaserSound"):
