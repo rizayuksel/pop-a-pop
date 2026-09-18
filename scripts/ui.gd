@@ -8,7 +8,8 @@ signal level_completed
 @onready var star_progress_label = $BaseControl/StarProgressLabel
 
 @onready var game_over_panel = $BaseControl/GameOverPanel
-@onready var restart_button = $BaseControl/GameOverPanel/RestartButton
+@onready var restart_button = $BaseControl/GameOverPanel/HBoxContainer/RestartButton
+@onready var game_over_home_button = $BaseControl/GameOverPanel/HBoxContainer/HomeButton
 
 @onready var level_complete_panel = $BaseControl/LevelCompletePanel
 @onready var home_button = $BaseControl/LevelCompletePanel/HBoxContainer/HomeButton
@@ -29,6 +30,7 @@ func _ready():
 	next_level_button.pressed.connect(_on_next_level_pressed)
 	success_restart_button.pressed.connect(_on_restart_pressed)
 	home_button.pressed.connect(_on_home_pressed)
+	game_over_home_button.pressed.connect(_on_home_pressed)
 
 func setup_level(total: int, arrows: int, targets: Array[int]):
 	total_balloons = total

@@ -5,6 +5,8 @@
 [ext_resource type="Texture2D" uid="uid://d1jsaqkafn0ck" path="res://assets/textures/ButtonLeft.png" id="3_swyxg"]
 [ext_resource type="Texture2D" uid="uid://dmup0i3y1xx7a" path="res://assets/textures/ButtonRight.png" id="4_8yp2s"]
 [ext_resource type="Texture2D" uid="uid://dbllq3r27t260" path="res://assets/textures/ButtonHome.png" id="5_8ehll"]
+[ext_resource type="Script" uid="uid://bxgabi2ph8084" path="res://scripts/parallax_background.gd" id="6_8ehll"]
+[ext_resource type="Texture2D" uid="uid://ba1vy7kq8hnbi" path="res://assets/textures/BgMenu.jpg" id="7_i7y2i"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_i7y2i"]
 atlas = ExtResource("5_8ehll")
@@ -21,6 +23,7 @@ grow_vertical = 2
 script = ExtResource("1_p0wlc")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1991921335]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -115,3 +118,22 @@ grow_vertical = 0
 texture_normal = SubResource("AtlasTexture_i7y2i")
 ignore_texture_size = true
 stretch_mode = 4
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="." unique_id=377214222]
+script = ExtResource("6_8ehll")
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground" unique_id=1499879003]
+motion_mirroring = Vector2(720, 0)
+
+[node name="TextureRect" type="TextureRect" parent="ParallaxBackground/ParallaxLayer" unique_id=481639813]
+custom_minimum_size = Vector2(720, 1280)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 720.0
+offset_bottom = 1280.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_i7y2i")
+expand_mode = 1
+stretch_mode = 6

@@ -9,6 +9,7 @@ extends Node2D
 @onready var bow = $Bow
 
 func _ready():
+	MusicManager.play_level_music()
 	bow.arrow_shot.connect(_on_bow_arrow_shot)
 	ui.next_level_requested.connect(_on_next_level_requested)
 	ui.level_completed.connect(_on_level_completed)

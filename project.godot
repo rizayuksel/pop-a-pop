@@ -18,7 +18,8 @@ config/icon="res://icon.svg"
 [autoload]
 
 SaveManager="*uid://clb52cw6ogrwy"
-LevelMusic="*uid://ctjy5hnjd3xb7"
+MusicManager="*uid://cqrmxo82w482j"
+TransitionManager="*uid://c0tfcj76c7ue6"
 
 [display]
 
@@ -37,3 +38,4 @@ common/physics_ticks_per_second=240
 rendering_device/driver.windows="d3d12"
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+textures/vram_compression/import_etc2_astc=true

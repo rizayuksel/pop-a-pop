@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://cqrmxo82w482j"]
+
+[ext_resource type="Script" uid="uid://brypd4hyjhw37" path="res://scripts/music_manager.gd" id="1_pjo54"]
+[ext_resource type="AudioStream" uid="uid://b66kf2p640qw4" path="res://assets/audio/music/KimLightyear-Hey!.mp3" id="1_tnlm8"]
+[ext_resource type="AudioStream" uid="uid://ki4pccx0iho3" path="res://assets/audio/music/KimLightyear-NightRunner.mp3" id="2_pjo54"]
+
+[node name="MusicManager" type="Node" unique_id=177487440]
+script = ExtResource("1_pjo54")
+
+[node name="MenuMusic" type="AudioStreamPlayer" parent="." unique_id=482238219]
+stream = ExtResource("1_tnlm8")
+
+[node name="LevelMusic1" type="AudioStreamPlayer" parent="." unique_id=1363127533]
+stream = ExtResource("2_pjo54")

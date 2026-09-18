@@ -21,6 +21,8 @@ var right_btn_start_pos = Vector2.ZERO
 var level_btn_scene = preload("res://scenes/ui/level_button.tscn")
 
 func _ready():
+	MusicManager.play_menu_music()
+	
 	left_btn.pressed.connect(prev_page)
 	right_btn.pressed.connect(next_page)
 	home_btn.pressed.connect(_on_home_pressed)
@@ -134,7 +136,7 @@ func _input(event):
 				next_page()
 
 func _on_level_pressed(level_num: int):
-	get_tree().change_scene_to_file("res://scenes/levels/level_" + str(level_num) + ".tscn")
+	TransitionManager.transition_to_scene("res://scenes/levels/level_" + str(level_num) + ".tscn")
 
 func _on_home_pressed():
 	get_tree().change_scene_to_file("res://scenes/ui/main_menu.tscn")

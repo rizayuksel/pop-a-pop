@@ -1,8 +1,11 @@
 [gd_scene format=3 uid="uid://32p7ysxh4omg"]
 
 [ext_resource type="Script" uid="uid://cptk5lcdtp0rv" path="res://scripts/ui.gd" id="1_nt7q6"]
+[ext_resource type="Texture2D" uid="uid://b5wnw3acvx6pt" path="res://assets/textures/ButtonPlay.png" id="2_hl07w"]
 [ext_resource type="AudioStream" uid="uid://q5fhnbchn10r" path="res://assets/audio/sfx/LaserShoot.wav" id="2_x4jx1"]
 [ext_resource type="AudioStream" uid="uid://bk8m0volylg0e" path="res://assets/audio/sfx/FireShoot.wav" id="3_gdt2y"]
+[ext_resource type="Texture2D" uid="uid://dbllq3r27t260" path="res://assets/textures/ButtonHome.png" id="3_swkix"]
+[ext_resource type="Texture2D" uid="uid://bvf6qe8br6dqc" path="res://assets/textures/ButtonRestart.png" id="4_hc5d0"]
 [ext_resource type="AudioStream" uid="uid://b4ytpq8ur02wi" path="res://assets/audio/sfx/IceShoot.wav" id="4_wm3ai"]
 [ext_resource type="AudioStream" uid="uid://cs5w6cxtxxjuy" path="res://assets/audio/sfx/IceHit.wav" id="5_wm3ai"]
 [ext_resource type="AudioStream" uid="uid://dsicjsnmf8n6g" path="res://assets/audio/sfx/BalloonPop.wav" id="6_8dubc"]
@@ -73,21 +76,27 @@ offset_bottom = 100.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="RestartButton" type="Button" parent="BaseControl/GameOverPanel" unique_id=887930020]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -56.0
-offset_top = -21.0
-offset_right = 56.0
-offset_bottom = 21.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 24
-text = "↻ Restart"
+[node name="HBoxContainer" type="HBoxContainer" parent="BaseControl/GameOverPanel" unique_id=1795083210]
+layout_mode = 0
+offset_left = 26.0
+offset_top = 71.0
+offset_right = 276.0
+offset_bottom = 131.0
+alignment = 1
+
+[node name="RestartButton" type="TextureButton" parent="BaseControl/GameOverPanel/HBoxContainer" unique_id=231546263]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+texture_normal = ExtResource("4_hc5d0")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="HomeButton" type="TextureButton" parent="BaseControl/GameOverPanel/HBoxContainer" unique_id=1874507140]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+texture_normal = ExtResource("3_swkix")
+ignore_texture_size = true
+stretch_mode = 5
 
 [node name="LevelCompletePanel" type="Panel" parent="BaseControl" unique_id=143146671]
 visible = false
@@ -111,25 +120,35 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 230.0
-offset_bottom = 30.0
+offset_left = -124.0
+offset_top = -29.0
+offset_right = 126.0
+offset_bottom = 31.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 20
+alignment = 1
 
-[node name="NextLevelButton" type="Button" parent="BaseControl/LevelCompletePanel/HBoxContainer" unique_id=2070421084]
+[node name="NextLevelButton" type="TextureButton" parent="BaseControl/LevelCompletePanel/HBoxContainer" unique_id=1546818422]
+custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
-theme_override_font_sizes/font_size = 24
-text = "➔"
+texture_normal = ExtResource("2_hl07w")
+ignore_texture_size = true
+stretch_mode = 5
 
-[node name="HomeButton" type="Button" parent="BaseControl/LevelCompletePanel/HBoxContainer" unique_id=484826141]
+[node name="HomeButton" type="TextureButton" parent="BaseControl/LevelCompletePanel/HBoxContainer" unique_id=181843542]
+custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
-text = "⌂"
+texture_normal = ExtResource("3_swkix")
+ignore_texture_size = true
+stretch_mode = 5
 
-[node name="SuccessRestartButton" type="Button" parent="BaseControl/LevelCompletePanel/HBoxContainer" unique_id=2065967444]
+[node name="SuccessRestartButton" type="TextureButton" parent="BaseControl/LevelCompletePanel/HBoxContainer" unique_id=1868804920]
+custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
-text = "↻"
+texture_normal = ExtResource("4_hc5d0")
+ignore_texture_size = true
+stretch_mode = 5
 
 [node name="FinalStarsLabel" type="Label" parent="BaseControl/LevelCompletePanel" unique_id=1343618756]
 layout_mode = 0

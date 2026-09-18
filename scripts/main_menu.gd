@@ -11,6 +11,8 @@ const MENU_BALLOON_SCENE = preload("res://scenes/ui/menu_balloon.tscn")
 @onready var balloon_timer = $Timer
 
 func _ready():
+	MusicManager.play_menu_music()
+	
 	play_button.pressed.connect(_on_play_pressed)
 	level_select_button.pressed.connect(_on_level_select_pressed)
 	settings_button.pressed.connect(_on_settings_pressed)
@@ -31,7 +33,7 @@ func _on_play_pressed():
 	var level_path = "res://scenes/levels/level_" + str(latest_level) + ".tscn"
 	
 	if ResourceLoader.exists(level_path):
-		get_tree().change_scene_to_file(level_path)
+		TransitionManager.transition_to_scene(level_path)
 	else:
 		print("Scene not found: ", level_path)
 
@@ -39,7 +41,7 @@ func _on_level_select_pressed():
 	get_tree().change_scene_to_file("res://scenes/ui/level_select.tscn")
 
 func _on_settings_pressed():
-	print("Settings menüsü henüz hazır değil")
+	print("Settings menu is not ready yet")
 
 func _on_credits_pressed():
 	get_tree().change_scene_to_file("res://scenes/ui/credits_screen.tscn")
@@ -57,13 +59,13 @@ func _on_spawn_balloon():
 	balloon.position = Vector2(random_x, spawn_y)
 	
 	var colors = [
-		Color("8A9A5B"), # Green
-		Color("87CEEB"), # Blue
-		Color("E35335"), # Red
-		Color("F4C430"), # Yellow
-		Color("F8C8DC"), # Pink
-		Color("DA70D6"), # Purple
-		Color("F5DEB3")  # Brown
+		Color("8A9A5B"),
+		Color("87CEEB"),
+		Color("E35335"),
+		Color("F4C430"),
+		Color("F8C8DC"),
+		Color("DA70D6"),
+		Color("F5DEB3")
 	]
 	balloon.modulate = colors.pick_random()
 	
