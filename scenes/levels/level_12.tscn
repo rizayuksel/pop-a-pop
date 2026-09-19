@@ -33,7 +33,7 @@ default_color = Color(0.7993065, 0.44433373, 0, 1)
 [node name="UI" parent="." unique_id=1367951368 instance=ExtResource("3_yd7i6")]
 
 [node name="Bow" parent="." unique_id=1965107452 instance=ExtResource("4_vcewm")]
-position = Vector2(104, 608)
+position = Vector2(128, 608)
 trajectory_length = 50
 
 [node name="Bouncer" parent="." unique_id=899775968 instance=ExtResource("5_b73n6")]

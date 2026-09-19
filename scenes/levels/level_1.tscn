@@ -12,7 +12,7 @@ level_arrows = 3
 next_level_scene = ExtResource("2_sk5k4")
 
 [node name="Bow" parent="." unique_id=1965107452 instance=ExtResource("3_oc4kc")]
-position = Vector2(109, 705)
+position = Vector2(127, 705)
 
 [node name="Balloon" parent="." unique_id=1069062386 instance=ExtResource("4_s8va5")]
 position = Vector2(341, 637)

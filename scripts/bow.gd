@@ -4,11 +4,15 @@ signal arrow_shot
 
 const ARROW_SCENE = preload("res://scenes/objects/arrow.tscn")
 const MAX_DRAG_LENGTH = 150.0
+const SMOOTH_SPEED = 25.0
 
 var is_dragging = false
 var drag_start_position = Vector2.ZERO
 var is_active = true
 var base_scale = Vector2.ONE
+
+var current_pull_distance = 0.0
+var target_rotation = 0.0
 
 @onready var bow_string = $BowString
 @onready var loaded_arrow = $LoadedArrow
@@ -36,61 +40,61 @@ func _unhandled_input(event):
 	if not is_active:
 		return
 		
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+	if (event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT) or event is InputEventScreenTouch:
 		if event.pressed:
 			is_dragging = true
-			drag_start_position = get_global_mouse_position()
+			drag_start_position = event.position
 			loaded_arrow.visible = true
+			target_rotation = rotation
 		elif is_dragging:
 			is_dragging = false
 			loaded_arrow.visible = false
-			var drag_end_position = get_global_mouse_position()
-			_shoot_arrow(drag_start_position, drag_end_position)
+			
+			if current_pull_distance >= 80.0:
+				_shoot_arrow()
+			
 			hide_trajectory()
-
 			_reset_bow_string()
+			current_pull_distance = 0.0
 
 			var tween = get_tree().create_tween()
 			tween.tween_property(self, "scale", base_scale * Vector2(0.8, 1.2), 0.05)
 			tween.tween_property(self, "scale", base_scale, 0.3).set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
 
-func _process(_delta):
+func _process(delta):
 	if is_dragging and is_active:
-		var current_mouse_pos = get_global_mouse_position()
-		var drag_vector = drag_start_position - current_mouse_pos
+		var current_pos = get_viewport().get_mouse_position()
+		var drag_vector = drag_start_position - current_pos
 		
-		drag_vector = drag_vector.limit_length(MAX_DRAG_LENGTH)
-		look_at(global_position + drag_vector)
-		
-		var pull_distance = drag_vector.length()
-		
-		bow_string.set_point_position(1, Vector2(-pull_distance, 0))
-		loaded_arrow.position = Vector2(-pull_distance, 0)
-		
-		if pull_distance >= 80.0:
-			var direction = drag_vector.normalized()
-			var speed = pull_distance * 10.0
-			var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+		if drag_vector.length() > 5.0:
+			drag_vector = drag_vector.limit_length(MAX_DRAG_LENGTH)
+			target_rotation = drag_vector.angle()
 			
-			update_trajectory(global_position, direction * speed, gravity)
-		else:
-			hide_trajectory()
+			var target_pull = drag_vector.length()
+			
+			rotation = lerp_angle(rotation, target_rotation, SMOOTH_SPEED * delta)
+			current_pull_distance = lerp(current_pull_distance, target_pull, SMOOTH_SPEED * delta)
+			
+			bow_string.set_point_position(1, Vector2(-current_pull_distance, 0))
+			loaded_arrow.position = Vector2(-current_pull_distance, 0)
+			
+			if current_pull_distance >= 80.0:
+				var direction = Vector2.RIGHT.rotated(rotation)
+				var speed = current_pull_distance * 10.0
+				var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+				
+				update_trajectory(global_position, direction * speed, gravity)
+			else:
+				hide_trajectory()
 
-func _shoot_arrow(start_pos, end_pos):
-	var drag_vector = start_pos - end_pos
-	drag_vector = drag_vector.limit_length(MAX_DRAG_LENGTH)
-	var pull_distance = drag_vector.length()
-	
-	if pull_distance < 80.0:
-		return
-		
+func _shoot_arrow():
 	var arrow = ARROW_SCENE.instantiate()
 	arrow.position = global_position 
-	arrow.rotation = drag_vector.angle()
+	arrow.rotation = rotation
 	get_tree().current_scene.add_child(arrow)
 	
-	var direction = drag_vector.normalized()
-	var speed = pull_distance * 10.0
+	var direction = Vector2.RIGHT.rotated(rotation)
+	var speed = current_pull_distance * 10.0
 	arrow.linear_velocity = direction * speed
 	
 	var main_scene = get_tree().current_scene

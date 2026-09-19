@@ -11,6 +11,7 @@ var pages: Array = []
 var touch_start_pos = Vector2.ZERO
 var left_btn_start_pos = Vector2.ZERO
 var right_btn_start_pos = Vector2.ZERO
+var is_animating = false
 
 @onready var pages_container = $PagesContainer
 @onready var left_btn = $LeftButton
@@ -38,14 +39,14 @@ func _ready():
 	
 	if current_page == 0:
 		left_btn.position = left_btn_start_pos + Vector2(-200, 0)
+		left_btn.disabled = true
 	if current_page == total_pages - 1:
 		right_btn.position = right_btn_start_pos + Vector2(200, 0)
+		right_btn.disabled = true
 		
 	update_ui()
 
 func generate_pages():
-	var highest_unlocked = 1
-
 	for p in range(total_pages):
 		var grid = GridContainer.new()
 		grid.columns = COLUMNS
@@ -61,15 +62,12 @@ func generate_pages():
 				break
 				
 			var btn = level_btn_scene.instantiate()
-			
 			grid.add_child(btn)
 			
 			var is_unlocked = (level_num == 1)
 			if level_num > 1:
 				var prev_stars = SaveManager.get_level_stars("level_" + str(level_num - 1))
 				is_unlocked = (prev_stars > 0)
-				if is_unlocked:
-					highest_unlocked = level_num
 			
 			var stars = SaveManager.get_level_stars("level_" + str(level_num))
 			
@@ -90,6 +88,9 @@ func update_ui():
 	for i in range(pages.size()):
 		pages[i].visible = (i == current_page)
 		
+	left_btn.disabled = (current_page == 0)
+	right_btn.disabled = (current_page == total_pages - 1)
+		
 	var left_tween = create_tween()
 	if current_page == 0:
 		left_tween.tween_property(left_btn, "position", left_btn_start_pos + Vector2(-200, 0), 0.3).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
@@ -103,7 +104,8 @@ func update_ui():
 		right_tween.tween_property(right_btn, "position", right_btn_start_pos, 0.3).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 
 func next_page():
-	if current_page < total_pages - 1:
+	if current_page < total_pages - 1 and not is_animating:
+		is_animating = true
 		var tween = create_tween()
 		tween.tween_property(right_btn, "position", right_btn_start_pos + Vector2(15, 0), 0.1)
 		tween.tween_property(right_btn, "position", right_btn_start_pos, 0.1)
@@ -112,9 +114,11 @@ func next_page():
 		
 		current_page += 1
 		update_ui()
+		is_animating = false
 
 func prev_page():
-	if current_page > 0:
+	if current_page > 0 and not is_animating:
+		is_animating = true
 		var tween = create_tween()
 		tween.tween_property(left_btn, "position", left_btn_start_pos + Vector2(-15, 0), 0.1)
 		tween.tween_property(left_btn, "position", left_btn_start_pos, 0.1)
@@ -123,6 +127,7 @@ func prev_page():
 		
 		current_page -= 1
 		update_ui()
+		is_animating = false
 
 func _input(event):
 	if event is InputEventScreenTouch or event is InputEventMouseButton:
@@ -136,10 +141,12 @@ func _input(event):
 				next_page()
 
 func _on_level_pressed(level_num: int):
-	TransitionManager.transition_to_scene("res://scenes/levels/level_" + str(level_num) + ".tscn")
+	if not is_animating:
+		TransitionManager.transition_to_scene("res://scenes/levels/level_" + str(level_num) + ".tscn")
 
 func _on_home_pressed():
-	get_tree().change_scene_to_file("res://scenes/ui/main_menu.tscn")
+	if not is_animating:
+		get_tree().change_scene_to_file("res://scenes/ui/main_menu.tscn")
 
 func _on_spawn_balloon():
 	var balloon = MENU_BALLOON_SCENE.instantiate()
