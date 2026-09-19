@@ -1,16 +1,22 @@
 [gd_scene format=3 uid="uid://32p7ysxh4omg"]
 
 [ext_resource type="Script" uid="uid://cptk5lcdtp0rv" path="res://scripts/ui.gd" id="1_nt7q6"]
+[ext_resource type="Texture2D" uid="uid://b5wnw3acvx6pt" path="res://assets/textures/ButtonPlay.png" id="2_hl07w"]
 [ext_resource type="AudioStream" uid="uid://q5fhnbchn10r" path="res://assets/audio/sfx/LaserShoot.wav" id="2_x4jx1"]
+[ext_resource type="FontFile" uid="uid://dtxwram6b7ltt" path="res://assets/fonts/PixelifySans-VariableFont_wght.ttf" id="3_4w2x3"]
 [ext_resource type="AudioStream" uid="uid://bk8m0volylg0e" path="res://assets/audio/sfx/FireShoot.wav" id="3_gdt2y"]
 [ext_resource type="Texture2D" uid="uid://dbllq3r27t260" path="res://assets/textures/ButtonHome.png" id="3_swkix"]
 [ext_resource type="Texture2D" uid="uid://bvf6qe8br6dqc" path="res://assets/textures/ButtonRestart.png" id="4_hc5d0"]
 [ext_resource type="Texture2D" uid="uid://danqni8vnefh" path="res://assets/textures/ButtonNextLevel.png" id="4_hl07w"]
 [ext_resource type="AudioStream" uid="uid://b4ytpq8ur02wi" path="res://assets/audio/sfx/IceShoot.wav" id="4_wm3ai"]
+[ext_resource type="Texture2D" uid="uid://b57srdavv4ip8" path="res://assets/textures/Arrow.png" id="5_0i47d"]
 [ext_resource type="AudioStream" uid="uid://cs5w6cxtxxjuy" path="res://assets/audio/sfx/IceHit.wav" id="5_wm3ai"]
 [ext_resource type="AudioStream" uid="uid://dsicjsnmf8n6g" path="res://assets/audio/sfx/BalloonPop.wav" id="6_8dubc"]
+[ext_resource type="Texture2D" uid="uid://b84ckdh133tr6" path="res://assets/textures/StarEmpty.png" id="6_mgwkc"]
+[ext_resource type="Texture2D" uid="uid://cyr03yqv5dqu4" path="res://assets/textures/Balloon.png" id="7_4w2x3"]
 [ext_resource type="AudioStream" uid="uid://bbqjs4otra7mv" path="res://assets/audio/sfx/Arrow.wav" id="7_p7vwb"]
 [ext_resource type="AudioStream" uid="uid://dglg1omc3o5qh" path="res://assets/audio/sfx/Spike.wav" id="8_ktti3"]
+[ext_resource type="Texture2D" uid="uid://brhma4k73tsq8" path="res://assets/textures/ButtonPause.png" id="8_svq4k"]
 [ext_resource type="AudioStream" uid="uid://cps2xcct21vs0" path="res://assets/audio/sfx/Bounce.wav" id="9_cgfq5"]
 
 [sub_resource type="Environment" id="Environment_wjvqx"]
@@ -30,39 +36,151 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="NextArrowIcon" type="TextureRect" parent="BaseControl" unique_id=198920833]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="LevelProgressLabel" type="Label" parent="BaseControl" unique_id=842036011]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
-
-[node name="ArrowsLabel" type="Label" parent="BaseControl" unique_id=1768577222]
+[node name="TopBarContainer" type="HBoxContainer" parent="BaseControl" unique_id=569561012]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 1.0
-anchor_top = 0.01015625
+anchors_preset = 10
 anchor_right = 1.0
-anchor_bottom = 0.01015625
-offset_left = -40.0
-offset_bottom = 23.0
-grow_horizontal = 0
-tooltip_text = "Arrows: 10
-"
-metadata/_edit_use_anchors_ = true
+offset_bottom = 63.0
+grow_horizontal = 2
 
-[node name="StarProgressLabel" type="Label" parent="BaseControl" unique_id=1620192943]
-layout_mode = 0
-offset_left = 2.0
-offset_top = 115.0
-offset_right = 42.0
-offset_bottom = 138.0
+[node name="SpacerLeft" type="Control" parent="BaseControl/TopBarContainer" unique_id=1954362035]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
 
-[node name="GameOverPanel" type="Panel" parent="BaseControl" unique_id=335374873]
+[node name="NextArrowIcon" type="TextureRect" parent="BaseControl/TopBarContainer" unique_id=857804952]
+custom_minimum_size = Vector2(70, 63)
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_rotation = -0.7941248
+texture = ExtResource("5_0i47d")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ArrowsLabel" type="Label" parent="BaseControl/TopBarContainer" unique_id=1172462929]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_4w2x3")
+
+[node name="Spacer1" type="Control" parent="BaseControl/TopBarContainer" unique_id=1637642415]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="StarsContainer" type="HBoxContainer" parent="BaseControl/TopBarContainer" unique_id=8217469]
+layout_mode = 2
+
+[node name="Star1" type="TextureRect" parent="BaseControl/TopBarContainer/StarsContainer" unique_id=165605682]
+custom_minimum_size = Vector2(45, 45)
+layout_mode = 2
+texture = ExtResource("6_mgwkc")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="BaseControl/TopBarContainer/StarsContainer/Star1" unique_id=666145532]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_4w2x3")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Star2" type="TextureRect" parent="BaseControl/TopBarContainer/StarsContainer" unique_id=548883804]
+custom_minimum_size = Vector2(45, 45)
+layout_mode = 2
+texture = ExtResource("6_mgwkc")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="BaseControl/TopBarContainer/StarsContainer/Star2" unique_id=435640002]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_4w2x3")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Star3" type="TextureRect" parent="BaseControl/TopBarContainer/StarsContainer" unique_id=429573563]
+custom_minimum_size = Vector2(45, 45)
+layout_mode = 2
+texture = ExtResource("6_mgwkc")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="BaseControl/TopBarContainer/StarsContainer/Star3" unique_id=557724470]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_4w2x3")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Spacer2" type="Control" parent="BaseControl/TopBarContainer" unique_id=743155704]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="BalloonIcon" type="TextureRect" parent="BaseControl/TopBarContainer" unique_id=1190640450]
+modulate = Color(0.8901961, 0.3254902, 0.20784314, 1)
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("7_4w2x3")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="LevelProgressLabel" type="Label" parent="BaseControl/TopBarContainer" unique_id=1933910267]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_4w2x3")
+
+[node name="Spacer3" type="Control" parent="BaseControl/TopBarContainer" unique_id=655017836]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PauseButton" type="TextureButton" parent="BaseControl/TopBarContainer" unique_id=284850792]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+texture_normal = ExtResource("8_svq4k")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="SpacerRight" type="Control" parent="BaseControl/TopBarContainer" unique_id=232066490]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+
+[node name="PauseBackground" type="ColorRect" parent="BaseControl" unique_id=456013394]
 visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.39215687)
+
+[node name="PausePanel" type="Panel" parent="BaseControl/PauseBackground" unique_id=2010889585]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -76,7 +194,160 @@ offset_bottom = 100.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="BaseControl/GameOverPanel" unique_id=1795083210]
+[node name="HBoxContainer" type="HBoxContainer" parent="BaseControl/PauseBackground/PausePanel" unique_id=134807555]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ResumeButton" type="TextureButton" parent="BaseControl/PauseBackground/PausePanel/HBoxContainer" unique_id=1168674048]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+texture_normal = ExtResource("2_hl07w")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="RestartButton" type="TextureButton" parent="BaseControl/PauseBackground/PausePanel/HBoxContainer" unique_id=1123857389]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+texture_normal = ExtResource("4_hc5d0")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="HomeButton" type="TextureButton" parent="BaseControl/PauseBackground/PausePanel/HBoxContainer" unique_id=1992857055]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+texture_normal = ExtResource("3_swkix")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="LevelCompleteBackground" type="ColorRect" parent="BaseControl" unique_id=402565147]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.39215687)
+
+[node name="LevelCompletePanel" type="Panel" parent="BaseControl/LevelCompleteBackground" unique_id=143146671]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -100.0
+offset_right = 150.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="FinalStarsContainer" type="HBoxContainer" parent="BaseControl/LevelCompleteBackground/LevelCompletePanel" unique_id=583486010]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -88.0
+offset_right = 64.0
+offset_bottom = -38.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="FinalStar1" type="TextureRect" parent="BaseControl/LevelCompleteBackground/LevelCompletePanel/FinalStarsContainer" unique_id=1091095213]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="FinalStar2" type="TextureRect" parent="BaseControl/LevelCompleteBackground/LevelCompletePanel/FinalStarsContainer" unique_id=1018323617]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="FinalStar3" type="TextureRect" parent="BaseControl/LevelCompleteBackground/LevelCompletePanel/FinalStarsContainer" unique_id=846323674]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="BaseControl/LevelCompleteBackground/LevelCompletePanel" unique_id=2106383715]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -120.0
+offset_top = -32.0
+offset_right = 130.0
+offset_bottom = 28.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="NextLevelButton" type="TextureButton" parent="BaseControl/LevelCompleteBackground/LevelCompletePanel/HBoxContainer" unique_id=1546818422]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+texture_normal = ExtResource("4_hl07w")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="HomeButton" type="TextureButton" parent="BaseControl/LevelCompleteBackground/LevelCompletePanel/HBoxContainer" unique_id=181843542]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+texture_normal = ExtResource("3_swkix")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="SuccessRestartButton" type="TextureButton" parent="BaseControl/LevelCompleteBackground/LevelCompletePanel/HBoxContainer" unique_id=1868804920]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+texture_normal = ExtResource("4_hc5d0")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="GameOverBackground" type="ColorRect" parent="BaseControl" unique_id=2086312376]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.39215687)
+
+[node name="GameOverPanel" type="Panel" parent="BaseControl/GameOverBackground" unique_id=335374873]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -100.0
+offset_right = 150.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="BaseControl/GameOverBackground/GameOverPanel" unique_id=1795083210]
 layout_mode = 0
 offset_left = 26.0
 offset_top = 71.0
@@ -84,76 +355,19 @@ offset_right = 276.0
 offset_bottom = 131.0
 alignment = 1
 
-[node name="RestartButton" type="TextureButton" parent="BaseControl/GameOverPanel/HBoxContainer" unique_id=231546263]
+[node name="RestartButton" type="TextureButton" parent="BaseControl/GameOverBackground/GameOverPanel/HBoxContainer" unique_id=231546263]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 texture_normal = ExtResource("4_hc5d0")
 ignore_texture_size = true
 stretch_mode = 5
 
-[node name="HomeButton" type="TextureButton" parent="BaseControl/GameOverPanel/HBoxContainer" unique_id=1874507140]
+[node name="HomeButton" type="TextureButton" parent="BaseControl/GameOverBackground/GameOverPanel/HBoxContainer" unique_id=1874507140]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 texture_normal = ExtResource("3_swkix")
 ignore_texture_size = true
 stretch_mode = 5
-
-[node name="LevelCompletePanel" type="Panel" parent="BaseControl" unique_id=143146671]
-visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -150.0
-offset_top = -100.0
-offset_right = 150.0
-offset_bottom = 100.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="BaseControl/LevelCompletePanel" unique_id=2106383715]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -124.0
-offset_top = -29.0
-offset_right = 126.0
-offset_bottom = 31.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 20
-alignment = 1
-
-[node name="NextLevelButton" type="TextureButton" parent="BaseControl/LevelCompletePanel/HBoxContainer" unique_id=1546818422]
-custom_minimum_size = Vector2(60, 60)
-layout_mode = 2
-texture_normal = ExtResource("4_hl07w")
-ignore_texture_size = true
-stretch_mode = 5
-
-[node name="HomeButton" type="TextureButton" parent="BaseControl/LevelCompletePanel/HBoxContainer" unique_id=181843542]
-custom_minimum_size = Vector2(60, 60)
-layout_mode = 2
-texture_normal = ExtResource("3_swkix")
-ignore_texture_size = true
-stretch_mode = 5
-
-[node name="SuccessRestartButton" type="TextureButton" parent="BaseControl/LevelCompletePanel/HBoxContainer" unique_id=1868804920]
-custom_minimum_size = Vector2(60, 60)
-layout_mode = 2
-texture_normal = ExtResource("4_hc5d0")
-ignore_texture_size = true
-stretch_mode = 5
-
-[node name="FinalStarsLabel" type="Label" parent="BaseControl/LevelCompletePanel" unique_id=1343618756]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=779814329]
 environment = SubResource("Environment_wjvqx")

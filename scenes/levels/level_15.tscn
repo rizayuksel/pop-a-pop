@@ -1,12 +1,19 @@
 [gd_scene format=3 uid="uid://cne4dt1hd2dij"]
 
 [ext_resource type="Script" uid="uid://dbbm5rofm4i45" path="res://scripts/main.gd" id="1_2ajnc"]
+[ext_resource type="PackedScene" uid="uid://cp4vc2keiv7o8" path="res://scenes/levels/level_16.tscn" id="2_6siiu"]
 [ext_resource type="PackedScene" uid="uid://32p7ysxh4omg" path="res://scenes/ui/ui.tscn" id="2_721gy"]
 [ext_resource type="PackedScene" uid="uid://chsi1q1fyhs4q" path="res://scenes/objects/bow.tscn" id="3_6siiu"]
+[ext_resource type="PackedScene" uid="uid://c61rm7cacm1uf" path="res://scenes/objects/bouncer.tscn" id="5_hsgml"]
+[ext_resource type="PackedScene" uid="uid://m4wc2udpxngg" path="res://scenes/objects/mud.tscn" id="6_gfeu0"]
+[ext_resource type="PackedScene" uid="uid://cluocltwlltwx" path="res://scenes/objects/ice_balloon.tscn" id="7_6tvfy"]
+[ext_resource type="PackedScene" uid="uid://bw8n28q6u2mbb" path="res://scenes/objects/balloon.tscn" id="8_nqdgy"]
 
 [node name="Main" type="Node2D" unique_id=202816392]
 script = ExtResource("1_2ajnc")
-level_arrows = 2
+level_arrows = 4
+star_targets = Array[int]([15, 20, 22])
+next_level_scene = ExtResource("2_6siiu")
 level_id = "level_15"
 
 [node name="RubberBand" type="Line2D" parent="." unique_id=918229744]
@@ -15,5 +22,150 @@ default_color = Color(0.7993065, 0.44433373, 0, 1)
 [node name="UI" parent="." unique_id=1367951368 instance=ExtResource("2_721gy")]
 
 [node name="Bow" parent="." unique_id=1965107452 instance=ExtResource("3_6siiu")]
-position = Vector2(116, 433)
+position = Vector2(144, 576)
 trajectory_length = 50
+
+[node name="Bouncer" parent="." unique_id=899775968 instance=ExtResource("5_hsgml")]
+position = Vector2(600, 272)
+rotation = 1.5707964
+
+[node name="Bouncer2" parent="." unique_id=1793787068 instance=ExtResource("5_hsgml")]
+position = Vector2(600, 464)
+rotation = 1.5707964
+
+[node name="Bouncer3" parent="." unique_id=814929045 instance=ExtResource("5_hsgml")]
+position = Vector2(600, 656)
+rotation = 1.5707964
+
+[node name="Bouncer4" parent="." unique_id=1133317370 instance=ExtResource("5_hsgml")]
+position = Vector2(600, 864)
+rotation = 1.5707964
+
+[node name="Mud" parent="." unique_id=1641655694 instance=ExtResource("6_gfeu0")]
+position = Vector2(560, 560)
+
+[node name="Mud2" parent="." unique_id=773972695 instance=ExtResource("6_gfeu0")]
+position = Vector2(560, 760)
+
+[node name="Mud3" parent="." unique_id=2026347570 instance=ExtResource("6_gfeu0")]
+position = Vector2(560, 368)
+
+[node name="Balloon" parent="." unique_id=1001884049 instance=ExtResource("8_nqdgy")]
+position = Vector2(536, 272)
+
+[node name="Balloon2" parent="." unique_id=935248295 instance=ExtResource("8_nqdgy")]
+position = Vector2(472, 272)
+
+[node name="Balloon3" parent="." unique_id=272371846 instance=ExtResource("8_nqdgy")]
+position = Vector2(408, 272)
+
+[node name="Balloon4" parent="." unique_id=1603588697 instance=ExtResource("8_nqdgy")]
+position = Vector2(344, 272)
+
+[node name="Balloon5" parent="." unique_id=196377886 instance=ExtResource("8_nqdgy")]
+position = Vector2(280, 272)
+
+[node name="Balloon7" parent="." unique_id=1234517019 instance=ExtResource("8_nqdgy")]
+position = Vector2(472, 368)
+
+[node name="Balloon8" parent="." unique_id=856515947 instance=ExtResource("8_nqdgy")]
+position = Vector2(408, 368)
+
+[node name="Balloon9" parent="." unique_id=319178508 instance=ExtResource("8_nqdgy")]
+position = Vector2(344, 368)
+
+[node name="Balloon10" parent="." unique_id=1611930093 instance=ExtResource("8_nqdgy")]
+position = Vector2(280, 368)
+
+[node name="Balloon12" parent="." unique_id=1744308070 instance=ExtResource("8_nqdgy")]
+position = Vector2(536, 464)
+
+[node name="Balloon13" parent="." unique_id=1219963870 instance=ExtResource("8_nqdgy")]
+position = Vector2(472, 464)
+
+[node name="Balloon14" parent="." unique_id=351450090 instance=ExtResource("8_nqdgy")]
+position = Vector2(408, 464)
+
+[node name="Balloon15" parent="." unique_id=1542602633 instance=ExtResource("8_nqdgy")]
+position = Vector2(344, 464)
+
+[node name="Balloon16" parent="." unique_id=1509645242 instance=ExtResource("8_nqdgy")]
+position = Vector2(280, 464)
+
+[node name="Balloon18" parent="." unique_id=465192171 instance=ExtResource("8_nqdgy")]
+position = Vector2(472, 560)
+
+[node name="Balloon19" parent="." unique_id=1858085743 instance=ExtResource("8_nqdgy")]
+position = Vector2(408, 560)
+
+[node name="Balloon20" parent="." unique_id=1131490004 instance=ExtResource("8_nqdgy")]
+position = Vector2(344, 560)
+
+[node name="Balloon21" parent="." unique_id=1687810213 instance=ExtResource("8_nqdgy")]
+position = Vector2(280, 560)
+
+[node name="Balloon23" parent="." unique_id=448294628 instance=ExtResource("8_nqdgy")]
+position = Vector2(536, 656)
+
+[node name="Balloon24" parent="." unique_id=1010233028 instance=ExtResource("8_nqdgy")]
+position = Vector2(472, 656)
+
+[node name="Balloon25" parent="." unique_id=70818736 instance=ExtResource("8_nqdgy")]
+position = Vector2(408, 656)
+
+[node name="Balloon26" parent="." unique_id=980555041 instance=ExtResource("8_nqdgy")]
+position = Vector2(344, 656)
+
+[node name="Balloon27" parent="." unique_id=407384228 instance=ExtResource("8_nqdgy")]
+position = Vector2(280, 656)
+
+[node name="Balloon29" parent="." unique_id=690770265 instance=ExtResource("8_nqdgy")]
+position = Vector2(472, 752)
+
+[node name="Balloon30" parent="." unique_id=1498035640 instance=ExtResource("8_nqdgy")]
+position = Vector2(408, 752)
+
+[node name="Balloon31" parent="." unique_id=634782115 instance=ExtResource("8_nqdgy")]
+position = Vector2(344, 752)
+
+[node name="Balloon32" parent="." unique_id=857914219 instance=ExtResource("8_nqdgy")]
+position = Vector2(280, 752)
+
+[node name="Balloon17" parent="." unique_id=27566822 instance=ExtResource("8_nqdgy")]
+position = Vector2(536, 848)
+
+[node name="Balloon22" parent="." unique_id=1319808237 instance=ExtResource("8_nqdgy")]
+position = Vector2(472, 848)
+
+[node name="Balloon28" parent="." unique_id=1257671106 instance=ExtResource("8_nqdgy")]
+position = Vector2(408, 848)
+
+[node name="Balloon33" parent="." unique_id=1722174319 instance=ExtResource("8_nqdgy")]
+position = Vector2(344, 848)
+
+[node name="Balloon34" parent="." unique_id=1960876442 instance=ExtResource("8_nqdgy")]
+position = Vector2(280, 848)
+
+[node name="IceBalloon7" parent="." unique_id=247006241 instance=ExtResource("7_6tvfy")]
+position = Vector2(496, 160)
+freeze_radius = 120.0
+
+[node name="IceBalloon12" parent="." unique_id=1142658948 instance=ExtResource("7_6tvfy")]
+position = Vector2(240, 160)
+freeze_radius = 120.0
+
+[node name="IceBalloon8" parent="." unique_id=1120520983 instance=ExtResource("7_6tvfy")]
+position = Vector2(432, 160)
+freeze_radius = 120.0
+
+[node name="IceBalloon11" parent="." unique_id=1459837868 instance=ExtResource("7_6tvfy")]
+position = Vector2(560, 160)
+freeze_radius = 120.0
+
+[node name="IceBalloon9" parent="." unique_id=55959417 instance=ExtResource("7_6tvfy")]
+position = Vector2(368, 160)
+freeze_radius = 120.0
+
+[node name="IceBalloon10" parent="." unique_id=1860107004 instance=ExtResource("7_6tvfy")]
+position = Vector2(304, 160)
+freeze_radius = 120.0

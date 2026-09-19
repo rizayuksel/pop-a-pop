@@ -9,6 +9,8 @@ extends Node2D
 @onready var bow = $Bow
 
 func _ready():
+	setup_background()
+	
 	MusicManager.play_level_music()
 	bow.arrow_shot.connect(_on_bow_arrow_shot)
 	ui.next_level_requested.connect(_on_next_level_requested)
@@ -19,6 +21,28 @@ func _ready():
 	
 	bow.is_active = ui.arrows_left > 0
 	print(level_id, " için cihazda kayıtlı yıldız: ", SaveManager.get_level_stars(level_id))
+
+func setup_background():
+	var current_level_num = level_id.trim_prefix("level_").to_int()
+	var bg_texture = null
+
+	if current_level_num <= 20:
+		bg_texture = preload("res://assets/textures/BgLevel1.jpg")
+		
+	if bg_texture:
+		var bg_canvas = CanvasLayer.new()
+		bg_canvas.layer = -1
+		
+		var bg_rect = TextureRect.new()
+		bg_rect.texture = bg_texture
+		bg_rect.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		bg_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
+		bg_rect.set_anchors_preset(Control.PRESET_FULL_RECT)
+		
+		bg_rect.modulate = Color(0.7, 0.7, 0.7, 1.0)
+		
+		bg_canvas.add_child(bg_rect)
+		add_child(bg_canvas)
 
 func _on_bow_arrow_shot():
 	ui.use_arrow()

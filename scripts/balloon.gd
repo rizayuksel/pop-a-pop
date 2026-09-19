@@ -42,20 +42,22 @@ func pop():
 		return
 		
 	is_popped = true
+	if is_in_group("balloons"):
+		remove_from_group("balloons")
+		
+	$Sprite2D.texture = popped_texture
+	$Sprite2D.visible = true
 
-	$Sprite2D.visible = false
 	for child in get_children():
 		if child is CollisionShape2D or child is CollisionPolygon2D:
 			child.set_deferred("disabled", true)
-			
+
 	var main_scene = get_tree().current_scene
 	if main_scene.has_node("UI"):
 		main_scene.get_node("UI").add_popped_balloon()
 		
 		if main_scene.get_node("UI").has_method("play_pop_sound"):
 			main_scene.get_node("UI").play_pop_sound()
-
-	queue_free()
 
 func _play_deflect_sound():
 	var main_scene = get_tree().current_scene

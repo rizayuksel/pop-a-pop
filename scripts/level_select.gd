@@ -5,6 +5,8 @@ const LEVELS_PER_PAGE = 10
 const COLUMNS = 2
 const MENU_BALLOON_SCENE = preload("res://scenes/ui/menu_balloon.tscn")
 
+var level_btn_scene = preload("res://scenes/ui/level_button.tscn")
+
 var current_page = 0
 var total_pages = 0
 var pages: Array = []
@@ -18,8 +20,6 @@ var is_animating = false
 @onready var right_btn = $RightButton
 @onready var home_btn = $HomeButton
 @onready var balloon_timer = $Timer
-
-var level_btn_scene = preload("res://scenes/ui/level_button.tscn")
 
 func _ready():
 	MusicManager.play_menu_music()
@@ -82,7 +82,7 @@ func auto_focus_page():
 		if i > 1 and SaveManager.get_level_stars("level_" + str(i - 1)) > 0:
 			highest_unlocked = i
 
-	current_page = floor((highest_unlocked - 1) / LEVELS_PER_PAGE)
+	current_page = int(float(highest_unlocked - 1) / float(LEVELS_PER_PAGE))
 
 func update_ui():
 	for i in range(pages.size()):

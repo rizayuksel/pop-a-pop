@@ -1,45 +1,79 @@
 [gd_scene format=3 uid="uid://dfl3k3rwpa6pl"]
 
 [ext_resource type="Script" uid="uid://c6d4iaksk6jfl" path="res://scripts/level_button.gd" id="1_i0sit"]
-[ext_resource type="Texture2D" uid="uid://dgcweuwinft2x" path="res://icon.svg" id="2_o8246"]
+[ext_resource type="Texture2D" uid="uid://ljesojohsl2s" path="res://assets/textures/LevelLock.png" id="2_0pgek"]
+[ext_resource type="Texture2D" uid="uid://cyr03yqv5dqu4" path="res://assets/textures/Balloon.png" id="2_4h6sh"]
+[ext_resource type="FontFile" uid="uid://dtxwram6b7ltt" path="res://assets/fonts/PixelifySans-VariableFont_wght.ttf" id="4_yaxlp"]
 
-[node name="LevelButton" type="TextureButton" unique_id=1512264420]
-custom_minimum_size = Vector2(150, 150)
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="LevelButton" type="Button" unique_id=685602313]
+custom_minimum_size = Vector2(130, 140)
+offset_right = 130.0
+offset_bottom = 140.0
+flat = true
 script = ExtResource("1_i0sit")
+metadata/_edit_use_anchors_ = true
 
-[node name="Thumbnail" type="TextureRect" parent="." unique_id=1611625403]
+[node name="BalloonImage" type="TextureRect" parent="." unique_id=1611625403]
+modulate = Color(0.8901961, 0.3254902, 0.20784314, 1)
+custom_minimum_size = Vector2(160, 150)
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -80.0
+offset_top = 11.0
+offset_right = 80.0
+offset_bottom = 191.0
 grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("2_o8246")
+texture = ExtResource("2_4h6sh")
 expand_mode = 1
+stretch_mode = 5
 
 [node name="LockIcon" type="TextureRect" parent="." unique_id=513004506]
+z_index = 2
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
+offset_left = -19.0
+offset_top = 3.0
+offset_right = 21.0
+offset_bottom = 43.0
 grow_horizontal = 2
 grow_vertical = 2
+texture = ExtResource("2_0pgek")
+expand_mode = 1
+stretch_mode = 5
 
-[node name="StarLabel" type="Label" parent="." unique_id=1821330457]
-layout_mode = 0
-offset_left = 10.0
-offset_top = 5.0
-offset_right = 50.0
-offset_bottom = 28.0
-theme_override_font_sizes/font_size = 24
+[node name="StarsContainer" type="HBoxContainer" parent="." unique_id=741939602]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -54.0
+offset_right = 59.0
+offset_bottom = 40.0
+grow_horizontal = 2
+
+[node name="Star1" type="TextureRect" parent="StarsContainer" unique_id=1263778857]
+custom_minimum_size = Vector2(35, 35)
+layout_mode = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Star2" type="TextureRect" parent="StarsContainer" unique_id=1668711422]
+custom_minimum_size = Vector2(35, 35)
+layout_mode = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Star3" type="TextureRect" parent="StarsContainer" unique_id=1153321638]
+custom_minimum_size = Vector2(35, 35)
+layout_mode = 2
+expand_mode = 1
+stretch_mode = 5
 
 [node name="LevelNumberLabel" type="Label" parent="." unique_id=1947258572]
 layout_mode = 1
@@ -48,12 +82,14 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = 40.0
-offset_right = 20.0
-offset_bottom = 70.0
+offset_left = -19.0
+offset_top = 6.0
+offset_right = 21.0
+offset_bottom = 43.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/outline_size = 4
-theme_override_font_sizes/font_size = 22
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("4_yaxlp")
+theme_override_font_sizes/font_size = 30
 horizontal_alignment = 1
+vertical_alignment = 1

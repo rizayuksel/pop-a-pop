@@ -11,4 +11,5 @@ script = ExtResource("1_pjo54")
 stream = ExtResource("1_tnlm8")
 
 [node name="LevelMusic1" type="AudioStreamPlayer" parent="." unique_id=1363127533]
+process_mode = 3
 stream = ExtResource("2_pjo54")

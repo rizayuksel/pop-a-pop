@@ -3,19 +3,40 @@ extends CanvasLayer
 signal next_level_requested
 signal level_completed
 
-@onready var arrows_label = $BaseControl/ArrowsLabel
-@onready var level_progress_label = $BaseControl/LevelProgressLabel
-@onready var star_progress_label = $BaseControl/StarProgressLabel
+@onready var arrows_label = $BaseControl/TopBarContainer/ArrowsLabel
+@onready var level_progress_label = $BaseControl/TopBarContainer/LevelProgressLabel
+@onready var pause_button = $BaseControl/TopBarContainer/PauseButton
 
-@onready var game_over_panel = $BaseControl/GameOverPanel
-@onready var restart_button = $BaseControl/GameOverPanel/HBoxContainer/RestartButton
-@onready var game_over_home_button = $BaseControl/GameOverPanel/HBoxContainer/HomeButton
+@onready var star1_icon = $BaseControl/TopBarContainer/StarsContainer/Star1
+@onready var star2_icon = $BaseControl/TopBarContainer/StarsContainer/Star2
+@onready var star3_icon = $BaseControl/TopBarContainer/StarsContainer/Star3
 
-@onready var level_complete_panel = $BaseControl/LevelCompletePanel
-@onready var home_button = $BaseControl/LevelCompletePanel/HBoxContainer/HomeButton
-@onready var success_restart_button = $BaseControl/LevelCompletePanel/HBoxContainer/SuccessRestartButton
-@onready var next_level_button = $BaseControl/LevelCompletePanel/HBoxContainer/NextLevelButton
-@onready var final_stars_label = $BaseControl/LevelCompletePanel/FinalStarsLabel
+@onready var star1_label = $BaseControl/TopBarContainer/StarsContainer/Star1/Label
+@onready var star2_label = $BaseControl/TopBarContainer/StarsContainer/Star2/Label
+@onready var star3_label = $BaseControl/TopBarContainer/StarsContainer/Star3/Label
+
+@onready var pause_background = $BaseControl/PauseBackground
+@onready var resume_button = $BaseControl/PauseBackground/PausePanel/HBoxContainer/ResumeButton
+@onready var pause_restart_button = $BaseControl/PauseBackground/PausePanel/HBoxContainer/RestartButton
+@onready var pause_home_button = $BaseControl/PauseBackground/PausePanel/HBoxContainer/HomeButton
+
+@onready var game_over_background = $BaseControl/GameOverBackground
+@onready var game_over_panel = $BaseControl/GameOverBackground/GameOverPanel
+@onready var restart_button = $BaseControl/GameOverBackground/GameOverPanel/HBoxContainer/RestartButton
+@onready var game_over_home_button = $BaseControl/GameOverBackground/GameOverPanel/HBoxContainer/HomeButton
+
+@onready var level_complete_background = $BaseControl/LevelCompleteBackground
+@onready var level_complete_panel = $BaseControl/LevelCompleteBackground/LevelCompletePanel
+@onready var home_button = $BaseControl/LevelCompleteBackground/LevelCompletePanel/HBoxContainer/HomeButton
+@onready var success_restart_button = $BaseControl/LevelCompleteBackground/LevelCompletePanel/HBoxContainer/SuccessRestartButton
+@onready var next_level_button = $BaseControl/LevelCompleteBackground/LevelCompletePanel/HBoxContainer/NextLevelButton
+
+@onready var final_star1 = $BaseControl/LevelCompleteBackground/LevelCompletePanel/FinalStarsContainer/FinalStar1
+@onready var final_star2 = $BaseControl/LevelCompleteBackground/LevelCompletePanel/FinalStarsContainer/FinalStar2
+@onready var final_star3 = $BaseControl/LevelCompleteBackground/LevelCompletePanel/FinalStarsContainer/FinalStar3
+
+var full_star_tex = preload("res://assets/textures/Star1.png")
+var empty_star_tex = preload("res://assets/textures/StarEmpty.png")
 
 var arrows_left = 0
 var popped_balloons = 0
@@ -26,11 +47,21 @@ var is_level_finished = false
 var shake_tween: Tween
 
 func _ready():
+	process_mode = Node.PROCESS_MODE_ALWAYS
+	pause_background.visible = false
+	game_over_background.visible = false
+	level_complete_background.visible = false
+	
 	restart_button.pressed.connect(_on_restart_pressed)
 	next_level_button.pressed.connect(_on_next_level_pressed)
 	success_restart_button.pressed.connect(_on_restart_pressed)
 	home_button.pressed.connect(_on_home_pressed)
 	game_over_home_button.pressed.connect(_on_home_pressed)
+	
+	pause_button.pressed.connect(_on_pause_pressed)
+	resume_button.pressed.connect(_on_resume_pressed)
+	pause_restart_button.pressed.connect(_on_restart_pressed)
+	pause_home_button.pressed.connect(_on_home_pressed)
 
 func setup_level(total: int, arrows: int, targets: Array[int]):
 	total_balloons = total
@@ -71,41 +102,59 @@ func update_ui():
 	
 	earned_stars = calculate_stars()
 	
-	var star_text = ""
-	for i in range(3):
-		if i < earned_stars:
-			star_text += "★"
-		else:
-			star_text += "☆"
-	star_progress_label.text = star_text
+	star1_icon.texture = full_star_tex if earned_stars >= 1 else empty_star_tex
+	star2_icon.texture = full_star_tex if earned_stars >= 2 else empty_star_tex
+	star3_icon.texture = full_star_tex if earned_stars >= 3 else empty_star_tex
+	
+	star1_label.text = ""
+	star2_label.text = ""
+	star3_label.text = ""
+	
+	if earned_stars == 0 and star_targets.size() > 0:
+		star1_label.text = str(star_targets[0] - popped_balloons)
+	elif earned_stars == 1 and star_targets.size() > 1:
+		star2_label.text = str(star_targets[1] - popped_balloons)
+	elif earned_stars == 2 and star_targets.size() > 2:
+		star3_label.text = str(star_targets[2] - popped_balloons)
+
+func _on_pause_pressed():
+	if not is_level_finished:
+		get_tree().paused = true
+		pause_background.visible = true
+
+func _on_resume_pressed():
+	get_tree().paused = false
+	pause_background.visible = false
 
 func show_game_over():
 	if not is_level_finished:
 		is_level_finished = true
-		game_over_panel.visible = true
+		
+		await get_tree().create_timer(1.5).timeout
+		game_over_background.visible = true
 
 func show_level_complete():
 	if not is_level_finished:
 		is_level_finished = true
 		
-		var final_star_text = ""
-		for i in range(3):
-			if i < earned_stars:
-				final_star_text += "★"
-			else:
-				final_star_text += "☆"
+		final_star1.texture = full_star_tex if earned_stars >= 1 else empty_star_tex
+		final_star2.texture = full_star_tex if earned_stars >= 2 else empty_star_tex
+		final_star3.texture = full_star_tex if earned_stars >= 3 else empty_star_tex
 		
-		final_stars_label.text = final_star_text
-		level_complete_panel.visible = true
+		await get_tree().create_timer(1.5).timeout
+		level_complete_background.visible = true
 		level_completed.emit()
 
 func _on_restart_pressed():
+	get_tree().paused = false
 	get_tree().reload_current_scene()
 
 func _on_next_level_pressed():
+	get_tree().paused = false
 	next_level_requested.emit()
 
 func _on_home_pressed():
+	get_tree().paused = false
 	get_tree().change_scene_to_file("res://scenes/ui/main_menu.tscn")
 
 func play_laser_sound():

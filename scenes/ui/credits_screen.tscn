@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://ct4cmj4s3qg5k" path="res://assets/textures/CreditMusic.png" id="1_uwft3"]
 [ext_resource type="Texture2D" uid="uid://dvxyl655aavbc" path="res://assets/textures/CreditDev.png" id="2_h6ve6"]
 [ext_resource type="Texture2D" uid="uid://b6o8aa2i25ek7" path="res://assets/textures/GameLogo.png" id="3_0irp7"]
+[ext_resource type="FontFile" uid="uid://dtxwram6b7ltt" path="res://assets/fonts/PixelifySans-VariableFont_wght.ttf" id="3_s67r0"]
 [ext_resource type="Texture2D" uid="uid://b437n6mitvv2n" path="res://assets/textures/GodotLogo.png" id="4_helb1"]
 [ext_resource type="Texture2D" uid="uid://dbllq3r27t260" path="res://assets/textures/ButtonHome.png" id="4_uklmw"]
 
@@ -58,6 +59,8 @@ stretch_mode = 5
 [node name="Label" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer" unique_id=1139239677]
 modulate = Color(0, 0, 0, 1)
 layout_mode = 2
+theme_override_fonts/font = ExtResource("3_s67r0")
+theme_override_font_sizes/font_size = 17
 text = "“Night Runner (Chiptune Edit)”
 “Legends”
 “Hey!”
@@ -81,6 +84,8 @@ stretch_mode = 5
 [node name="Label" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer2" unique_id=198324510]
 modulate = Color(0, 0, 0, 1)
 layout_mode = 2
+theme_override_fonts/font = ExtResource("3_s67r0")
+theme_override_font_sizes/font_size = 17
 text = "Rıza Yüksel"
 
 [node name="TextureRect" type="TextureRect" parent="CenterContainer/VBoxContainer" unique_id=95370825]
