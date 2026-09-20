@@ -136,13 +136,16 @@ func show_game_over():
 	if not is_level_finished:
 		is_level_finished = true
 		
-		var scene_name = get_tree().current_scene.name.to_lower()
-		var level_num = 1
+		var save_key = "level_1"
+		var current_scene = get_tree().current_scene
 		
-		if "level" in scene_name:
-			level_num = scene_name.replace("level_", "").replace("level", "").to_int()
+		if current_scene.get("level_id") != null:
+			save_key = current_scene.level_id
+		else:
+			var path = current_scene.scene_file_path
+			if path:
+				save_key = path.get_file().get_basename()
 		
-		var save_key = "level_" + str(level_num)
 		var previous_stars = int(SaveManager.get_level_stars(save_key))
 		
 		game_over_star1.texture = full_star_tex if previous_stars >= 1 else empty_star_tex

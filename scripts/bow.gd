@@ -116,6 +116,15 @@ func update_trajectory(start_pos: Vector2, initial_velocity: Vector2, gravity: f
 		var next_vel = current_vel + Vector2(0, gravity) * dt
 		var next_pos = current_pos + next_vel * dt 
 		
+		var mud_query = PhysicsRayQueryParameters2D.create(current_pos, next_pos)
+		mud_query.collision_mask = 2
+		mud_query.collide_with_areas = true
+		var mud_result = space_state.intersect_ray(mud_query)
+		
+		if mud_result and mud_result.collider.get("is_mud"):
+			trajectory_line.add_point(mud_result.position)
+			break
+			
 		var query = PhysicsRayQueryParameters2D.create(current_pos, next_pos)
 		query.collision_mask = 1
 		var result = space_state.intersect_ray(query)

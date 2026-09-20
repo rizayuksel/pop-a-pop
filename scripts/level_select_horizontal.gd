@@ -43,14 +43,23 @@ func generate_level_map():
 			wrapper.add_child(spacer)
 			
 		var level_key = "level_" + str(level_num)
-		var is_unlocked = SaveManager.is_level_unlocked(level_key)
-		var earned_stars = SaveManager.get_level_stars(level_key)
+		var is_unlocked = false
+		
+		if level_num == 1:
+			is_unlocked = true
+		else:
+			var prev_key = "level_" + str(level_num - 1)
+			var prev_stars = int(SaveManager.get_level_stars(prev_key))
+			is_unlocked = (prev_stars > 0)
+			
+		var earned_stars = int(SaveManager.get_level_stars(level_key))
 		
 		var is_boss_level = (level_num == TOTAL_LEVELS)
 		card.setup(level_num, is_unlocked, earned_stars, is_boss_level)
 		
 		if is_unlocked:
-			card.pressed.connect(_on_level_pressed.bind(level_num))
+			if not card.pressed.is_connected(_on_level_pressed):
+				card.pressed.connect(_on_level_pressed.bind(level_num))
 
 func _animate_arrows():
 	var tween = create_tween().set_loops()

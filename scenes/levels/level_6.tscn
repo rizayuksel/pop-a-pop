@@ -24,7 +24,7 @@ default_color = Color(0.7993065, 0.44433373, 0, 1)
 
 [node name="Bow" parent="." unique_id=1965107452 instance=ExtResource("4_uwlxl")]
 position = Vector2(168, 672)
-trajectory_length = 50
+trajectory_length = 70
 
 [node name="Mud" parent="." unique_id=1641655694 instance=ExtResource("5_4wfvb")]
 position = Vector2(411.1, 568)

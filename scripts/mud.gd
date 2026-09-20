@@ -1,5 +1,7 @@
 extends Area2D
 
+var is_mud = true
+
 func _ready():
 	body_entered.connect(_on_body_entered)
 

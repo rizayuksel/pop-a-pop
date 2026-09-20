@@ -12,6 +12,9 @@ var star_full = preload("res://assets/textures/Star1.png")
 
 func setup(num: int, is_unlocked: bool, earned_stars: int, is_boss_level: bool):
 	level_num = num
+	
+	if level_num == 1:
+		is_unlocked = true
 
 	if number_label:
 		number_label.text = str(level_num)
