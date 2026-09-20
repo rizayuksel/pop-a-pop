@@ -353,11 +353,13 @@ offset_left = 26.0
 offset_top = 71.0
 offset_right = 276.0
 offset_bottom = 131.0
+theme_override_constants/separation = 20
 alignment = 1
 
 [node name="RestartButton" type="TextureButton" parent="BaseControl/GameOverBackground/GameOverPanel/HBoxContainer" unique_id=231546263]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
+size_flags_vertical = 4
 texture_normal = ExtResource("4_hc5d0")
 ignore_texture_size = true
 stretch_mode = 5
@@ -365,8 +367,46 @@ stretch_mode = 5
 [node name="HomeButton" type="TextureButton" parent="BaseControl/GameOverBackground/GameOverPanel/HBoxContainer" unique_id=1874507140]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
+size_flags_vertical = 4
 texture_normal = ExtResource("3_swkix")
 ignore_texture_size = true
+stretch_mode = 5
+
+[node name="NextButton" type="TextureButton" parent="BaseControl/GameOverBackground/GameOverPanel/HBoxContainer" unique_id=379213666]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+disabled = true
+texture_normal = ExtResource("4_hl07w")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="BestStarsContainer" type="HBoxContainer" parent="BaseControl/GameOverBackground/GameOverPanel/HBoxContainer/NextButton" unique_id=1836974256]
+layout_mode = 0
+offset_left = 4.0
+offset_top = -17.0
+offset_right = 57.0
+offset_bottom = -2.0
+alignment = 1
+
+[node name="Star1" type="TextureRect" parent="BaseControl/GameOverBackground/GameOverPanel/HBoxContainer/NextButton/BestStarsContainer" unique_id=1758838553]
+custom_minimum_size = Vector2(15, 15)
+layout_mode = 2
+texture = ExtResource("6_mgwkc")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Star2" type="TextureRect" parent="BaseControl/GameOverBackground/GameOverPanel/HBoxContainer/NextButton/BestStarsContainer" unique_id=7239092]
+custom_minimum_size = Vector2(15, 15)
+layout_mode = 2
+texture = ExtResource("6_mgwkc")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Star3" type="TextureRect" parent="BaseControl/GameOverBackground/GameOverPanel/HBoxContainer/NextButton/BestStarsContainer" unique_id=1806253939]
+custom_minimum_size = Vector2(15, 15)
+layout_mode = 2
+texture = ExtResource("6_mgwkc")
+expand_mode = 1
 stretch_mode = 5
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=779814329]

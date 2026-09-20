@@ -25,6 +25,11 @@ signal level_completed
 @onready var restart_button = $BaseControl/GameOverBackground/GameOverPanel/HBoxContainer/RestartButton
 @onready var game_over_home_button = $BaseControl/GameOverBackground/GameOverPanel/HBoxContainer/HomeButton
 
+@onready var game_over_next_btn = $BaseControl/GameOverBackground/GameOverPanel/HBoxContainer/NextButton
+@onready var game_over_star1 = $BaseControl/GameOverBackground/GameOverPanel/HBoxContainer/NextButton/BestStarsContainer/Star1
+@onready var game_over_star2 = $BaseControl/GameOverBackground/GameOverPanel/HBoxContainer/NextButton/BestStarsContainer/Star2
+@onready var game_over_star3 = $BaseControl/GameOverBackground/GameOverPanel/HBoxContainer/NextButton/BestStarsContainer/Star3
+
 @onready var level_complete_background = $BaseControl/LevelCompleteBackground
 @onready var level_complete_panel = $BaseControl/LevelCompleteBackground/LevelCompletePanel
 @onready var home_button = $BaseControl/LevelCompleteBackground/LevelCompletePanel/HBoxContainer/HomeButton
@@ -54,6 +59,7 @@ func _ready():
 	
 	restart_button.pressed.connect(_on_restart_pressed)
 	next_level_button.pressed.connect(_on_next_level_pressed)
+	game_over_next_btn.pressed.connect(_on_next_level_pressed)
 	success_restart_button.pressed.connect(_on_restart_pressed)
 	home_button.pressed.connect(_on_home_pressed)
 	game_over_home_button.pressed.connect(_on_home_pressed)
@@ -130,7 +136,27 @@ func show_game_over():
 	if not is_level_finished:
 		is_level_finished = true
 		
-		await get_tree().create_timer(1.5).timeout
+		var scene_name = get_tree().current_scene.name.to_lower()
+		var level_num = 1
+		
+		if "level" in scene_name:
+			level_num = scene_name.replace("level_", "").replace("level", "").to_int()
+		
+		var save_key = "level_" + str(level_num)
+		var previous_stars = int(SaveManager.get_level_stars(save_key))
+		
+		game_over_star1.texture = full_star_tex if previous_stars >= 1 else empty_star_tex
+		game_over_star2.texture = full_star_tex if previous_stars >= 2 else empty_star_tex
+		game_over_star3.texture = full_star_tex if previous_stars >= 3 else empty_star_tex
+		
+		if previous_stars == 0:
+			game_over_next_btn.disabled = true
+			game_over_next_btn.modulate = Color(0.4, 0.4, 0.4, 0.9)
+		else:
+			game_over_next_btn.disabled = false
+			game_over_next_btn.modulate = Color(1.0, 1.0, 1.0, 1.0)
+		
+		await get_tree().create_timer(0.3).timeout
 		game_over_background.visible = true
 
 func show_level_complete():

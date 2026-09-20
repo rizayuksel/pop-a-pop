@@ -1,0 +1,97 @@
+[gd_scene format=3 uid="uid://dqurjwirnyqwf"]
+
+[ext_resource type="Script" uid="uid://be7bkj4wj0s8r" path="res://scripts/level_card_polaroid.gd" id="1_vtarg"]
+[ext_resource type="Texture2D" uid="uid://wlximfmmllqo" path="res://assets/textures/levels/thumbnails/level_1_thumb.webp" id="2_5huqm"]
+[ext_resource type="Texture2D" uid="uid://b84ckdh133tr6" path="res://assets/textures/StarEmpty.png" id="2_vtarg"]
+[ext_resource type="FontFile" uid="uid://dtxwram6b7ltt" path="res://assets/fonts/PixelifySans-VariableFont_wght.ttf" id="4_5huqm"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wjvqx"]
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[node name="LevelCard" type="Button" unique_id=1565054896]
+custom_minimum_size = Vector2(350, 588)
+offset_right = 350.0
+offset_bottom = 588.0
+mouse_filter = 1
+flat = true
+script = ExtResource("1_vtarg")
+
+[node name="ColorRect" type="Panel" parent="." unique_id=64570189]
+custom_minimum_size = Vector2(350, 588)
+layout_mode = 0
+offset_right = 350.0
+offset_bottom = 588.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_wjvqx")
+
+[node name="LevelScreenshot" type="TextureRect" parent="ColorRect" unique_id=91743674]
+custom_minimum_size = Vector2(350, 504)
+clip_contents = true
+layout_mode = 0
+offset_top = 10.0
+offset_right = 250.0
+offset_bottom = 370.0
+mouse_filter = 2
+texture = ExtResource("2_5huqm")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="StarsContainer" type="HBoxContainer" parent="." unique_id=1769133087]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -71.0
+offset_top = -68.0
+offset_right = 77.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Star1" type="TextureRect" parent="StarsContainer" unique_id=828726837]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("2_vtarg")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Star3" type="TextureRect" parent="StarsContainer" unique_id=919495445]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("2_vtarg")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Star2" type="TextureRect" parent="StarsContainer" unique_id=1498337377]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("2_vtarg")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="LevelNumberLabel" type="Label" parent="." unique_id=1250943716]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -62.0
+offset_top = -60.0
+offset_right = -22.0
+offset_bottom = -11.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_5huqm")
+theme_override_font_sizes/font_size = 40
+text = "1"

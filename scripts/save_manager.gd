@@ -43,3 +43,16 @@ func get_level_stars(level_id: String) -> int:
 	if save_data["levels"].has(level_id):
 		return int(save_data["levels"][level_id]["stars"])
 	return 0
+
+func is_level_unlocked(level_id: String) -> bool:
+	if level_id == "1":
+		return true
+
+	var prev_level = str(int(level_id) - 1)
+	if save_data["levels"].has(prev_level) and save_data["levels"][prev_level]["stars"] > 0:
+		return true
+
+	if save_data["levels"].has(level_id) and save_data["levels"][level_id].has("unlocked"):
+		return save_data["levels"][level_id]["unlocked"]
+		
+	return false

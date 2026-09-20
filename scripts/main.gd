@@ -49,7 +49,7 @@ func _on_bow_arrow_shot():
 	if ui.arrows_left <= 0:
 		bow.is_active = false
 		
-		await get_tree().create_timer(5.0).timeout
+		await get_tree().create_timer(3.5).timeout
 
 		if not ui.is_level_finished:
 			if ui.earned_stars > 0:

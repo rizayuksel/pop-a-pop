@@ -1,0 +1,154 @@
+[gd_scene format=3 uid="uid://xsoapcr3xtuw"]
+
+[ext_resource type="Script" uid="uid://d0kcx6g5630tb" path="res://scripts/level_select_horizontal.gd" id="1_ils3q"]
+[ext_resource type="Texture2D" uid="uid://50t5vl2jbdp7" path="res://assets/textures/LevelSelectBg1.1.webp" id="2_g7xr8"]
+[ext_resource type="Texture2D" uid="uid://b6o8aa2i25ek7" path="res://assets/textures/GameLogo.png" id="2_jilaj"]
+[ext_resource type="Texture2D" uid="uid://dbllq3r27t260" path="res://assets/textures/ButtonHome.png" id="3_y2pyl"]
+[ext_resource type="Texture2D" uid="uid://d1jsaqkafn0ck" path="res://assets/textures/ButtonLeft.png" id="4_txlvf"]
+[ext_resource type="Texture2D" uid="uid://dmup0i3y1xx7a" path="res://assets/textures/ButtonRight.png" id="5_avjnn"]
+[ext_resource type="Texture2D" uid="uid://b3igrxtgfqmmw" path="res://assets/textures/LevelSelectBg1.2.webp" id="7_dvdmr"]
+[ext_resource type="Texture2D" uid="uid://c15faqm04espr" path="res://assets/textures/LevelSelectBg1.3.webp" id="8_a8emj"]
+[ext_resource type="Texture2D" uid="uid://dd840mql7241g" path="res://assets/textures/LevelSelectBg1.4.webp" id="9_ce6c5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kqukc"]
+atlas = ExtResource("3_y2pyl")
+region = Rect2(11, 9.25, 201.5, 212.5)
+
+[node name="LevelSelectHorizontal" type="Control" unique_id=1799129633]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ils3q")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=1721169094]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_scroll_mode = 3
+vertical_scroll_mode = 0
+scroll_deadzone = 20
+
+[node name="MarginContainer" type="MarginContainer" parent="ScrollContainer" unique_id=1214492655]
+layout_mode = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 300
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 50
+
+[node name="LevelContainer" type="HBoxContainer" parent="ScrollContainer/MarginContainer" unique_id=1094064907]
+layout_mode = 2
+theme_override_constants/separation = 80
+
+[node name="GameLogo" type="TextureRect" parent="." unique_id=1077492236]
+z_index = 1
+custom_minimum_size = Vector2(600, 200)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -616.0
+offset_right = 300.0
+offset_bottom = -416.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_jilaj")
+expand_mode = 1
+
+[node name="HomeButton" type="TextureButton" parent="." unique_id=1400131353]
+texture_filter = 1
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -144.0
+offset_right = 40.0
+offset_bottom = -64.0
+grow_horizontal = 2
+grow_vertical = 0
+texture_normal = SubResource("AtlasTexture_kqukc")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="PrevThemeButton" type="TextureButton" parent="." unique_id=1869617565]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 32.0
+offset_top = -15.0
+offset_right = 76.0
+offset_bottom = 16.0
+grow_vertical = 2
+scale = Vector2(1.2, 1.2)
+texture_normal = ExtResource("4_txlvf")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="NextThemeButton" type="TextureButton" parent="." unique_id=730368776]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -86.0
+offset_top = -15.0
+offset_right = -30.0
+offset_bottom = 16.0
+grow_horizontal = 0
+grow_vertical = 2
+texture_normal = ExtResource("5_avjnn")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="." unique_id=1447795526]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground" unique_id=984006236]
+
+[node name="BgContainer" type="HBoxContainer" parent="ParallaxBackground/ParallaxLayer" unique_id=1983033958]
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/separation = 0
+
+[node name="TextureRect" type="TextureRect" parent="ParallaxBackground/ParallaxLayer/BgContainer" unique_id=1319588526]
+custom_minimum_size = Vector2(1920, 1280)
+layout_mode = 2
+texture = ExtResource("2_g7xr8")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="TextureRect2" type="TextureRect" parent="ParallaxBackground/ParallaxLayer/BgContainer" unique_id=245464254]
+custom_minimum_size = Vector2(1920, 1280)
+layout_mode = 2
+texture = ExtResource("7_dvdmr")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="TextureRect3" type="TextureRect" parent="ParallaxBackground/ParallaxLayer/BgContainer" unique_id=954745215]
+custom_minimum_size = Vector2(1920, 1280)
+layout_mode = 2
+texture = ExtResource("8_a8emj")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="TextureRect4" type="TextureRect" parent="ParallaxBackground/ParallaxLayer/BgContainer" unique_id=1249734849]
+custom_minimum_size = Vector2(720, 1280)
+layout_mode = 2
+texture = ExtResource("9_ce6c5")
+expand_mode = 1
+stretch_mode = 6

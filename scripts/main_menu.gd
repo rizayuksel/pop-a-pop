@@ -38,7 +38,7 @@ func _on_play_pressed():
 		print("Scene not found: ", level_path)
 
 func _on_level_select_pressed():
-	get_tree().change_scene_to_file("res://scenes/ui/level_select.tscn")
+	get_tree().change_scene_to_file("res://scenes/ui/level_select_horizontal.tscn")
 
 func _on_settings_pressed():
 	print("Settings menu is not ready yet")
