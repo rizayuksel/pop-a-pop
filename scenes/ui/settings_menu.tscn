@@ -1,0 +1,115 @@
+[gd_scene format=3 uid="uid://m22jmji8jt62"]
+
+[ext_resource type="Texture2D" uid="uid://c7vtlvgwmicdp" path="res://assets/textures/SettingsMusic.png" id="1_mhswj"]
+[ext_resource type="Script" uid="uid://bjtf64qouxoj1" path="res://scripts/settings_menu.gd" id="1_x3vyp"]
+[ext_resource type="Texture2D" uid="uid://bwyyhcalexebf" path="res://assets/textures/SettingsSfx.png" id="2_x3vyp"]
+[ext_resource type="Texture2D" uid="uid://b6o8aa2i25ek7" path="res://assets/textures/GameLogo.png" id="4_yu862"]
+[ext_resource type="Texture2D" uid="uid://dbllq3r27t260" path="res://assets/textures/ButtonHome.png" id="5_ywggk"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ngbvi"]
+atlas = ExtResource("5_ywggk")
+region = Rect2(11, 9.25, 201.5, 212.5)
+
+[node name="SettingsMenu" type="Control" unique_id=1950435806]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_x3vyp")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1015854922]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.8901961, 0.3254902, 0.20784314, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1266653140]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1546353168]
+layout_mode = 2
+
+[node name="Music" type="TextureRect" parent="VBoxContainer/HBoxContainer" unique_id=2078403112]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+texture = ExtResource("1_mhswj")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MusicSlider" type="HSlider" parent="VBoxContainer/HBoxContainer" unique_id=204047402]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+max_value = 1.0
+step = 0.01
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer" unique_id=1603585529]
+layout_mode = 2
+
+[node name="Sfx" type="TextureRect" parent="VBoxContainer/HBoxContainer2" unique_id=590110890]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+texture = ExtResource("2_x3vyp")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="SfxSlider" type="HSlider" parent="VBoxContainer/HBoxContainer2" unique_id=76787843]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+max_value = 1.0
+step = 0.01
+
+[node name="GameLogo" type="TextureRect" parent="." unique_id=524817735]
+custom_minimum_size = Vector2(600, 200)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -616.0
+offset_right = 300.0
+offset_bottom = -416.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_yu862")
+expand_mode = 1
+
+[node name="HomeButton" type="TextureButton" parent="." unique_id=479002557]
+texture_filter = 1
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -144.0
+offset_right = 40.0
+offset_bottom = -64.0
+grow_horizontal = 2
+grow_vertical = 0
+texture_normal = SubResource("AtlasTexture_ngbvi")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="Timer" type="Timer" parent="." unique_id=119442109]
+autostart = true

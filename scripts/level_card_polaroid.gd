@@ -5,6 +5,7 @@ extends Button
 @onready var star2 = $StarsContainer/Star2
 @onready var star3 = $StarsContainer/Star3
 @onready var number_label = $LevelNumberLabel
+@onready var lock_icon = $LockIcon
 
 var level_num: int = 1
 var star_empty = preload("res://assets/textures/StarEmpty.png")
@@ -18,6 +19,9 @@ func setup(num: int, is_unlocked: bool, earned_stars: int, is_boss_level: bool):
 
 	if number_label:
 		number_label.text = str(level_num)
+		
+	if lock_icon:
+		lock_icon.visible = not is_unlocked
 	
 	if is_unlocked:
 		disabled = false
@@ -39,3 +43,6 @@ func setup(num: int, is_unlocked: bool, earned_stars: int, is_boss_level: bool):
 		star2.texture = star_empty
 		star3.texture = star_empty
 		modulate = Color(0.5, 0.5, 0.5)
+		
+		if lock_icon:
+			lock_icon.modulate = Color(2.0, 2.0, 2.0)

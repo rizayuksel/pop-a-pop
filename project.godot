@@ -11,8 +11,9 @@ config_version=5
 [application]
 
 config/name="pop-a-pop"
-run/main_scene="uid://djbrf26740nxc"
+run/main_scene="uid://dqokqhm0hkyup"
 config/features=PackedStringArray("4.7", "GL Compatibility")
+boot_splash/show_image=false
 config/icon="res://icon.svg"
 
 [autoload]

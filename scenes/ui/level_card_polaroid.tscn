@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://wlximfmmllqo" path="res://assets/textures/levels/thumbnails/level_1_thumb.webp" id="2_5huqm"]
 [ext_resource type="Texture2D" uid="uid://b84ckdh133tr6" path="res://assets/textures/StarEmpty.png" id="2_vtarg"]
 [ext_resource type="FontFile" uid="uid://dtxwram6b7ltt" path="res://assets/fonts/PixelifySans-VariableFont_wght.ttf" id="4_5huqm"]
+[ext_resource type="Texture2D" uid="uid://ljesojohsl2s" path="res://assets/textures/LevelLock.png" id="5_8ami7"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wjvqx"]
 border_color = Color(1, 1, 1, 1)
@@ -95,3 +96,21 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("4_5huqm")
 theme_override_font_sizes/font_size = 40
 text = "1"
+
+[node name="LockIcon" type="TextureRect" parent="." unique_id=474519764]
+z_index = 2
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -37.5
+offset_top = -37.5
+offset_right = 37.5
+offset_bottom = 37.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_8ami7")
+expand_mode = 1
+stretch_mode = 5

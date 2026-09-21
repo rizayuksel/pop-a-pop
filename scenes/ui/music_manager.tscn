@@ -9,7 +9,9 @@ script = ExtResource("1_pjo54")
 
 [node name="MenuMusic" type="AudioStreamPlayer" parent="." unique_id=482238219]
 stream = ExtResource("1_tnlm8")
+bus = &"Music"
 
 [node name="LevelMusic1" type="AudioStreamPlayer" parent="." unique_id=1363127533]
 process_mode = 3
 stream = ExtResource("2_pjo54")
+bus = &"Music"

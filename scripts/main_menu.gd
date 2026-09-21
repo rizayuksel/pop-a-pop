@@ -41,7 +41,7 @@ func _on_level_select_pressed():
 	get_tree().change_scene_to_file("res://scenes/ui/level_select_horizontal.tscn")
 
 func _on_settings_pressed():
-	print("Settings menu is not ready yet")
+	get_tree().change_scene_to_file("res://scenes/ui/settings_menu.tscn")
 
 func _on_credits_pressed():
 	get_tree().change_scene_to_file("res://scenes/ui/credits_screen.tscn")

@@ -1,6 +1,7 @@
 extends Control
 
 const TOTAL_LEVELS = 16
+const MENU_BALLOON_SCENE = preload("res://scenes/ui/menu_balloon.tscn")
 var level_card_scene = preload("res://scenes/ui/level_card_polaroid.tscn")
 
 @onready var level_container = $ScrollContainer/MarginContainer/LevelContainer
@@ -19,6 +20,12 @@ func _ready():
 	
 	_animate_arrows()
 	generate_level_map()
+	
+	var balloon_timer = Timer.new()
+	balloon_timer.wait_time = 1.5
+	balloon_timer.autostart = true
+	add_child(balloon_timer)
+	balloon_timer.timeout.connect(_on_spawn_balloon)
 
 func generate_level_map():
 	for i in range(TOTAL_LEVELS):
@@ -87,6 +94,29 @@ func _on_home_pressed():
 
 func _on_level_pressed(level_num: int):
 	TransitionManager.transition_to_scene("res://scenes/levels/level_" + str(level_num) + ".tscn")
+
+func _on_spawn_balloon():
+	var balloon = MENU_BALLOON_SCENE.instantiate()
+	
+	var screen_width = get_viewport_rect().size.x
+	var random_x = randf_range(50.0, screen_width - 50.0)
+	var spawn_y = get_viewport_rect().size.y + 50.0
+	
+	balloon.position = Vector2(random_x, spawn_y)
+	
+	var colors = [
+		Color("8A9A5B"),
+		Color("87CEEB"),
+		Color("E35335"),
+		Color("F4C430"),
+		Color("F8C8DC"),
+		Color("DA70D6"),
+		Color("F5DEB3")
+	]
+	balloon.modulate = colors.pick_random()
+	
+	add_child(balloon)
+	move_child(balloon, 0)
 
 func _process(_delta):
 	if scroll_container and parallax_bg:
