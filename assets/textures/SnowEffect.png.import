@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bym11ikrjit6u"
-path="res://.godot/imported/level_1_thumb.webp-7e0d4b0826928b9ac212022b6785aca0.ctex"
+uid="uid://dqkl5theiyxjv"
+path="res://.godot/imported/SnowEffect.png-77be8ae24af6c8f6e2cfdc3a4783c025.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/levels/thumbnails/level_1_thumb.webp"
-dest_files=["res://.godot/imported/level_1_thumb.webp-7e0d4b0826928b9ac212022b6785aca0.ctex"]
+source_file="res://assets/textures/SnowEffect.png"
+dest_files=["res://.godot/imported/SnowEffect.png-77be8ae24af6c8f6e2cfdc3a4783c025.ctex"]
 
 [params]
 

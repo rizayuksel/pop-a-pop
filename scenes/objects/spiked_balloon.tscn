@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://cxnqyddeam16" path="res://scripts/spiked_balloon.gd" id="1_fibnh"]
 [ext_resource type="Texture2D" uid="uid://cn017obn8hk3f" path="res://assets/textures/SpikeBalloon.png" id="2_fibnh"]
 [ext_resource type="Texture2D" uid="uid://bm3pxlep4g66w" path="res://assets/textures/SpikeBall.png" id="3_kvqmn"]
+[ext_resource type="Texture2D" uid="uid://77ewwm7an5np" path="res://assets/textures/FrozenSpikeBalloon.png" id="4_wkjts"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wom6i"]
 radius = 60.0
@@ -44,3 +45,8 @@ texture = ExtResource("3_kvqmn")
 position = Vector2(48, -48)
 scale = Vector2(0.02, 0.02)
 texture = ExtResource("3_kvqmn")
+
+[node name="FrozenSprite" type="Sprite2D" parent="." unique_id=66082875]
+visible = false
+scale = Vector2(0.104, 0.104)
+texture = ExtResource("4_wkjts")

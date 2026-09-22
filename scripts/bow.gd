@@ -131,7 +131,8 @@ func update_trajectory(start_pos: Vector2, initial_velocity: Vector2, gravity: f
 		
 		if result:
 			trajectory_line.add_point(result.position)
-			current_vel = current_vel.bounce(result.normal)
+			if result.normal != Vector2.ZERO:
+				current_vel = current_vel.bounce(result.normal)
 			current_pos = result.position
 		else:
 			trajectory_line.add_point(next_pos)

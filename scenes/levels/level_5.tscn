@@ -39,10 +39,10 @@ position = Vector2(403.1, 384)
 [node name="Balloon3" parent="." unique_id=118734724 instance=ExtResource("6_5ke18")]
 position = Vector2(475.1, 384)
 
-[node name="IceBalloon" parent="." unique_id=343957057 instance=ExtResource("7_j14br")]
-position = Vector2(323.1, 504)
-freeze_radius = 200.0
-
 [node name="FireBalloon" parent="." unique_id=1069062386 instance=ExtResource("8_0y7y4")]
 position = Vector2(451.1, 216)
 explosion_radius = 200.0
+
+[node name="IceBalloon" parent="." unique_id=599715081 instance=ExtResource("7_j14br")]
+position = Vector2(328, 504)
+freeze_radius = 200.0

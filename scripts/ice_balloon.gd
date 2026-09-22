@@ -1,6 +1,8 @@
 extends Area2D
 
 @export var freeze_radius = 120.0
+var snow_texture = preload("res://assets/textures/SnowEffect.png")
+var frozen_fire_texture = preload("res://assets/textures/FrozenFireBalloon.png")
 
 func _ready():
 	body_entered.connect(_on_body_entered)
@@ -26,7 +28,7 @@ func pop():
 
 func apply_freeze_effect():
 	var all_balloons = get_tree().get_nodes_in_group("balloons")
-	
+
 	for target_balloon in all_balloons:
 		if target_balloon != self and is_instance_valid(target_balloon):
 
@@ -37,10 +39,24 @@ func apply_freeze_effect():
 			var dist = global_position.distance_to(target_balloon.global_position)
 			
 			if dist <= freeze_radius:
-				target_balloon.modulate = Color(0.0, 0.8, 1.0, 0.9)
+				var balloon_sprite = target_balloon.get_node_or_null("Sprite2D")
+				if target_balloon.has_method("custom_freeze"):
+					target_balloon.custom_freeze()
+				elif balloon_sprite:
+					balloon_sprite.modulate = balloon_sprite.modulate.lerp(Color.WHITE, 0.6)
+						
+				var snow_sprite = Sprite2D.new()
+				snow_sprite.texture = snow_texture
+				snow_sprite.name = "SnowEffectOverlay"
+				snow_sprite.scale = Vector2(0.2, 0.2)
+				target_balloon.add_child(snow_sprite)
 				
 				target_balloon.set_physics_process(false)
 				target_balloon.set_process(false)
+				
+				if target_balloon is Area2D:
+					target_balloon.set_deferred("monitoring", false)
+					target_balloon.set_deferred("monitorable", false)
 				
 				var static_body = StaticBody2D.new()
 				static_body.name = "IceBarrier"

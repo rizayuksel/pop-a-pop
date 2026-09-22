@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bym11ikrjit6u"
-path="res://.godot/imported/level_1_thumb.webp-7e0d4b0826928b9ac212022b6785aca0.ctex"
+uid="uid://b8gn365lmopfu"
+path="res://.godot/imported/FrozenLaserBalloon2.png-4a2f2d628abc8ec27c8310b974558a8e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/levels/thumbnails/level_1_thumb.webp"
-dest_files=["res://.godot/imported/level_1_thumb.webp-7e0d4b0826928b9ac212022b6785aca0.ctex"]
+source_file="res://assets/textures/FrozenLaserBalloon2.png"
+dest_files=["res://.godot/imported/FrozenLaserBalloon2.png-4a2f2d628abc8ec27c8310b974558a8e.ctex"]
 
 [params]
 

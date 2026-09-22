@@ -6,6 +6,10 @@
 _data = [Vector2(0.05239521, 1), 0.0, 0.0, 0, 0, Vector2(0.99700606, 0), -2.6594884, 0.0, 0, 0]
 point_count = 2
 
+[sub_resource type="Gradient" id="Gradient_tqnj0"]
+offsets = PackedFloat32Array(0.0017513135, 0.30823117, 0.68476355, 0.85989493, 1)
+colors = PackedColorArray(1, 0.7666667, 0, 1, 1, 0.4666667, 0, 1, 0.8, 0, 0, 1, 0.8, 0, 0, 0.5294118, 0.8, 0, 0, 0.03529412)
+
 [node name="ExplosionEffect" type="Node2D" unique_id=534598594]
 z_index = 10
 script = ExtResource("1_7i385")
@@ -25,3 +29,4 @@ initial_velocity_max = 250.0
 scale_amount_min = 5.0
 scale_amount_max = 10.0
 scale_amount_curve = SubResource("Curve_wjvqx")
+color_ramp = SubResource("Gradient_tqnj0")

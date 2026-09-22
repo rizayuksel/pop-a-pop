@@ -5,12 +5,13 @@
 [ext_resource type="PackedScene" uid="uid://chsi1q1fyhs4q" path="res://scenes/objects/bow.tscn" id="3_2w147"]
 [ext_resource type="PackedScene" uid="uid://m4wc2udpxngg" path="res://scenes/objects/mud.tscn" id="4_2w147"]
 [ext_resource type="PackedScene" uid="uid://c61rm7cacm1uf" path="res://scenes/objects/bouncer.tscn" id="5_xw7bu"]
-[ext_resource type="PackedScene" uid="uid://b5l6ipxxfj30s" path="res://scenes/objects/fire_balloon.tscn" id="6_imaen"]
 [ext_resource type="PackedScene" uid="uid://bw8n28q6u2mbb" path="res://scenes/objects/balloon.tscn" id="7_bqjd5"]
+[ext_resource type="PackedScene" uid="uid://naewmtyhfful" path="res://scenes/objects/laser_balloon.tscn" id="8_4wjd0"]
 
 [node name="Main" type="Node2D" unique_id=202816392]
 script = ExtResource("1_5bes1")
-level_arrows = 4
+level_arrows = 1
+star_targets = Array[int]([40, 41, 42])
 level_id = "level_16"
 
 [node name="RubberBand" type="Line2D" parent="." unique_id=918229744]
@@ -19,136 +20,172 @@ default_color = Color(0.7993065, 0.44433373, 0, 1)
 [node name="UI" parent="." unique_id=1367951368 instance=ExtResource("2_3ycd6")]
 
 [node name="Bow" parent="." unique_id=1965107452 instance=ExtResource("3_2w147")]
-position = Vector2(152, 976)
-trajectory_length = 500
+position = Vector2(155.1, 1053)
+trajectory_length = 50
 
-[node name="Mud5" parent="." unique_id=1641655694 instance=ExtResource("4_2w147")]
-position = Vector2(416, 600)
+[node name="LaserBalloon" parent="." unique_id=1069062386 instance=ExtResource("8_4wjd0")]
+position = Vector2(595.1, 789)
 
-[node name="Mud6" parent="." unique_id=693216329 instance=ExtResource("4_2w147")]
-position = Vector2(376, 656)
+[node name="LaserBalloon2" parent="." unique_id=1543796329 instance=ExtResource("8_4wjd0")]
+position = Vector2(595.1, 189)
+laser_type = 0
 
-[node name="Mud7" parent="." unique_id=1245125872 instance=ExtResource("4_2w147")]
-position = Vector2(344, 720)
+[node name="LaserBalloon3" parent="." unique_id=1688071118 instance=ExtResource("8_4wjd0")]
+position = Vector2(163.1, 189)
 
-[node name="Mud8" parent="." unique_id=445751512 instance=ExtResource("4_2w147")]
-position = Vector2(320, 784)
+[node name="LaserBalloon4" parent="." unique_id=1753666756 instance=ExtResource("8_4wjd0")]
+position = Vector2(163.1, 653)
+laser_type = 0
 
-[node name="Mud10" parent="." unique_id=1530257667 instance=ExtResource("4_2w147")]
-position = Vector2(560, 456)
+[node name="LaserBalloon5" parent="." unique_id=1823214809 instance=ExtResource("8_4wjd0")]
+position = Vector2(523.1, 653)
 
-[node name="Mud11" parent="." unique_id=789685975 instance=ExtResource("4_2w147")]
-position = Vector2(504, 496)
+[node name="LaserBalloon6" parent="." unique_id=667147554 instance=ExtResource("8_4wjd0")]
+position = Vector2(523.1, 277)
+laser_type = 0
 
-[node name="Mud12" parent="." unique_id=1888934425 instance=ExtResource("4_2w147")]
-position = Vector2(456, 544)
+[node name="LaserBalloon7" parent="." unique_id=1363711528 instance=ExtResource("8_4wjd0")]
+position = Vector2(243.1, 277)
 
-[node name="Mud13" parent="." unique_id=247181172 instance=ExtResource("4_2w147")]
-position = Vector2(264, 568)
+[node name="LaserBalloon8" parent="." unique_id=512346537 instance=ExtResource("8_4wjd0")]
+position = Vector2(243.1, 549)
+laser_type = 0
 
-[node name="Mud14" parent="." unique_id=1746339480 instance=ExtResource("4_2w147")]
-position = Vector2(224, 624)
-
-[node name="Mud15" parent="." unique_id=509567344 instance=ExtResource("4_2w147")]
-position = Vector2(200, 688)
-
-[node name="Mud16" parent="." unique_id=1856176445 instance=ExtResource("4_2w147")]
-position = Vector2(184, 752)
-
-[node name="Mud17" parent="." unique_id=240667252 instance=ExtResource("4_2w147")]
-position = Vector2(448, 368)
-
-[node name="Mud18" parent="." unique_id=1920303877 instance=ExtResource("4_2w147")]
-position = Vector2(392, 408)
-
-[node name="Mud19" parent="." unique_id=1169239558 instance=ExtResource("4_2w147")]
-position = Vector2(344, 456)
-
-[node name="Mud20" parent="." unique_id=430088444 instance=ExtResource("4_2w147")]
-position = Vector2(304, 512)
-
-[node name="Mud" parent="." unique_id=970107660 instance=ExtResource("4_2w147")]
-position = Vector2(496, 320)
-
-[node name="Mud2" parent="." unique_id=1928829468 instance=ExtResource("4_2w147")]
-position = Vector2(552, 280)
+[node name="LaserBalloon9" parent="." unique_id=1802361792 instance=ExtResource("8_4wjd0")]
+position = Vector2(459.1, 549)
 
 [node name="Bouncer" parent="." unique_id=899775968 instance=ExtResource("5_xw7bu")]
-position = Vector2(664, 288)
-rotation = 0.6981317
+position = Vector2(643.10004, 1149)
+rotation = -0.6981317
 
-[node name="FireBalloon" parent="." unique_id=1069062386 instance=ExtResource("6_imaen")]
-position = Vector2(648, 552)
-explosion_radius = 150.0
+[node name="Mud" parent="." unique_id=1641655694 instance=ExtResource("4_2w147")]
+position = Vector2(163.1, 853)
 
-[node name="FireBalloon2" parent="." unique_id=1163399187 instance=ExtResource("6_imaen")]
-position = Vector2(632, 632)
-explosion_radius = 150.0
+[node name="Mud2" parent="." unique_id=153905274 instance=ExtResource("4_2w147")]
+position = Vector2(227.1, 853)
 
-[node name="FireBalloon3" parent="." unique_id=1064290308 instance=ExtResource("6_imaen")]
-position = Vector2(616, 712)
-explosion_radius = 150.0
+[node name="Mud3" parent="." unique_id=418660903 instance=ExtResource("4_2w147")]
+position = Vector2(291.1, 853)
 
-[node name="Balloon" parent="." unique_id=1147550889 instance=ExtResource("7_bqjd5")]
-position = Vector2(680, 688)
+[node name="Mud4" parent="." unique_id=1429535807 instance=ExtResource("4_2w147")]
+position = Vector2(355.1, 853)
 
-[node name="Balloon2" parent="." unique_id=884295219 instance=ExtResource("7_bqjd5")]
-position = Vector2(664, 776)
+[node name="Mud5" parent="." unique_id=1770508827 instance=ExtResource("4_2w147")]
+position = Vector2(419.1, 853)
 
-[node name="Balloon3" parent="." unique_id=1143346252 instance=ExtResource("7_bqjd5")]
-position = Vector2(584, 584)
+[node name="Mud6" parent="." unique_id=7531321 instance=ExtResource("4_2w147")]
+position = Vector2(483.1, 853)
 
-[node name="Balloon4" parent="." unique_id=617449684 instance=ExtResource("7_bqjd5")]
-position = Vector2(568, 664)
+[node name="Mud7" parent="." unique_id=959528037 instance=ExtResource("4_2w147")]
+position = Vector2(547.1, 853)
 
-[node name="Balloon5" parent="." unique_id=116759773 instance=ExtResource("7_bqjd5")]
-position = Vector2(552, 744)
+[node name="Mud8" parent="." unique_id=1715200408 instance=ExtResource("4_2w147")]
+position = Vector2(659.1, 853)
 
-[node name="Balloon6" parent="." unique_id=1772879891 instance=ExtResource("7_bqjd5")]
-position = Vector2(512, 616)
+[node name="Mud9" parent="." unique_id=240326461 instance=ExtResource("4_2w147")]
+position = Vector2(659.1, 789)
 
-[node name="Balloon7" parent="." unique_id=465806301 instance=ExtResource("7_bqjd5")]
-position = Vector2(496, 704)
+[node name="Mud10" parent="." unique_id=1711761426 instance=ExtResource("4_2w147")]
+position = Vector2(659.1, 725)
 
-[node name="Balloon8" parent="." unique_id=291611790 instance=ExtResource("7_bqjd5")]
-position = Vector2(480, 784)
+[node name="Balloon" parent="." unique_id=424356972 instance=ExtResource("7_bqjd5")]
+position = Vector2(595.1, 677)
 
-[node name="Mud3" parent="." unique_id=1113247474 instance=ExtResource("4_2w147")]
-position = Vector2(328, 856)
+[node name="Balloon2" parent="." unique_id=631214087 instance=ExtResource("7_bqjd5")]
+position = Vector2(595.1, 581)
 
-[node name="Mud4" parent="." unique_id=1619077297 instance=ExtResource("4_2w147")]
-position = Vector2(376, 904)
+[node name="Balloon3" parent="." unique_id=1533292573 instance=ExtResource("7_bqjd5")]
+position = Vector2(595.1, 485)
 
-[node name="Mud9" parent="." unique_id=2142728186 instance=ExtResource("4_2w147")]
-position = Vector2(448, 912)
+[node name="Balloon4" parent="." unique_id=1455644060 instance=ExtResource("7_bqjd5")]
+position = Vector2(595.1, 389)
 
-[node name="Mud21" parent="." unique_id=177549559 instance=ExtResource("4_2w147")]
-position = Vector2(520, 912)
+[node name="Balloon5" parent="." unique_id=1820838244 instance=ExtResource("7_bqjd5")]
+position = Vector2(595.1, 293)
 
-[node name="Mud22" parent="." unique_id=100030584 instance=ExtResource("4_2w147")]
-position = Vector2(416, 840)
+[node name="Balloon6" parent="." unique_id=415062013 instance=ExtResource("7_bqjd5")]
+position = Vector2(451.1, 189)
 
-[node name="Mud23" parent="." unique_id=1235736507 instance=ExtResource("4_2w147")]
-position = Vector2(488, 848)
+[node name="Balloon7" parent="." unique_id=1073976314 instance=ExtResource("7_bqjd5")]
+position = Vector2(379.1, 189)
 
-[node name="Mud24" parent="." unique_id=2070633318 instance=ExtResource("4_2w147")]
-position = Vector2(560, 848)
+[node name="Balloon8" parent="." unique_id=320009352 instance=ExtResource("7_bqjd5")]
+position = Vector2(307.1, 189)
 
-[node name="Mud25" parent="." unique_id=1667187042 instance=ExtResource("4_2w147")]
-position = Vector2(592, 912)
+[node name="Balloon9" parent="." unique_id=228174939 instance=ExtResource("7_bqjd5")]
+position = Vector2(235.1, 189)
 
-[node name="Mud26" parent="." unique_id=403847893 instance=ExtResource("4_2w147")]
-position = Vector2(664, 912)
+[node name="Balloon10" parent="." unique_id=98503555 instance=ExtResource("7_bqjd5")]
+position = Vector2(523.1, 189)
 
-[node name="Mud27" parent="." unique_id=2041525570 instance=ExtResource("4_2w147")]
-position = Vector2(632, 848)
+[node name="Balloon11" parent="." unique_id=786260591 instance=ExtResource("7_bqjd5")]
+position = Vector2(163.1, 565)
 
-[node name="Balloon9" parent="." unique_id=852575793 instance=ExtResource("7_bqjd5")]
-position = Vector2(416, 768)
+[node name="Balloon12" parent="." unique_id=743715932 instance=ExtResource("7_bqjd5")]
+position = Vector2(163.1, 469)
 
-[node name="FireBalloon4" parent="." unique_id=1305837343 instance=ExtResource("6_imaen")]
-position = Vector2(488, 1008)
-explosion_radius = 150.0
+[node name="Balloon13" parent="." unique_id=271365226 instance=ExtResource("7_bqjd5")]
+position = Vector2(163.1, 373)
 
-[node name="FireBalloon5" parent="." unique_id=899115627 instance=ExtResource("6_imaen")]
-position = Vector2(496, 1096)
+[node name="Balloon14" parent="." unique_id=1029758930 instance=ExtResource("7_bqjd5")]
+position = Vector2(163.1, 277)
+
+[node name="Balloon15" parent="." unique_id=1321545116 instance=ExtResource("7_bqjd5")]
+position = Vector2(451.1, 653)
+
+[node name="Balloon16" parent="." unique_id=822549496 instance=ExtResource("7_bqjd5")]
+position = Vector2(379.1, 653)
+
+[node name="Balloon17" parent="." unique_id=1517879740 instance=ExtResource("7_bqjd5")]
+position = Vector2(307.1, 653)
+
+[node name="Balloon18" parent="." unique_id=2020038802 instance=ExtResource("7_bqjd5")]
+position = Vector2(235.1, 653)
+
+[node name="Balloon19" parent="." unique_id=1277647715 instance=ExtResource("7_bqjd5")]
+position = Vector2(523.1, 565)
+
+[node name="Balloon20" parent="." unique_id=1455668216 instance=ExtResource("7_bqjd5")]
+position = Vector2(523.1, 469)
+
+[node name="Balloon21" parent="." unique_id=1733060311 instance=ExtResource("7_bqjd5")]
+position = Vector2(523.1, 373)
+
+[node name="Balloon22" parent="." unique_id=424211267 instance=ExtResource("7_bqjd5")]
+position = Vector2(459.1, 277)
+
+[node name="Balloon23" parent="." unique_id=426119654 instance=ExtResource("7_bqjd5")]
+position = Vector2(387.1, 277)
+
+[node name="Balloon24" parent="." unique_id=645334940 instance=ExtResource("7_bqjd5")]
+position = Vector2(315.1, 277)
+
+[node name="Balloon25" parent="." unique_id=590726747 instance=ExtResource("7_bqjd5")]
+position = Vector2(243.1, 461)
+
+[node name="Balloon26" parent="." unique_id=1722018382 instance=ExtResource("7_bqjd5")]
+position = Vector2(243.1, 365)
+
+[node name="Balloon27" parent="." unique_id=1665764035 instance=ExtResource("7_bqjd5")]
+position = Vector2(387.1, 277)
+
+[node name="Balloon28" parent="." unique_id=1849855073 instance=ExtResource("7_bqjd5")]
+position = Vector2(315.1, 277)
+
+[node name="Balloon29" parent="." unique_id=1849296217 instance=ExtResource("7_bqjd5")]
+position = Vector2(387.1, 549)
+
+[node name="Balloon30" parent="." unique_id=1655792718 instance=ExtResource("7_bqjd5")]
+position = Vector2(315.1, 549)
+
+[node name="Balloon31" parent="." unique_id=1693920715 instance=ExtResource("7_bqjd5")]
+position = Vector2(315.1, 549)
+
+[node name="Balloon32" parent="." unique_id=1826923644 instance=ExtResource("7_bqjd5")]
+position = Vector2(459.1, 461)
+
+[node name="Balloon33" parent="." unique_id=1975632702 instance=ExtResource("7_bqjd5")]
+position = Vector2(459.1, 365)
+
+[node name="Mud11" parent="." unique_id=1983597166 instance=ExtResource("4_2w147")]
+position = Vector2(99.100006, 853)

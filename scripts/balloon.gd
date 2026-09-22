@@ -1,5 +1,7 @@
 extends Area2D
 
+var original_color: Color
+
 var colors = [
 	Color("8A9A5B"),
 	Color("87CEEB"),
@@ -15,7 +17,8 @@ var is_popped = false
 var fall_speed = 0.0
 
 func _ready():
-	$Sprite2D.modulate = colors.pick_random()
+	original_color = colors.pick_random()
+	$Sprite2D.modulate = original_color
 	body_entered.connect(_on_body_entered)
 
 func _process(delta):

@@ -7,6 +7,7 @@
 radius = 13.0
 
 [node name="Spike" type="Area2D" unique_id=1104277886]
+collision_layer = 3
 script = ExtResource("1_ljd5v")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=133472836]

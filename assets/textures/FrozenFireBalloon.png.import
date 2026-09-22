@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bym11ikrjit6u"
-path="res://.godot/imported/level_1_thumb.webp-7e0d4b0826928b9ac212022b6785aca0.ctex"
+uid="uid://bxm3lvdbdlfql"
+path="res://.godot/imported/FrozenFireBalloon.png-6546f34c67ce6154447a6e9f2e41f44c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/levels/thumbnails/level_1_thumb.webp"
-dest_files=["res://.godot/imported/level_1_thumb.webp-7e0d4b0826928b9ac212022b6785aca0.ctex"]
+source_file="res://assets/textures/FrozenFireBalloon.png"
+dest_files=["res://.godot/imported/FrozenFireBalloon.png-6546f34c67ce6154447a6e9f2e41f44c.ctex"]
 
 [params]
 

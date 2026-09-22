@@ -3,7 +3,13 @@ extends Area2D
 const EXPLOSION_SCENE = preload("res://scenes/objects/explosion_effect.tscn")
 @export var explosion_radius = 120.0 
 
+var original_color: Color 
+var is_popped = false 
+
 func _ready():
+	if has_node("Sprite2D"):
+		original_color = $Sprite2D.modulate
+		
 	body_entered.connect(_on_body_entered)
 
 func _on_body_entered(body):
@@ -11,6 +17,10 @@ func _on_body_entered(body):
 		pop()
 
 func pop():
+	if is_popped:
+		return
+	is_popped = true
+	
 	_update_ui_score()
 	
 	var main_scene = get_tree().current_scene
@@ -30,28 +40,80 @@ func explode():
 	for target_balloon in all_balloons:
 		if target_balloon != self and is_instance_valid(target_balloon):
 			if global_position.distance_to(target_balloon.global_position) <= explosion_radius:
+				
 				if target_balloon.has_node("IceBarrier"):
 					_unfreeze_balloon(target_balloon)
 				else:
-					_update_ui_score()
-					target_balloon.queue_free()
+					var script = target_balloon.get_script()
+					if script and script.resource_path.get_file() == "fire_balloon.gd":
+						get_tree().create_timer(0.15).timeout.connect(func():
+							if is_instance_valid(target_balloon):
+								target_balloon.pop()
+						)
+					else:
+						_update_ui_score()
+						target_balloon.queue_free()
+
+	var space_state = get_world_2d().direct_space_state
+	var query = PhysicsShapeQueryParameters2D.new()
+	var shape = CircleShape2D.new()
+	shape.radius = explosion_radius
+	query.shape = shape
+	query.transform = Transform2D(0, global_position)
+	query.collide_with_areas = true
+	query.collide_with_bodies = true
+	
+	var hits = space_state.intersect_shape(query)
+	for hit in hits:
+		var target = hit.collider
+		if is_instance_valid(target) and target != self:
+			var script = target.get_script()
+			var script_name = script.resource_path.get_file() if script else ""
+			
+			if script_name == "mud.gd" or target.get("is_mud"):
+				target.queue_free()
 
 func _unfreeze_balloon(balloon):
 	var ice_barrier = balloon.get_node_or_null("IceBarrier")
 	if ice_barrier:
 		ice_barrier.queue_free()
-	
-	balloon.modulate = Color(1, 1, 1, 1)
+		
+	var snow_overlay = balloon.get_node_or_null("SnowEffectOverlay")
+	if snow_overlay:
+		snow_overlay.queue_free()
+
+	if balloon.has_method("custom_unfreeze"):
+		balloon.custom_unfreeze()
+
 	balloon.set_physics_process(true)
 	balloon.set_process(true)
-	
+
 	if balloon is Area2D:
 		balloon.set_deferred("monitoring", true)
 		balloon.set_deferred("monitorable", true)
 
+func custom_freeze():
+	var normal_sprite = get_node_or_null("Sprite2D")
+	var frozen_sprite = get_node_or_null("FrozenSprite")
+
+	if normal_sprite:
+		normal_sprite.visible = false
+		
+	if frozen_sprite:
+		frozen_sprite.visible = true
+		frozen_sprite.modulate = Color.WHITE
+
+func custom_unfreeze():
+	var normal_sprite = get_node_or_null("Sprite2D")
+	var frozen_sprite = get_node_or_null("FrozenSprite")
+	if normal_sprite and frozen_sprite:
+		normal_sprite.visible = true
+		frozen_sprite.visible = false
+
 func spawn_explosion_effect():
 	var effect = EXPLOSION_SCENE.instantiate()
 	effect.global_position = global_position
+	effect.modulate = Color(1.0, 0.5, 0.0) 
 	get_tree().current_scene.call_deferred("add_child", effect)
 
 func _update_ui_score():

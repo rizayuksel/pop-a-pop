@@ -7,7 +7,7 @@
 radius = 33.0
 
 [node name="Mud" type="Area2D" unique_id=1641655694]
-collision_layer = 2
+collision_layer = 3
 script = ExtResource("1_7hsp0")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=315300746]

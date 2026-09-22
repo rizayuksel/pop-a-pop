@@ -7,6 +7,10 @@ const TEX_HORIZONTAL = preload("res://assets/textures/LaserBalloon1.png")
 const TEX_VERTICAL = preload("res://assets/textures/LaserBalloon2.png")
 const TEX_CROSS = preload("res://assets/textures/LaserBalloon3.png")
 
+const FROZEN_TEX_HORIZONTAL = preload("res://assets/textures/FrozenLaserBalloon1.png") 
+const FROZEN_TEX_VERTICAL = preload("res://assets/textures/FrozenLaserBalloon2.png")
+const FROZEN_TEX_CROSS = preload("res://assets/textures/FrozenLaserBalloon3.png")
+
 @export var laser_type: LaserType = LaserType.HORIZONTAL:
 	set(value):
 		laser_type = value
@@ -15,6 +19,8 @@ const TEX_CROSS = preload("res://assets/textures/LaserBalloon3.png")
 @export var laser_range: float = 2000.0
 
 const SPARK_SCENE = preload("res://scenes/objects/laser_spark.tscn")
+
+var is_popped = false
 
 func _ready():
 	if not Engine.is_editor_hint():
@@ -25,22 +31,33 @@ func _ready():
 	_update_texture()
 
 func _update_texture():
-	if not has_node("Sprite2D"):
-		return
-		
-	match laser_type:
-		LaserType.HORIZONTAL:
-			$Sprite2D.texture = TEX_HORIZONTAL
-		LaserType.VERTICAL:
-			$Sprite2D.texture = TEX_VERTICAL
-		LaserType.CROSS:
-			$Sprite2D.texture = TEX_CROSS
+	if has_node("Sprite2D"):
+		match laser_type:
+			LaserType.HORIZONTAL:
+				$Sprite2D.texture = TEX_HORIZONTAL
+			LaserType.VERTICAL:
+				$Sprite2D.texture = TEX_VERTICAL
+			LaserType.CROSS:
+				$Sprite2D.texture = TEX_CROSS
+				
+	if has_node("FrozenSprite"):
+		match laser_type:
+			LaserType.HORIZONTAL:
+				$FrozenSprite.texture = FROZEN_TEX_HORIZONTAL
+			LaserType.VERTICAL:
+				$FrozenSprite.texture = FROZEN_TEX_VERTICAL
+			LaserType.CROSS:
+				$FrozenSprite.texture = FROZEN_TEX_CROSS
 
 func _on_body_entered(body):
 	if body is RigidBody2D:
 		pop()
 
 func pop():
+	if is_popped:
+		return
+	is_popped = true
+
 	_update_ui_score()
 
 	var main_scene = get_tree().current_scene
@@ -49,7 +66,11 @@ func pop():
 		
 	fire_lasers()
 
-	$Sprite2D.visible = false
+	if has_node("Sprite2D"):
+		$Sprite2D.visible = false
+	if has_node("FrozenSprite"):
+		$FrozenSprite.visible = false
+		
 	$CollisionShape2D.set_deferred("disabled", true)
 
 	var tween = create_tween()
@@ -135,6 +156,11 @@ func process_laser_hit(hit_obj):
 			
 		if script_path == "mud.gd":
 			target.queue_free()
+		elif script_path == "laser_balloon.gd":
+			get_tree().create_timer(0.15).timeout.connect(func():
+				if is_instance_valid(target):
+					target.pop()
+			)
 		else:
 			silent_destroy_balloon(target)
 
@@ -143,6 +169,25 @@ func silent_destroy_balloon(balloon):
 	if main_scene.has_node("UI"):
 		main_scene.get_node("UI").add_popped_balloon()
 	balloon.queue_free()
+
+func custom_freeze():
+	var normal_sprite = get_node_or_null("Sprite2D")
+	var frozen_sprite = get_node_or_null("FrozenSprite")
+	
+	if normal_sprite:
+		normal_sprite.visible = false
+		
+	if frozen_sprite:
+		frozen_sprite.visible = true
+		frozen_sprite.modulate = Color.WHITE
+
+func custom_unfreeze():
+	var normal_sprite = get_node_or_null("Sprite2D")
+	var frozen_sprite = get_node_or_null("FrozenSprite")
+	
+	if normal_sprite and frozen_sprite:
+		normal_sprite.visible = true
+		frozen_sprite.visible = false
 
 func _update_ui_score():
 	var main_scene = get_tree().current_scene
