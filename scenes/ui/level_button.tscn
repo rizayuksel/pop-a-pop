@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dfl3k3rwpa6pl"]
 
 [ext_resource type="Script" uid="uid://c6d4iaksk6jfl" path="res://scripts/level_button.gd" id="1_i0sit"]
-[ext_resource type="Texture2D" uid="uid://ljesojohsl2s" path="res://assets/textures/LevelLock.png" id="2_0pgek"]
+[ext_resource type="Texture2D" uid="uid://ljesojohsl2s" path="res://assets/textures/LevelLock1.png" id="2_0pgek"]
 [ext_resource type="Texture2D" uid="uid://cyr03yqv5dqu4" path="res://assets/textures/Balloon.png" id="2_4h6sh"]
 [ext_resource type="FontFile" uid="uid://dtxwram6b7ltt" path="res://assets/fonts/PixelifySans-VariableFont_wght.ttf" id="4_yaxlp"]
 

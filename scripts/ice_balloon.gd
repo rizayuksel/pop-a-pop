@@ -49,6 +49,7 @@ func apply_freeze_effect():
 				snow_sprite.texture = snow_texture
 				snow_sprite.name = "SnowEffectOverlay"
 				snow_sprite.scale = Vector2(0.2, 0.2)
+				snow_sprite.z_index = 16
 				target_balloon.add_child(snow_sprite)
 				
 				target_balloon.set_physics_process(false)

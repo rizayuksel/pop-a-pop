@@ -43,13 +43,17 @@ func _play_ice_sound():
 func custom_freeze():
 	var normal_sprite = get_node_or_null("Sprite2D")
 	var frozen_sprite = get_node_or_null("FrozenSprite")
-	
+
 	if normal_sprite:
 		normal_sprite.visible = false
 		
 	if frozen_sprite:
 		frozen_sprite.visible = true
 		frozen_sprite.modulate = Color.WHITE
+
+	z_index = 100
+	z_as_relative = false
+	modulate = Color.WHITE
 
 func custom_unfreeze():
 	var normal_sprite = get_node_or_null("Sprite2D")

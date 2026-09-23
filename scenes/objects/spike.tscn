@@ -7,6 +7,7 @@
 radius = 13.0
 
 [node name="Spike" type="Area2D" unique_id=1104277886]
+z_index = 15
 collision_layer = 3
 script = ExtResource("1_ljd5v")
 
@@ -14,6 +15,7 @@ script = ExtResource("1_ljd5v")
 shape = SubResource("CircleShape2D_wjvqx")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=237516862]
+z_index = 15
 scale = Vector2(0.015, 0.015)
 texture = ExtResource("2_7a7y0")
 

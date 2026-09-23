@@ -108,7 +108,7 @@ position = Vector2(1.5, 4)
 shape = SubResource("RectangleShape2D_2ayqo")
 
 [node name="Mud2" parent="." unique_id=1600861878 instance=ExtResource("9_hfkb1")]
-position = Vector2(152, 656)
+position = Vector2(128, 656)
 
 [node name="Mud3" parent="." unique_id=1586257682 instance=ExtResource("9_hfkb1")]
-position = Vector2(224, 656)
+position = Vector2(200, 656)

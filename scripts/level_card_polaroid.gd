@@ -34,7 +34,7 @@ func setup(num: int, is_unlocked: bool, earned_stars: int, is_boss_level: bool):
 		star3.texture = star_full if earned_stars >= 3 else star_empty
 		
 		if is_boss_level:
-			modulate = Color(1.2, 1.0, 1.0)
+			modulate = Color(1.4, 1.0, 1.0)
 		else:
 			modulate = Color(1.0, 1.0, 1.0)
 	else:

@@ -1,6 +1,6 @@
 extends Control
 
-const TOTAL_LEVELS = 20
+const TOTAL_LEVELS = 16
 const MENU_BALLOON_SCENE = preload("res://scenes/ui/menu_balloon.tscn")
 
 @onready var play_button = $VBoxContainer/Row1/PlayButton

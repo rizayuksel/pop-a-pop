@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://wlximfmmllqo" path="res://assets/textures/levels/thumbnails/level_1_thumb.webp" id="2_5huqm"]
 [ext_resource type="Texture2D" uid="uid://b84ckdh133tr6" path="res://assets/textures/StarEmpty.png" id="2_vtarg"]
 [ext_resource type="FontFile" uid="uid://dtxwram6b7ltt" path="res://assets/fonts/PixelifySans-VariableFont_wght.ttf" id="4_5huqm"]
-[ext_resource type="Texture2D" uid="uid://ljesojohsl2s" path="res://assets/textures/LevelLock.png" id="5_8ami7"]
+[ext_resource type="Texture2D" uid="uid://ljesojohsl2s" path="res://assets/textures/LevelLock1.png" id="5_8ami7"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wjvqx"]
 border_color = Color(1, 1, 1, 1)
