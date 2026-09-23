@@ -82,6 +82,13 @@ func _unfreeze_balloon(balloon):
 	if snow_overlay:
 		snow_overlay.queue_free()
 
+	var balloon_sprite = balloon.get_node_or_null("Sprite2D")
+	if balloon_sprite:
+		if "original_color" in balloon:
+			balloon_sprite.modulate = balloon.original_color
+		else:
+			balloon_sprite.modulate = Color(1, 1, 1, 1)
+
 	if balloon.has_method("custom_unfreeze"):
 		balloon.custom_unfreeze()
 

@@ -25,8 +25,12 @@ func _ready():
 func setup_background():
 	var current_level_num = level_id.trim_prefix("level_").to_int()
 	var bg_texture = null
+	var bg_modulate = Color(0.7, 0.7, 0.7, 1.0)
 
-	if current_level_num <= 20:
+	if current_level_num >= 17:
+		bg_texture = preload("res://assets/textures/BgLevel2.jpg")
+		bg_modulate = Color(0.55, 0.55, 0.60, 1.0)
+	else:
 		bg_texture = preload("res://assets/textures/BgLevel1.jpg")
 		
 	if bg_texture:
@@ -39,7 +43,7 @@ func setup_background():
 		bg_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
 		bg_rect.set_anchors_preset(Control.PRESET_FULL_RECT)
 		
-		bg_rect.modulate = Color(0.7, 0.7, 0.7, 1.0)
+		bg_rect.modulate = bg_modulate
 		
 		bg_canvas.add_child(bg_rect)
 		add_child(bg_canvas)

@@ -14,6 +14,7 @@ size = Vector2(99.9993, 19.999964)
 height = 106.0
 
 [node name="Bouncer" type="StaticBody2D" unique_id=899775968]
+collision_mask = 0
 physics_material_override = SubResource("PhysicsMaterial_1wysw")
 script = ExtResource("1_q2nta")
 

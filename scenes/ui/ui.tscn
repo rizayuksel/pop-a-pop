@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://32p7ysxh4omg"]
 
 [ext_resource type="Script" uid="uid://cptk5lcdtp0rv" path="res://scripts/ui.gd" id="1_nt7q6"]
+[ext_resource type="Texture2D" uid="uid://eftbf6d66aa4" path="res://assets/textures/UiArrow.png" id="2_4w2x3"]
 [ext_resource type="Texture2D" uid="uid://b5wnw3acvx6pt" path="res://assets/textures/ButtonPlay.png" id="2_hl07w"]
 [ext_resource type="AudioStream" uid="uid://q5fhnbchn10r" path="res://assets/audio/sfx/LaserShoot.wav" id="2_x4jx1"]
 [ext_resource type="FontFile" uid="uid://dtxwram6b7ltt" path="res://assets/fonts/PixelifySans-VariableFont_wght.ttf" id="3_4w2x3"]
@@ -9,7 +10,6 @@
 [ext_resource type="Texture2D" uid="uid://bvf6qe8br6dqc" path="res://assets/textures/ButtonRestart.png" id="4_hc5d0"]
 [ext_resource type="Texture2D" uid="uid://danqni8vnefh" path="res://assets/textures/ButtonNextLevel.png" id="4_hl07w"]
 [ext_resource type="AudioStream" uid="uid://b4ytpq8ur02wi" path="res://assets/audio/sfx/IceShoot.wav" id="4_wm3ai"]
-[ext_resource type="Texture2D" uid="uid://b57srdavv4ip8" path="res://assets/textures/Arrow.png" id="5_0i47d"]
 [ext_resource type="AudioStream" uid="uid://cs5w6cxtxxjuy" path="res://assets/audio/sfx/IceHit.wav" id="5_wm3ai"]
 [ext_resource type="AudioStream" uid="uid://dsicjsnmf8n6g" path="res://assets/audio/sfx/BalloonPop.wav" id="6_8dubc"]
 [ext_resource type="Texture2D" uid="uid://b84ckdh133tr6" path="res://assets/textures/StarEmpty.png" id="6_mgwkc"]
@@ -52,7 +52,7 @@ custom_minimum_size = Vector2(70, 63)
 layout_mode = 2
 offset_transform_enabled = true
 offset_transform_rotation = -0.7941248
-texture = ExtResource("5_0i47d")
+texture = ExtResource("2_4w2x3")
 expand_mode = 1
 stretch_mode = 5
 

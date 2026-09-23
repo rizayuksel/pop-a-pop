@@ -1,0 +1,140 @@
+[gd_scene format=3 uid="uid://bum70antl5tov"]
+
+[ext_resource type="Script" uid="uid://bp5yc8j3hxf8x" path="res://scripts/map_transition.gd" id="1_ebxdu"]
+[ext_resource type="Texture2D" uid="uid://e5sxmxmg0e2c" path="res://assets/textures/SilhouetteFerrisWheel.jpeg" id="2_eswmc"]
+[ext_resource type="Texture2D" uid="uid://b8hbd8rdppasq" path="res://assets/textures/SilhouettePirateShip.jpeg" id="3_we7fl"]
+[ext_resource type="Texture2D" uid="uid://bcceac72qxs6l" path="res://assets/textures/SilhouetteWhiteLine.jpeg" id="4_dadb8"]
+
+[sub_resource type="Animation" id="Animation_n0n3y"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(360, 640)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("LineHider:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(704, 384)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CanvasLayer/FadeOut:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_0gvby"]
+resource_name = "travel"
+length = 3.5000000000000004
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.56666666, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(360, 640), Vector2(3088, 640)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("LineHider:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.56666666, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(704, 384), Vector2(3480, 424)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CanvasLayer/FadeOut:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(2.5, 3.4666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8xpw5"]
+_data = {
+&"RESET": SubResource("Animation_n0n3y"),
+&"travel": SubResource("Animation_0gvby")
+}
+
+[node name="MapTransition" type="Node2D" unique_id=1383070548]
+script = ExtResource("1_ebxdu")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=325239153]
+custom_minimum_size = Vector2(3500, 1280)
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0, 0, 0, 1)
+
+[node name="StartIsland" type="Sprite2D" parent="." unique_id=125465437]
+position = Vector2(360, 656)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_eswmc")
+
+[node name="EndIsland" type="Sprite2D" parent="." unique_id=2051724296]
+position = Vector2(3088, 656)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_we7fl")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=2020664655]
+position = Vector2(360, 640)
+
+[node name="Line" type="Sprite2D" parent="." unique_id=20180585]
+position = Vector2(1656.0001, 680.00006)
+scale = Vector2(1.9, 1.9)
+texture = ExtResource("4_dadb8")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=571729911]
+libraries/ = SubResource("AnimationLibrary_8xpw5")
+
+[node name="LineHider" type="ColorRect" parent="." unique_id=39728136]
+custom_minimum_size = Vector2(2000, 500)
+offset_left = 704.0
+offset_top = 384.0
+offset_right = 2704.003
+offset_bottom = 884.0
+color = Color(0, 0, 0, 1)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=889751405]
+
+[node name="FadeOut" type="ColorRect" parent="CanvasLayer" unique_id=1308156006]
+modulate = Color(0, 0, 0, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)

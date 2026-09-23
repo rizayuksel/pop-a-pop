@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://i8njrjalqu8c" path="res://scripts/laser_balloon.gd" id="1_yh615"]
 [ext_resource type="Texture2D" uid="uid://snyuxe13p22j" path="res://assets/textures/LaserBalloon2.png" id="2_sbnrn"]
+[ext_resource type="Texture2D" uid="uid://b8gn365lmopfu" path="res://assets/textures/FrozenLaserBalloon2.png" id="3_5ikn6"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_isi3j"]
 radius = 60.0
@@ -9,6 +10,7 @@ height = 144.0
 
 [node name="LaserBalloon" type="Area2D" unique_id=1069062386 groups=["balloons"]]
 scale = Vector2(0.5, 0.5)
+collision_layer = 2
 script = ExtResource("1_yh615")
 laser_type = 1
 
@@ -28,3 +30,4 @@ end_cap_mode = 2
 [node name="FrozenSprite" type="Sprite2D" parent="." unique_id=1529325286]
 visible = false
 scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_5ikn6")

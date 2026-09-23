@@ -11,6 +11,9 @@ func _ready():
 
 func _on_hit_detector_body_entered(body):
 	if body is RigidBody2D:
+		if body.name.begins_with("Ghost") or body.scene_file_path.contains("ghost_arrow"):
+			return
+			
 		play_bounce_effect()
 
 func play_bounce_effect():

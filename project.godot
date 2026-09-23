@@ -33,6 +33,11 @@ window/handheld/orientation=1
 
 pointing/emulate_touch_from_mouse=true
 
+[layer_names]
+
+2d_render/layer_1="Environment"
+2d_render/layer_2="Balloons"
+
 [physics]
 
 common/physics_ticks_per_second=240

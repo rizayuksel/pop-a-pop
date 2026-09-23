@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://dsih5s5pijcjr"]
+
+[ext_resource type="Script" uid="uid://c0v3fkou12era" path="res://scripts/ghost_arrow_balloon.gd" id="1_b31qo"]
+[ext_resource type="Texture2D" uid="uid://xdwath3aspfn" path="res://assets/textures/GhostArrowBalloon.png" id="2_2lee8"]
+[ext_resource type="Texture2D" uid="uid://rks05dkvwn8w" path="res://assets/textures/FrozenGhostArrowBalloon.png" id="2_b31qo"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wo48x"]
+radius = 58.0
+height = 136.0
+
+[node name="GhostArrowBalloon" type="Area2D" unique_id=1069062386 groups=["balloons"]]
+scale = Vector2(0.5, 0.5)
+collision_layer = 2
+script = ExtResource("1_b31qo")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=141423176]
+position = Vector2(-4.3099976, 4.720001)
+scale = Vector2(0.22, 0.22)
+texture = ExtResource("2_2lee8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1534589566]
+position = Vector2(-0.30999756, 0.7200012)
+shape = SubResource("CapsuleShape2D_wo48x")
+
+[node name="FrozenSprite" type="Sprite2D" parent="." unique_id=2080781510]
+visible = false
+position = Vector2(-6, 6)
+scale = Vector2(0.22, 0.22)
+texture = ExtResource("2_b31qo")

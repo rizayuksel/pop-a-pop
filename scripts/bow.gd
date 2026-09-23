@@ -10,6 +10,11 @@ var is_dragging = false
 var drag_start_position = Vector2.ZERO
 var is_active = true
 var base_scale = Vector2.ONE
+var loaded_arrow_base_scale = Vector2.ONE
+var is_ghost_loaded = false
+
+var tex_normal_arrow = preload("res://assets/textures/Arrow.png")
+var tex_ghost_arrow = preload("res://assets/textures/GhostArrow.png")
 
 var current_pull_distance = 0.0
 var target_rotation = 0.0
@@ -24,6 +29,7 @@ var bottom_tip = Vector2(-20, 120)
 
 func _ready():
 	base_scale = scale
+	loaded_arrow_base_scale = loaded_arrow.scale
 	trajectory_line.top_level = true
 	trajectory_line.global_position = Vector2.ZERO
 	hide_trajectory()
@@ -44,6 +50,18 @@ func _unhandled_input(event):
 		if event.pressed:
 			is_dragging = true
 			drag_start_position = event.position
+			
+			var main_scene = get_tree().current_scene
+			var ui = main_scene.get_node_or_null("UI")
+			if ui and "current_arrow_type" in ui and ui.current_arrow_type == 1:
+				is_ghost_loaded = true
+				loaded_arrow.texture = tex_ghost_arrow
+				loaded_arrow.scale = loaded_arrow_base_scale * 1.6
+			else:
+				is_ghost_loaded = false
+				loaded_arrow.texture = tex_normal_arrow
+				loaded_arrow.scale = loaded_arrow_base_scale
+				
 			loaded_arrow.visible = true
 			target_rotation = rotation
 		elif is_dragging:
@@ -57,9 +75,10 @@ func _unhandled_input(event):
 			_reset_bow_string()
 			current_pull_distance = 0.0
 
-			var tween = get_tree().create_tween()
-			tween.tween_property(self, "scale", base_scale * Vector2(0.8, 1.2), 0.05)
-			tween.tween_property(self, "scale", base_scale, 0.3).set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
+			if not is_ghost_loaded:
+				var tween = get_tree().create_tween()
+				tween.tween_property(self, "scale", base_scale * Vector2(0.8, 1.2), 0.05)
+				tween.tween_property(self, "scale", base_scale, 0.3).set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
 
 func _process(delta):
 	if is_dragging and is_active:
@@ -83,27 +102,44 @@ func _process(delta):
 				var speed = current_pull_distance * 10.0
 				var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 				
-				update_trajectory(global_position, direction * speed, gravity)
+				update_trajectory(global_position, direction * speed, gravity, is_ghost_loaded)
 			else:
 				hide_trajectory()
 
 func _shoot_arrow():
-	var arrow = ARROW_SCENE.instantiate()
+	var main_scene = get_tree().current_scene
+	var ui = main_scene.get_node_or_null("UI")
+	
+	var arrow = null
+	if is_ghost_loaded:
+		var ghost_res = load("res://scenes/objects/ghost_arrow.tscn")
+		if ghost_res:
+			arrow = ghost_res.instantiate()
+			
+	if not arrow:
+		arrow = ARROW_SCENE.instantiate()
+		
 	arrow.position = global_position 
 	arrow.rotation = rotation
-	get_tree().current_scene.add_child(arrow)
+	main_scene.add_child(arrow)
 	
 	var direction = Vector2.RIGHT.rotated(rotation)
 	var speed = current_pull_distance * 10.0
-	arrow.linear_velocity = direction * speed
+	var velocity = direction * speed
 	
-	var main_scene = get_tree().current_scene
-	if main_scene.has_node("UI") and main_scene.get_node("UI").has_method("play_shoot_sound"):
-		main_scene.get_node("UI").play_shoot_sound()
-	
+	if arrow.has_method("shoot"):
+		arrow.shoot(velocity)
+	else:
+		arrow.linear_velocity = velocity
+		if "is_flying" in arrow:
+			arrow.is_flying = true
+			
+	if ui and ui.has_method("play_shoot_sound"):
+		ui.play_shoot_sound()
+
 	emit_signal("arrow_shot")
 
-func update_trajectory(start_pos: Vector2, initial_velocity: Vector2, gravity: float):
+func update_trajectory(start_pos: Vector2, initial_velocity: Vector2, gravity: float, is_ghost: bool = false):
 	trajectory_line.clear_points()
 	trajectory_line.add_point(start_pos)
 
@@ -116,28 +152,30 @@ func update_trajectory(start_pos: Vector2, initial_velocity: Vector2, gravity: f
 		var next_vel = current_vel + Vector2(0, gravity) * dt
 		var next_pos = current_pos + next_vel * dt 
 		
-		var mud_query = PhysicsRayQueryParameters2D.create(current_pos, next_pos)
-		mud_query.collision_mask = 2
-		mud_query.collide_with_areas = true
-		var mud_result = space_state.intersect_ray(mud_query)
-		
-		if mud_result and mud_result.collider.get("is_mud"):
-			trajectory_line.add_point(mud_result.position)
-			break
+		if not is_ghost:
+			var mud_query = PhysicsRayQueryParameters2D.create(current_pos, next_pos)
+			mud_query.collision_mask = 1
+			mud_query.collide_with_areas = true
+			var mud_result = space_state.intersect_ray(mud_query)
 			
-		var query = PhysicsRayQueryParameters2D.create(current_pos, next_pos)
-		query.collision_mask = 1
-		var result = space_state.intersect_ray(query)
-		
-		if result:
-			trajectory_line.add_point(result.position)
-			if result.normal != Vector2.ZERO:
-				current_vel = current_vel.bounce(result.normal)
-			current_pos = result.position
-		else:
-			trajectory_line.add_point(next_pos)
-			current_pos = next_pos
-			current_vel = next_vel
+			if mud_result and mud_result.collider.get("is_mud"):
+				trajectory_line.add_point(mud_result.position)
+				break
+				
+			var query = PhysicsRayQueryParameters2D.create(current_pos, next_pos)
+			query.collision_mask = 1
+			var result = space_state.intersect_ray(query)
+			
+			if result:
+				trajectory_line.add_point(result.position)
+				if result.normal != Vector2.ZERO:
+					current_vel = current_vel.bounce(result.normal)
+				current_pos = result.position
+				continue
+				
+		trajectory_line.add_point(next_pos)
+		current_pos = next_pos
+		current_vel = next_vel
 
 func hide_trajectory():
 	trajectory_line.clear_points()

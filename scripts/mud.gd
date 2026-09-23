@@ -7,6 +7,9 @@ func _ready():
 
 func _on_body_entered(body):
 	if body is RigidBody2D:
+		if body.name.begins_with("Ghost") or body.scene_file_path.contains("ghost_arrow"):
+			return
+			
 		if body.has_method("stick"):
 			body.stick()
 			

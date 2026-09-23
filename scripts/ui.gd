@@ -3,6 +3,10 @@ extends CanvasLayer
 signal next_level_requested
 signal level_completed
 
+enum ArrowType { NORMAL, GHOST, CANNONBALL, TRIPLE }
+var current_arrow_type: ArrowType = ArrowType.NORMAL
+
+@onready var next_arrow_icon = $BaseControl/TopBarContainer/NextArrowIcon
 @onready var arrows_label = $BaseControl/TopBarContainer/ArrowsLabel
 @onready var level_progress_label = $BaseControl/TopBarContainer/LevelProgressLabel
 @onready var pause_button = $BaseControl/TopBarContainer/PauseButton
@@ -43,6 +47,11 @@ signal level_completed
 var full_star_tex = preload("res://assets/textures/Star1.png")
 var empty_star_tex = preload("res://assets/textures/StarEmpty.png")
 
+var tex_arrow_normal = preload("res://assets/textures/UiArrow.png")
+var tex_arrow_ghost = preload("res://assets/textures/UiGhostArrow.png")
+var tex_arrow_cannon = preload("res://assets/textures/UiCannonBall.png")
+var tex_arrow_triple = preload("res://assets/textures/UiTripleArrow.png")
+
 var arrows_left = 0
 var popped_balloons = 0
 var total_balloons = 0
@@ -76,6 +85,8 @@ func setup_level(total: int, arrows: int, targets: Array[int]):
 	popped_balloons = 0
 	earned_stars = 0
 	is_level_finished = false
+
+	equip_normal_arrow()
 	update_ui()
 
 func add_popped_balloon():
@@ -92,8 +103,42 @@ func use_arrow() -> bool:
 	if arrows_left > 0:
 		arrows_left -= 1
 		update_ui()
+
+		if current_arrow_type != ArrowType.NORMAL:
+			equip_normal_arrow()
+			
 		return true
 	return false
+
+func equip_normal_arrow():
+	current_arrow_type = ArrowType.NORMAL
+	_update_arrow_icon()
+
+func equip_ghost_arrow():
+	current_arrow_type = ArrowType.GHOST
+	_update_arrow_icon()
+
+func equip_cannonball():
+	current_arrow_type = ArrowType.CANNONBALL
+	_update_arrow_icon()
+
+func equip_triple_arrow():
+	current_arrow_type = ArrowType.TRIPLE
+	_update_arrow_icon()
+
+func _update_arrow_icon():
+	if not next_arrow_icon:
+		return
+		
+	match current_arrow_type:
+		ArrowType.NORMAL:
+			next_arrow_icon.texture = tex_arrow_normal
+		ArrowType.GHOST:
+			next_arrow_icon.texture = tex_arrow_ghost
+		ArrowType.CANNONBALL:
+			next_arrow_icon.texture = tex_arrow_cannon
+		ArrowType.TRIPLE:
+			next_arrow_icon.texture = tex_arrow_triple
 
 func calculate_stars() -> int:
 	var stars = 0

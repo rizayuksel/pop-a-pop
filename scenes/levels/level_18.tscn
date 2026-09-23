@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://crkrsaevjbsqi"]
+
+[ext_resource type="Script" uid="uid://dbbm5rofm4i45" path="res://scripts/main.gd" id="1_y2700"]
+[ext_resource type="PackedScene" uid="uid://dnycm15sndkic" path="res://scenes/levels/level_19.tscn" id="2_7rgcv"]
+[ext_resource type="PackedScene" uid="uid://32p7ysxh4omg" path="res://scenes/ui/ui.tscn" id="2_cfa1n"]
+[ext_resource type="PackedScene" uid="uid://chsi1q1fyhs4q" path="res://scenes/objects/bow.tscn" id="3_hdpka"]
+
+[node name="Main" type="Node2D" unique_id=202816392]
+script = ExtResource("1_y2700")
+star_targets = Array[int]([40, 41, 42])
+next_level_scene = ExtResource("2_7rgcv")
+level_id = "level_18"
+
+[node name="RubberBand" type="Line2D" parent="." unique_id=918229744]
+default_color = Color(0.7993065, 0.44433373, 0, 1)
+
+[node name="UI" parent="." unique_id=1367951368 instance=ExtResource("2_cfa1n")]
+
+[node name="Bow" parent="." unique_id=1965107452 instance=ExtResource("3_hdpka")]
+position = Vector2(184, 608)
+trajectory_length = 50
