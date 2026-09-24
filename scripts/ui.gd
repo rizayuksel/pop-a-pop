@@ -3,7 +3,7 @@ extends CanvasLayer
 signal next_level_requested
 signal level_completed
 
-enum ArrowType { NORMAL, GHOST, CANNONBALL, TRIPLE }
+enum ArrowType { NORMAL, GHOST, CANNONBALL }
 var current_arrow_type: ArrowType = ArrowType.NORMAL
 
 @onready var next_arrow_icon = $BaseControl/TopBarContainer/NextArrowIcon
@@ -50,7 +50,6 @@ var empty_star_tex = preload("res://assets/textures/StarEmpty.png")
 var tex_arrow_normal = preload("res://assets/textures/UiArrow.png")
 var tex_arrow_ghost = preload("res://assets/textures/UiGhostArrow.png")
 var tex_arrow_cannon = preload("res://assets/textures/UiCannonBall.png")
-var tex_arrow_triple = preload("res://assets/textures/UiTripleArrow.png")
 
 var arrows_left = 0
 var popped_balloons = 0
@@ -106,7 +105,10 @@ func add_popped_balloon():
 	update_ui()
 	
 	if popped_balloons >= total_balloons:
-		show_level_complete()
+		if earned_stars > 0:
+			show_level_complete()
+		else:
+			show_game_over()
 
 func use_arrow() -> bool:
 	if arrows_left > 0:
@@ -131,10 +133,6 @@ func equip_cannonball():
 	current_arrow_type = ArrowType.CANNONBALL
 	_update_arrow_icon()
 
-func equip_triple_arrow():
-	current_arrow_type = ArrowType.TRIPLE
-	_update_arrow_icon()
-
 func _update_arrow_icon():
 	if not next_arrow_icon:
 		return
@@ -146,8 +144,6 @@ func _update_arrow_icon():
 			next_arrow_icon.texture = tex_arrow_ghost
 		ArrowType.CANNONBALL:
 			next_arrow_icon.texture = tex_arrow_cannon
-		ArrowType.TRIPLE:
-			next_arrow_icon.texture = tex_arrow_triple
 
 func calculate_stars() -> int:
 	var stars = 0

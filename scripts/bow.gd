@@ -11,6 +11,7 @@ var drag_start_position = Vector2.ZERO
 var is_active = true
 var base_scale = Vector2.ONE
 var loaded_arrow_base_scale = Vector2.ONE
+
 var is_ghost_loaded = false
 
 var tex_normal_arrow = preload("res://assets/textures/Arrow.png")
@@ -53,14 +54,23 @@ func _unhandled_input(event):
 			
 			var main_scene = get_tree().current_scene
 			var ui = main_scene.get_node_or_null("UI")
-			if ui and "current_arrow_type" in ui and ui.current_arrow_type == 1:
-				is_ghost_loaded = true
-				loaded_arrow.texture = tex_ghost_arrow
-				loaded_arrow.scale = loaded_arrow_base_scale * 1.6
+			
+			if ui and "current_arrow_type" in ui:
+				if ui.current_arrow_type == ui.ArrowType.GHOST:
+					is_ghost_loaded = true
+					loaded_arrow.texture = tex_ghost_arrow
+					loaded_arrow.scale = loaded_arrow_base_scale * 1.6
+					loaded_arrow.modulate = Color.WHITE
+				else:
+					is_ghost_loaded = false
+					loaded_arrow.texture = tex_normal_arrow
+					loaded_arrow.scale = loaded_arrow_base_scale
+					loaded_arrow.modulate = Color.WHITE
 			else:
 				is_ghost_loaded = false
 				loaded_arrow.texture = tex_normal_arrow
 				loaded_arrow.scale = loaded_arrow_base_scale
+				loaded_arrow.modulate = Color.WHITE
 				
 			loaded_arrow.visible = true
 			target_rotation = rotation

@@ -4,10 +4,14 @@
 [ext_resource type="PackedScene" uid="uid://dnycm15sndkic" path="res://scenes/levels/level_19.tscn" id="2_7rgcv"]
 [ext_resource type="PackedScene" uid="uid://32p7ysxh4omg" path="res://scenes/ui/ui.tscn" id="2_cfa1n"]
 [ext_resource type="PackedScene" uid="uid://chsi1q1fyhs4q" path="res://scenes/objects/bow.tscn" id="3_hdpka"]
+[ext_resource type="PackedScene" uid="uid://0cvst7hrwf3g" path="res://scenes/objects/triple_arrow_balloon.tscn" id="5_u7mae"]
+[ext_resource type="PackedScene" uid="uid://m4wc2udpxngg" path="res://scenes/objects/mud.tscn" id="6_o3e4a"]
+[ext_resource type="PackedScene" uid="uid://bw8n28q6u2mbb" path="res://scenes/objects/balloon.tscn" id="7_co840"]
 
 [node name="Main" type="Node2D" unique_id=202816392]
 script = ExtResource("1_y2700")
-star_targets = Array[int]([40, 41, 42])
+level_arrows = 1
+star_targets = Array[int]([2, 3, 4])
 next_level_scene = ExtResource("2_7rgcv")
 level_id = "level_18"
 
@@ -17,5 +21,47 @@ default_color = Color(0.7993065, 0.44433373, 0, 1)
 [node name="UI" parent="." unique_id=1367951368 instance=ExtResource("2_cfa1n")]
 
 [node name="Bow" parent="." unique_id=1965107452 instance=ExtResource("3_hdpka")]
-position = Vector2(184, 608)
-trajectory_length = 50
+position = Vector2(182, 616)
+trajectory_length = 80
+
+[node name="TripleArrowBalloon" parent="." unique_id=1069062386 instance=ExtResource("5_u7mae")]
+position = Vector2(384, 600)
+
+[node name="Balloon" parent="." unique_id=1138075625 instance=ExtResource("7_co840")]
+position = Vector2(624, 496)
+
+[node name="Balloon2" parent="." unique_id=192605642 instance=ExtResource("7_co840")]
+position = Vector2(624, 600)
+
+[node name="Balloon3" parent="." unique_id=108852469 instance=ExtResource("7_co840")]
+position = Vector2(624, 704)
+
+[node name="Mud" parent="." unique_id=1641655694 instance=ExtResource("6_o3e4a")]
+position = Vector2(408, 528)
+
+[node name="Mud2" parent="." unique_id=1110097580 instance=ExtResource("6_o3e4a")]
+position = Vector2(448, 472)
+
+[node name="Mud3" parent="." unique_id=158447688 instance=ExtResource("6_o3e4a")]
+position = Vector2(488, 416)
+
+[node name="Mud4" parent="." unique_id=475160483 instance=ExtResource("6_o3e4a")]
+position = Vector2(528, 360)
+
+[node name="Mud5" parent="." unique_id=2134019833 instance=ExtResource("6_o3e4a")]
+position = Vector2(568, 304)
+
+[node name="Mud6" parent="." unique_id=660542608 instance=ExtResource("6_o3e4a")]
+position = Vector2(408, 672)
+
+[node name="Mud7" parent="." unique_id=311765668 instance=ExtResource("6_o3e4a")]
+position = Vector2(448, 728)
+
+[node name="Mud8" parent="." unique_id=1946807523 instance=ExtResource("6_o3e4a")]
+position = Vector2(488, 784)
+
+[node name="Mud9" parent="." unique_id=1419782516 instance=ExtResource("6_o3e4a")]
+position = Vector2(528, 840)
+
+[node name="Mud10" parent="." unique_id=2051111311 instance=ExtResource("6_o3e4a")]
+position = Vector2(568, 896)

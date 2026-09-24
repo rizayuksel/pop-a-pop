@@ -8,7 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://dsih5s5pijcjr" path="res://scenes/objects/ghost_arrow_balloon.tscn" id="5_n50xv"]
 [ext_resource type="PackedScene" uid="uid://m4wc2udpxngg" path="res://scenes/objects/mud.tscn" id="6_tyhj7"]
 [ext_resource type="PackedScene" uid="uid://bw8n28q6u2mbb" path="res://scenes/objects/balloon.tscn" id="7_gf7k6"]
-[ext_resource type="PackedScene" uid="uid://dee2qly6qqq25" path="res://scenes/objects/spiked_balloon.tscn" id="10_dhd0r"]
 
 [node name="Main" type="Node2D" unique_id=202816392]
 position = Vector2(-16, 16)
@@ -25,7 +24,7 @@ default_color = Color(0.7993065, 0.44433373, 0, 1)
 
 [node name="Bow" parent="." unique_id=1965107452 instance=ExtResource("3_d6g8c")]
 position = Vector2(192, 616)
-trajectory_length = 50
+trajectory_length = 80
 
 [node name="GhostArrowBalloon" parent="." unique_id=1069062386 instance=ExtResource("5_n50xv")]
 position = Vector2(464, 232)
@@ -79,6 +78,3 @@ position = Vector2(656, 496)
 
 [node name="Mud12" parent="." unique_id=1421838027 instance=ExtResource("6_tyhj7")]
 position = Vector2(656, 752)
-
-[node name="SpikedBalloon" parent="." unique_id=1899988194 instance=ExtResource("10_dhd0r")]
-position = Vector2(352, 920)

@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://0cvst7hrwf3g"]
+
+[ext_resource type="Script" uid="uid://deyvtgpv152wb" path="res://scripts/triple_arrow_balloon.gd" id="1_4wduy"]
+[ext_resource type="Texture2D" uid="uid://b0t52asv2gxp4" path="res://assets/textures/TripleArrowBalloon.png" id="2_4wduy"]
+[ext_resource type="Texture2D" uid="uid://bqk8pp0ra61lc" path="res://assets/textures/FrozenTripleArrowBalloon.png" id="3_spqg5"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wo48x"]
+radius = 58.0
+height = 136.0
+
+[node name="TripleArrowBalloon" type="Area2D" unique_id=1069062386 groups=["balloons"]]
+scale = Vector2(0.5, 0.5)
+collision_layer = 2
+script = ExtResource("1_4wduy")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=141423176]
+position = Vector2(-4.3099976, 4.720001)
+scale = Vector2(0.22, 0.22)
+texture = ExtResource("2_4wduy")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1534589566]
+position = Vector2(-0.30999756, 0.7200012)
+shape = SubResource("CapsuleShape2D_wo48x")
+
+[node name="FrozenSprite" type="Sprite2D" parent="." unique_id=2080781510]
+visible = false
+position = Vector2(-6, 6)
+scale = Vector2(0.22, 0.22)
+texture = ExtResource("3_spqg5")
