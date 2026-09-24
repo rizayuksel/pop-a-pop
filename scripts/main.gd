@@ -11,7 +11,12 @@ extends Node2D
 func _ready():
 	setup_background()
 	
-	MusicManager.play_level_music()
+	var current_level_num = level_id.trim_prefix("level_").to_int()
+	if current_level_num >= 17:
+		MusicManager.play_music("theme_2")
+	else:
+		MusicManager.play_music("theme_1")
+		
 	bow.arrow_shot.connect(_on_bow_arrow_shot)
 	ui.next_level_requested.connect(_on_next_level_requested)
 	ui.level_completed.connect(_on_level_completed)

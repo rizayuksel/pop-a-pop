@@ -62,6 +62,15 @@ var shake_tween: Tween
 
 func _ready():
 	process_mode = Node.PROCESS_MODE_ALWAYS
+	
+	var current_scene = get_tree().current_scene
+	if current_scene and current_scene.get("level_id") != null:
+		var current_level_num = current_scene.level_id.trim_prefix("level_").to_int()
+		if current_level_num >= 17:
+			full_star_tex = preload("res://assets/textures/Star2.png")
+		else:
+			full_star_tex = preload("res://assets/textures/Star1.png")
+			
 	pause_background.visible = false
 	game_over_background.visible = false
 	level_complete_background.visible = false

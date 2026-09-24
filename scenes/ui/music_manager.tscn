@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://brypd4hyjhw37" path="res://scripts/music_manager.gd" id="1_pjo54"]
 [ext_resource type="AudioStream" uid="uid://b66kf2p640qw4" path="res://assets/audio/music/KimLightyear-Hey!.mp3" id="1_tnlm8"]
 [ext_resource type="AudioStream" uid="uid://ki4pccx0iho3" path="res://assets/audio/music/KimLightyear-NightRunner.mp3" id="2_pjo54"]
+[ext_resource type="AudioStream" uid="uid://cgtlku4cq4a0n" path="res://assets/audio/music/KimLightyear-Legends.mp3" id="4_trmr3"]
 
 [node name="MusicManager" type="Node" unique_id=177487440]
 script = ExtResource("1_pjo54")
@@ -15,3 +16,7 @@ bus = &"Music"
 process_mode = 3
 stream = ExtResource("2_pjo54")
 bus = &"Music"
+
+[node name="LevelMusic2" type="AudioStreamPlayer" parent="." unique_id=362098856]
+process_mode = 3
+stream = ExtResource("4_trmr3")

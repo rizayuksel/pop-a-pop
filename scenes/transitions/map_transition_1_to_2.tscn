@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bum70antl5tov"]
 
-[ext_resource type="Script" uid="uid://bp5yc8j3hxf8x" path="res://scripts/map_transition.gd" id="1_ebxdu"]
+[ext_resource type="Script" uid="uid://bp5yc8j3hxf8x" path="res://scripts/map_transition_1_to_2.gd" id="1_ebxdu"]
 [ext_resource type="Texture2D" uid="uid://e5sxmxmg0e2c" path="res://assets/textures/SilhouetteFerrisWheel.jpeg" id="2_eswmc"]
 [ext_resource type="Texture2D" uid="uid://b8hbd8rdppasq" path="res://assets/textures/SilhouettePirateShip.jpeg" id="3_we7fl"]
 [ext_resource type="Texture2D" uid="uid://bcceac72qxs6l" path="res://assets/textures/SilhouetteWhiteLine.jpeg" id="4_dadb8"]
