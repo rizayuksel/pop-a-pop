@@ -58,11 +58,12 @@ func pop():
 		return
 	is_popped = true
 
-	_update_ui_score()
-
 	var main_scene = get_tree().current_scene
-	if main_scene.has_node("UI") and main_scene.get_node("UI").has_method("play_laser_sound"):
-		main_scene.get_node("UI").play_laser_sound()
+	if main_scene.has_node("UI"):
+		var ui = main_scene.get_node("UI")
+		ui.add_popped_balloon()
+		if ui.has_method("play_laser_sound"):
+			ui.play_laser_sound()
 		
 	fire_lasers()
 
@@ -111,14 +112,13 @@ func fire_lasers():
 			var result = space_state.intersect_ray(query)
 			
 			if result:
-				var hit_obj = result.collider
-				var target = hit_obj
+				var target = result.collider
 				
-				if hit_obj.name == "IceBarrier":
-					target = hit_obj.get_parent()
+				if target.name == "IceBarrier":
+					target = target.get_parent()
 					
 				if target.has_method("pop"):
-					process_laser_hit(hit_obj)
+					process_laser_hit(target)
 					current_exclude.append(result.rid)
 					spawn_spark(target.global_position)
 				else:
@@ -128,6 +128,10 @@ func fire_lasers():
 						
 					if script_path == "arrow.gd" or script_path == "spike.gd":
 						current_exclude.append(result.rid)
+					elif script_path == "mud.gd" or target.get("is_mud"):
+						target.queue_free()
+						current_exclude.append(result.rid)
+						spawn_spark(target.global_position)
 					else:
 						beam_end_point = to_local(result.position)
 						spawn_spark(result.position)
@@ -143,32 +147,16 @@ func fire_lasers():
 		beam.default_color = Color(0.0, 1.0, 1.0, 1.0)
 		add_child(beam)
 
-func process_laser_hit(hit_obj):
-	var target = hit_obj
+func process_laser_hit(target):
+	var script = target.get_script()
 	
-	if hit_obj.name == "IceBarrier":
-		target = hit_obj.get_parent()
-		
-	if target.has_method("pop"):
-		var script_path = ""
-		if target.get_script() != null:
-			script_path = target.get_script().resource_path.get_file()
-			
-		if script_path == "mud.gd":
-			target.queue_free()
-		elif script_path == "laser_balloon.gd":
-			get_tree().create_timer(0.15).timeout.connect(func():
-				if is_instance_valid(target):
-					target.pop()
-			)
-		else:
-			silent_destroy_balloon(target)
-
-func silent_destroy_balloon(balloon):
-	var main_scene = get_tree().current_scene
-	if main_scene.has_node("UI"):
-		main_scene.get_node("UI").add_popped_balloon()
-	balloon.queue_free()
+	if script and script.resource_path.get_file() == "laser_balloon.gd":
+		get_tree().create_timer(0.15).timeout.connect(func():
+			if is_instance_valid(target):
+				target.pop()
+		)
+	else:
+		target.pop()
 
 func custom_freeze():
 	var normal_sprite = get_node_or_null("Sprite2D")
@@ -188,11 +176,6 @@ func custom_unfreeze():
 	if normal_sprite and frozen_sprite:
 		normal_sprite.visible = true
 		frozen_sprite.visible = false
-
-func _update_ui_score():
-	var main_scene = get_tree().current_scene
-	if main_scene.has_node("UI"):
-		main_scene.get_node("UI").add_popped_balloon()
 
 func spawn_spark(spawn_pos: Vector2):
 	var spark = SPARK_SCENE.instantiate()

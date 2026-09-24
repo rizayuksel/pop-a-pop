@@ -9,7 +9,6 @@ var is_popped = false
 func _ready():
 	if has_node("Sprite2D"):
 		original_color = $Sprite2D.modulate
-		
 	body_entered.connect(_on_body_entered)
 
 func _on_body_entered(body):
@@ -21,8 +20,6 @@ func pop():
 		return
 	is_popped = true
 	
-	_update_ui_score()
-	
 	var main_scene = get_tree().current_scene
 	var ui = main_scene.get_node_or_null("UI")
 	if ui:
@@ -30,30 +27,21 @@ func pop():
 			ui.play_fire_sound()
 		if ui.has_method("shake_camera"):
 			ui.shake_camera(18.0, 0.3)
+		ui.add_popped_balloon()
 			
 	explode()
 	spawn_explosion_effect()
 	queue_free()
 
 func explode():
+	var all_targets = []
+	
 	var all_balloons = get_tree().get_nodes_in_group("balloons")
-	for target_balloon in all_balloons:
-		if target_balloon != self and is_instance_valid(target_balloon):
-			if global_position.distance_to(target_balloon.global_position) <= explosion_radius:
+	for balloon in all_balloons:
+		if balloon != self and is_instance_valid(balloon):
+			if global_position.distance_to(balloon.global_position) <= explosion_radius:
+				all_targets.append(balloon)
 				
-				if target_balloon.has_node("IceBarrier"):
-					_unfreeze_balloon(target_balloon)
-				else:
-					var script = target_balloon.get_script()
-					if script and script.resource_path.get_file() == "fire_balloon.gd":
-						get_tree().create_timer(0.15).timeout.connect(func():
-							if is_instance_valid(target_balloon):
-								target_balloon.pop()
-						)
-					else:
-						_update_ui_score()
-						target_balloon.queue_free()
-
 	var space_state = get_world_2d().direct_space_state
 	var query = PhysicsShapeQueryParameters2D.new()
 	var shape = CircleShape2D.new()
@@ -66,12 +54,41 @@ func explode():
 	var hits = space_state.intersect_shape(query)
 	for hit in hits:
 		var target = hit.collider
-		if is_instance_valid(target) and target != self:
-			var script = target.get_script()
-			var script_name = script.resource_path.get_file() if script else ""
+		if is_instance_valid(target) and target != self and not all_targets.has(target):
+			all_targets.append(target)
 			
-			if script_name == "mud.gd" or target.get("is_mud"):
-				target.queue_free()
+	for target in all_targets:
+		_process_target(target)
+
+func _process_target(target):
+	if target.has_node("IceBarrier"):
+		_unfreeze_balloon(target)
+		return
+
+	var script = target.get_script()
+	var script_name = script.resource_path.get_file() if script else ""
+
+	if target.has_method("pop"):
+		if script_name == "fire_balloon.gd":
+			get_tree().create_timer(0.15).timeout.connect(func():
+				if is_instance_valid(target):
+					target.pop()
+			)
+		elif script_name == "laser_balloon.gd" or script_name == "spiked_balloon.gd":
+			var main_scene = get_tree().current_scene
+			if main_scene.has_node("UI"):
+				main_scene.get_node("UI").add_popped_balloon()
+			target.queue_free()
+		else:
+			target.pop()
+	else:
+		if script_name == "mud.gd" or target.get("is_mud"):
+			target.queue_free()
+		elif target.is_in_group("balloons"):
+			var main_scene = get_tree().current_scene
+			if main_scene.has_node("UI"):
+				main_scene.get_node("UI").add_popped_balloon()
+			target.queue_free()
 
 func _unfreeze_balloon(balloon):
 	var ice_barrier = balloon.get_node_or_null("IceBarrier")
@@ -122,8 +139,3 @@ func spawn_explosion_effect():
 	effect.global_position = global_position
 	effect.modulate = Color(1.0, 0.5, 0.0) 
 	get_tree().current_scene.call_deferred("add_child", effect)
-
-func _update_ui_score():
-	var main_scene = get_tree().current_scene
-	if main_scene.has_node("UI"):
-		main_scene.get_node("UI").add_popped_balloon()

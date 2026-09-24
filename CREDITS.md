@@ -9,6 +9,10 @@ A 2D physics-based puzzle game.
 ## Audio & Music
 Music tracks provided by **Kim Lightyear** under the [Creative Commons Attribution 3.0 (CC-BY 3.0)](https://creativecommons.org/licenses/by/3.0/) license.
 
+* **"Hey!"** 
+  Credits: Kim Lightyear
+  Source: [OpenGameArt](https://opengameart.org/content/hey) | [SoundCloud](https://soundcloud.com/kim-lightyear)
+
 * **"Night Runner (Chiptune Edit)"** 
   Credits: Kim Lightyear
   Source: [OpenGameArt](https://opengameart.org/content/night-runner-chiptune-edit) | [SoundCloud](https://soundcloud.com/kim-lightyear)
@@ -17,9 +21,9 @@ Music tracks provided by **Kim Lightyear** under the [Creative Commons Attributi
   Credits: Kim Lightyear
   Source: [OpenGameArt](https://opengameart.org/content/legends) | [SoundCloud](https://soundcloud.com/kim-lightyear)
 
-* **"Hey!"** 
+* **"Falling Stars"** 
   Credits: Kim Lightyear
-  Source: [OpenGameArt](https://opengameart.org/content/hey) | [SoundCloud](https://soundcloud.com/kim-lightyear)
+  Source: [OpenGameArt](https://opengameart.org/content/falling-stars) | [SoundCloud](https://soundcloud.com/kim-lightyear)
 
 ## Tools & Engine
 * Powered by [Godot Engine](https://godotengine.org/) 4.

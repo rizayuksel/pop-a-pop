@@ -1,7 +1,7 @@
 extends Area2D
 
 @export var speed: float = 600.0
-var can_bounce: bool = true
+var has_hit: bool = false
 
 func _ready():
 	body_entered.connect(_handle_collision)
@@ -13,61 +13,44 @@ func _process(delta):
 	position += Vector2.RIGHT.rotated(rotation) * speed * delta
 
 func _handle_collision(node):
-	if not is_instance_valid(node) or node == self:
+	if has_hit or not is_instance_valid(node) or node == self:
 		return
 		
-	var script = node.get_script()
+	var target = node
+	if target.name == "IceBarrier" or target.name == "IceHitDetector":
+		target = target.get_parent()
+		
+	var script = target.get_script()
 	var script_name = script.resource_path.get_file() if script else ""
 	
-	if script_name == "mud.gd" or node.get("is_mud"):
-		node.queue_free()
+	if script_name == "mud.gd" or target.get("is_mud"):
+		has_hit = true
+		target.queue_free()
 		queue_free()
 		return
 		
-	if node.name == "IceBarrier" or node.name == "IceHitDetector" or node is StaticBody2D:
-		_bounce_spike(node)
+	if target.has_node("IceBarrier") or node.name == "IceBarrier" or node.name == "IceHitDetector":
+		has_hit = true
+		_play_ice_hit_sound()
+		queue_free()
 		return
 		
-	if node.has_method("pop"):
-		if node.has_node("IceBarrier"):
-			_bounce_spike(node)
-		else:
-			node.pop()
-			queue_free()
-
-func _bounce_spike(hit_node):
-	if not can_bounce:
+	if target.has_method("pop"):
+		has_hit = true
+		target.pop()
+		queue_free()
+		return
+	elif target.is_in_group("balloons"):
+		has_hit = true
+		target.queue_free() 
+		queue_free()
 		return
 		
-	var normal = Vector2.ZERO
-	
-	if hit_node.name == "IceBarrier" or hit_node.name == "IceHitDetector" or hit_node.has_node("IceBarrier"):
-		var center = hit_node.global_position
-		if hit_node.name == "IceHitDetector":
-			center = hit_node.get_parent().global_position
-		normal = (global_position - center).normalized()
-	else:
-		var space_state = get_world_2d().direct_space_state
-		var current_dir = Vector2.RIGHT.rotated(rotation)
-		var query = PhysicsRayQueryParameters2D.create(global_position - current_dir * 20.0, global_position + current_dir * 20.0)
-		var result = space_state.intersect_ray(query)
-		
-		if result:
-			normal = result.normal
-		else:
-			normal = -current_dir
-	
-	if normal != Vector2.ZERO:
-		var current_dir = Vector2.RIGHT.rotated(rotation)
-		var bounce_dir = current_dir.bounce(normal)
-		rotation = bounce_dir.angle()
-		
-		position += bounce_dir * 15.0
-		
-	_play_ice_hit_sound()
-	
-	can_bounce = false
-	get_tree().create_timer(0.05).timeout.connect(func(): can_bounce = true)
+	if node is StaticBody2D:
+		has_hit = true
+		_play_ice_hit_sound()
+		queue_free()
+		return
 
 func _play_ice_hit_sound():
 	var main_scene = get_tree().current_scene
