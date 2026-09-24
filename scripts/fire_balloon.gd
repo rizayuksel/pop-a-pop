@@ -61,8 +61,20 @@ func explode():
 		_process_target(target)
 
 func _process_target(target):
-	if target.has_node("IceBarrier"):
+	if target.name == "IceBarrier" or target.name == "IceHitDetector":
+		target = target.get_parent()
+		
+	if not is_instance_valid(target) or target == self:
+		return
+
+	if target.has_node("IceBarrier") or target.get("is_frozen"):
 		_unfreeze_balloon(target)
+		if "is_frozen" in target:
+			target.is_frozen = false
+
+	# Doğrudan Sessiz Patlatma Kontrolü
+	if target.has_method("pop_silently"):
+		target.pop_silently()
 		return
 
 	var script = target.get_script()
@@ -81,6 +93,10 @@ func _process_target(target):
 			target.queue_free()
 		else:
 			target.pop()
+			if is_instance_valid(target) and target.has_method("pop"):
+				var popped = target.get("is_popped")
+				if popped == false or popped == null:
+					target.pop()
 	else:
 		if script_name == "mud.gd" or target.get("is_mud"):
 			target.queue_free()
@@ -93,10 +109,12 @@ func _process_target(target):
 func _unfreeze_balloon(balloon):
 	var ice_barrier = balloon.get_node_or_null("IceBarrier")
 	if ice_barrier:
+		balloon.remove_child(ice_barrier) 
 		ice_barrier.queue_free()
 		
 	var snow_overlay = balloon.get_node_or_null("SnowEffectOverlay")
 	if snow_overlay:
+		balloon.remove_child(snow_overlay)
 		snow_overlay.queue_free()
 
 	var balloon_sprite = balloon.get_node_or_null("Sprite2D")

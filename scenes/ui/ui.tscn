@@ -18,6 +18,9 @@
 [ext_resource type="AudioStream" uid="uid://dglg1omc3o5qh" path="res://assets/audio/sfx/Spike.wav" id="8_ktti3"]
 [ext_resource type="Texture2D" uid="uid://brhma4k73tsq8" path="res://assets/textures/ButtonPause.png" id="8_svq4k"]
 [ext_resource type="AudioStream" uid="uid://cps2xcct21vs0" path="res://assets/audio/sfx/Bounce.wav" id="9_cgfq5"]
+[ext_resource type="AudioStream" uid="uid://jxmky8w3hvy3" path="res://assets/audio/sfx/CannonballShot.wav" id="19_oopc8"]
+[ext_resource type="AudioStream" uid="uid://uhu4kkq6fjr7" path="res://assets/audio/sfx/GhostArrow.wav" id="20_qmss2"]
+[ext_resource type="AudioStream" uid="uid://bjkb82tqn08x3" path="res://assets/audio/sfx/TripleArrow.wav" id="21_26a3v"]
 
 [sub_resource type="Environment" id="Environment_wjvqx"]
 background_mode = 3
@@ -444,4 +447,16 @@ bus = &"SFX"
 [node name="BouncerSound" type="AudioStreamPlayer" parent="." unique_id=849304436]
 stream = ExtResource("9_cgfq5")
 max_polyphony = 5
+bus = &"SFX"
+
+[node name="CannonballSound" type="AudioStreamPlayer" parent="." unique_id=104370614]
+stream = ExtResource("19_oopc8")
+bus = &"SFX"
+
+[node name="GhostArrowSound" type="AudioStreamPlayer" parent="." unique_id=800782452]
+stream = ExtResource("20_qmss2")
+bus = &"SFX"
+
+[node name="TripleArrowSound" type="AudioStreamPlayer" parent="." unique_id=488514858]
+stream = ExtResource("21_26a3v")
 bus = &"SFX"

@@ -114,10 +114,11 @@ func fire_lasers():
 			if result:
 				var target = result.collider
 				
-				if target.name == "IceBarrier":
+				# Hedef buz engeli ise asıl balonu hedef alıyoruz
+				if target.name == "IceBarrier" or target.name == "IceHitDetector":
 					target = target.get_parent()
 					
-				if target.has_method("pop"):
+				if target.has_method("pop") or target.has_method("pop_silently"):
 					process_laser_hit(target)
 					current_exclude.append(result.rid)
 					spawn_spark(target.global_position)
@@ -148,15 +149,74 @@ func fire_lasers():
 		add_child(beam)
 
 func process_laser_hit(target):
+	if not is_instance_valid(target) or target == self:
+		return
+
 	var script = target.get_script()
-	
-	if script and script.resource_path.get_file() == "laser_balloon.gd":
+	var script_name = script.resource_path.get_file() if script else ""
+
+	# 1. Buz üreten ana balonu sessizce yok et
+	if target.has_method("pop_silently") or script_name == "ice_balloon.gd":
+		if target.has_method("pop_silently"):
+			target.pop_silently()
+		else:
+			var main_scene = get_tree().current_scene
+			if main_scene.has_node("UI"):
+				main_scene.get_node("UI").add_popped_balloon()
+			target.queue_free()
+		return
+
+	# 2. Donmuş hedefi buzdan temizle (balonun kendisini kurtar)
+	if target.has_node("IceBarrier") or target.get("is_frozen"):
+		_unfreeze_balloon(target)
+		if "is_frozen" in target:
+			target.is_frozen = false
+
+	# 3. Temizlenmiş hedefi özelliğine göre tetikle veya yok et
+	if script_name == "laser_balloon.gd":
 		get_tree().create_timer(0.15).timeout.connect(func():
-			if is_instance_valid(target):
+			if is_instance_valid(target) and target.has_method("pop"):
 				target.pop()
 		)
+	elif script_name == "fire_balloon.gd" or script_name == "triple_arrow_balloon.gd":
+		if target.has_method("pop"):
+			target.pop()
 	else:
-		target.pop()
+		if target.has_method("pop"):
+			target.pop()
+			# Balon hala patlamadıysa (is_popped == false), onu zorla patlat
+			if is_instance_valid(target) and target.has_method("pop"):
+				var popped = target.get("is_popped")
+				if popped == false or popped == null:
+					target.pop()
+
+func _unfreeze_balloon(balloon):
+	var ice_barrier = balloon.get_node_or_null("IceBarrier")
+	if ice_barrier:
+		balloon.remove_child(ice_barrier) 
+		ice_barrier.queue_free()
+		
+	var snow_overlay = balloon.get_node_or_null("SnowEffectOverlay")
+	if snow_overlay:
+		balloon.remove_child(snow_overlay)
+		snow_overlay.queue_free()
+
+	var balloon_sprite = balloon.get_node_or_null("Sprite2D")
+	if balloon_sprite:
+		if "original_color" in balloon:
+			balloon_sprite.modulate = balloon.original_color
+		else:
+			balloon_sprite.modulate = Color(1, 1, 1, 1)
+
+	if balloon.has_method("custom_unfreeze"):
+		balloon.custom_unfreeze()
+
+	balloon.set_physics_process(true)
+	balloon.set_process(true)
+
+	if balloon is Area2D:
+		balloon.set_deferred("monitoring", true)
+		balloon.set_deferred("monitorable", true)
 
 func custom_freeze():
 	var normal_sprite = get_node_or_null("Sprite2D")

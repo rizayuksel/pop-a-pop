@@ -4,6 +4,8 @@ extends Area2D
 var snow_texture = preload("res://assets/textures/SnowEffect.png")
 var frozen_fire_texture = preload("res://assets/textures/FrozenFireBalloon.png")
 
+var is_popped = false 
+
 func _ready():
 	body_entered.connect(_on_body_entered)
 	area_entered.connect(_on_area_entered)
@@ -17,6 +19,10 @@ func _on_area_entered(area):
 		pop()
 
 func pop():
+	if is_popped:
+		return
+	is_popped = true
+	
 	_update_ui_score()
 
 	var main_scene = get_tree().current_scene
@@ -24,6 +30,14 @@ func pop():
 		main_scene.get_node("UI").play_ice_sound()
 		
 	apply_freeze_effect()
+	queue_free()
+
+func pop_silently():
+	if is_popped:
+		return
+	is_popped = true
+	
+	_update_ui_score()
 	queue_free()
 
 func apply_freeze_effect():
