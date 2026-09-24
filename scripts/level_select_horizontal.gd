@@ -22,17 +22,43 @@ var fade_rect: ColorRect
 @onready var parallax_bg = $ParallaxBackground
 
 func _ready():
+	var target_level = -1
+	var first_unplayed = -1
+	var first_imperfect = -1
+
+	var max_possible_levels = MAX_ISLANDS * TOTAL_LEVELS
+
+	for i in range(1, max_possible_levels + 1):
+		var level_key = "level_" + str(i)
+		var stars = int(SaveManager.get_level_stars(level_key))
+		
+		if stars == 0 and first_unplayed == -1:
+			first_unplayed = i
+			
+		if stars < 3 and first_imperfect == -1:
+			first_imperfect = i
+
+	if first_unplayed != -1:
+		target_level = first_unplayed
+	elif first_imperfect != -1:
+		target_level = first_imperfect
+	else:
+		target_level = max_possible_levels
+
+	target_island = floori((target_level - 1) / float(TOTAL_LEVELS)) + 1
+	target_island = clampi(target_island, 1, MAX_ISLANDS)
+
 	current_island = target_island
-	
+
 	home_btn.pressed.connect(_on_home_pressed)
 	next_island_btn.pressed.connect(_on_next_island_pressed)
 	prev_island_btn.pressed.connect(_on_prev_island_pressed)
-	
+
 	_setup_fade_overlay()
 	_animate_arrows()
 	_update_ui_for_island()
 	generate_level_map()
-	
+
 	var balloon_timer = Timer.new()
 	balloon_timer.wait_time = 1.5
 	balloon_timer.autostart = true
@@ -100,12 +126,10 @@ func change_island(target: int, swipe_direction: int):
 		return
 		
 	is_transitioning = true
-	
-	# Önce ekran kararsın, kilitler de dahil kararması için fade ile uyumlu yapıyoruz
+
 	var fade_tween = create_tween()
 	fade_tween.tween_property(fade_rect, "color:a", 1.0, 0.2)
-	
-	# Kilit ikonlarını da ekranla birlikte karartalım
+
 	for card in level_container.get_children():
 		for child in card.get_children():
 			if child.has_node("LockIcon"):

@@ -1,6 +1,7 @@
 extends Control
 
 const TOTAL_LEVELS = 16
+const MAX_ISLANDS = 2
 const MENU_BALLOON_SCENE = preload("res://scenes/ui/menu_balloon.tscn")
 
 @onready var play_button = $VBoxContainer/Row1/PlayButton
@@ -22,11 +23,25 @@ func _ready():
 	balloon_timer.timeout.connect(_on_spawn_balloon)
 
 func get_latest_level() -> int:
-	var latest = 1
-	for i in range(1, TOTAL_LEVELS + 1):
-		if i > 1 and SaveManager.get_level_stars("level_" + str(i - 1)) > 0:
-			latest = i
-	return latest
+	var max_possible_levels = MAX_ISLANDS * TOTAL_LEVELS
+	var first_unplayed = -1
+	var first_imperfect = -1
+	
+	for i in range(1, max_possible_levels + 1):
+		var stars = int(SaveManager.get_level_stars("level_" + str(i)))
+		
+		if stars == 0 and first_unplayed == -1:
+			first_unplayed = i
+			
+		if stars < 3 and first_imperfect == -1:
+			first_imperfect = i
+			
+	if first_unplayed != -1:
+		return first_unplayed
+	elif first_imperfect != -1:
+		return first_imperfect
+	else:
+		return max_possible_levels
 
 func _on_play_pressed():
 	var latest_level = get_latest_level()

@@ -48,7 +48,9 @@ func pop():
 	var main_scene = get_tree().current_scene
 	var ui = main_scene.get_node_or_null("UI")
 	if ui:
-		if ui.has_method("play_pop_sound"):
+		if ui.has_node("TripleArrowSound"):
+			ui.get_node("TripleArrowSound").play()
+		elif ui.has_method("play_pop_sound"):
 			ui.play_pop_sound()
 
 	if has_node("Sprite2D"):
