@@ -1,0 +1,174 @@
+[gd_scene format=3 uid="uid://dqpycxegx12he"]
+
+[ext_resource type="Script" uid="uid://cgybk88f2q434" path="res://scripts/target_star.gd" id="1_1blb1"]
+[ext_resource type="Texture2D" uid="uid://b8hbd8rdppasq" path="res://assets/textures/SilhouettePirateShip.jpeg" id="3_1blb1"]
+[ext_resource type="Texture2D" uid="uid://b6o8aa2i25ek7" path="res://assets/textures/GameLogo.png" id="3_1qdll"]
+[ext_resource type="Texture2D" uid="uid://dbllq3r27t260" path="res://assets/textures/ButtonHome.png" id="4_1blb1"]
+[ext_resource type="Texture2D" uid="uid://dnb51mgh01wam" path="res://assets/textures/StarTargetBar.png" id="4_lt1gp"]
+[ext_resource type="Texture2D" uid="uid://dmup0i3y1xx7a" path="res://assets/textures/ButtonRight.png" id="5_2woha"]
+[ext_resource type="Texture2D" uid="uid://ccb2cvb0pq4no" path="res://assets/textures/EmptyBar.png" id="5_fv8i7"]
+[ext_resource type="Texture2D" uid="uid://d1jsaqkafn0ck" path="res://assets/textures/ButtonLeft.png" id="5_lt1gp"]
+[ext_resource type="Texture2D" uid="uid://62kkwy06uy6f" path="res://assets/textures/Star1.png" id="6_efl8x"]
+[ext_resource type="FontFile" uid="uid://dtxwram6b7ltt" path="res://assets/fonts/PixelifySans-VariableFont_wght.ttf" id="7_efl8x"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i6ahq"]
+atlas = ExtResource("4_1blb1")
+region = Rect2(11, 9.25, 201.5, 212.5)
+
+[node name="TargetStar" type="Control" unique_id=83153633]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1blb1")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=2113293040]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="GameLogo" type="TextureRect" parent="." unique_id=1217890048]
+z_index = 1
+custom_minimum_size = Vector2(600, 200)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -616.0
+offset_right = 300.0
+offset_bottom = -416.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_1qdll")
+expand_mode = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=277818684]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -300.0
+offset_right = 300.0
+offset_bottom = 300.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer" unique_id=1717834894]
+custom_minimum_size = Vector2(300, 300)
+layout_mode = 2
+texture = ExtResource("3_1blb1")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer" unique_id=733691295]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/CenterContainer" unique_id=1652313982]
+custom_minimum_size = Vector2(300, 300)
+layout_mode = 2
+texture = ExtResource("4_lt1gp")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="VBoxContainer/CenterContainer/TextureRect" unique_id=1634367570]
+layout_mode = 0
+offset_left = 48.0
+offset_top = 220.0
+offset_right = 252.0
+offset_bottom = 252.0
+value = 100.0
+nine_patch_stretch = true
+texture_progress = ExtResource("5_fv8i7")
+tint_progress = Color(0.6784314, 0.8156863, 0.5529412, 1)
+
+[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer/CenterContainer/TextureRect/TextureProgressBar" unique_id=1641137251]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/CenterContainer/TextureRect/TextureProgressBar/CenterContainer" unique_id=399976730]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/CenterContainer/TextureRect/TextureProgressBar/CenterContainer/HBoxContainer" unique_id=944085811]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+texture = ExtResource("6_efl8x")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="VBoxContainer/CenterContainer/TextureRect/TextureProgressBar/CenterContainer/HBoxContainer" unique_id=2104112375]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("7_efl8x")
+theme_override_font_sizes/font_size = 20
+text = "Deneme"
+
+[node name="HomeButton" type="TextureButton" parent="." unique_id=1172785468]
+texture_filter = 1
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -144.0
+offset_right = 40.0
+offset_bottom = -64.0
+grow_horizontal = 2
+grow_vertical = 0
+texture_normal = SubResource("AtlasTexture_i6ahq")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="PrevThemeButton" type="TextureButton" parent="." unique_id=444158876]
+z_index = 3
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 32.0
+offset_top = -15.0
+offset_right = 76.0
+offset_bottom = 16.0
+grow_vertical = 2
+scale = Vector2(1.2, 1.2)
+texture_normal = ExtResource("5_lt1gp")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="NextThemeButton" type="TextureButton" parent="." unique_id=908464745]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -86.0
+offset_top = -15.0
+offset_right = -30.0
+offset_bottom = 16.0
+grow_horizontal = 0
+grow_vertical = 2
+texture_normal = ExtResource("5_2woha")
+ignore_texture_size = true
+stretch_mode = 5

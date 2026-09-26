@@ -6,9 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://chsi1q1fyhs4q" path="res://scenes/objects/bow.tscn" id="4_uwlxl"]
 [ext_resource type="PackedScene" uid="uid://m4wc2udpxngg" path="res://scenes/objects/mud.tscn" id="5_4wfvb"]
 [ext_resource type="PackedScene" uid="uid://bw8n28q6u2mbb" path="res://scenes/objects/balloon.tscn" id="6_tqv5a"]
-[ext_resource type="PackedScene" uid="uid://cluocltwlltwx" path="res://scenes/objects/ice_balloon.tscn" id="7_ppjov"]
 [ext_resource type="PackedScene" uid="uid://naewmtyhfful" path="res://scenes/objects/laser_balloon.tscn" id="8_pafwe"]
-[ext_resource type="PackedScene" uid="uid://b5l6ipxxfj30s" path="res://scenes/objects/fire_balloon.tscn" id="9_gf2l7"]
 
 [node name="Main" type="Node2D" unique_id=202816392]
 script = ExtResource("1_e18e5")
@@ -74,10 +72,6 @@ position = Vector2(515.1, 800)
 [node name="Balloon6" parent="." unique_id=1485073019 instance=ExtResource("6_tqv5a")]
 position = Vector2(515.1, 880)
 
-[node name="IceBalloon" parent="." unique_id=1286895276 instance=ExtResource("7_ppjov")]
-position = Vector2(515.1, 720)
-freeze_radius = 120.0
-
 [node name="LaserBalloon" parent="." unique_id=1795994947 instance=ExtResource("8_pafwe")]
 position = Vector2(515.1, 632)
 
@@ -96,11 +90,14 @@ position = Vector2(627.1, 880)
 [node name="LaserBalloon2" parent="." unique_id=895529640 instance=ExtResource("8_pafwe")]
 position = Vector2(627.1, 632)
 
-[node name="FireBalloon" parent="." unique_id=1361628081 instance=ExtResource("9_gf2l7")]
-position = Vector2(515.1, 544)
-
 [node name="Balloon3" parent="." unique_id=752433251 instance=ExtResource("6_tqv5a")]
 position = Vector2(627.1, 544)
 
 [node name="Balloon10" parent="." unique_id=645863708 instance=ExtResource("6_tqv5a")]
 position = Vector2(627.1, 720)
+
+[node name="Balloon11" parent="." unique_id=1334031368 instance=ExtResource("6_tqv5a")]
+position = Vector2(515, 544)
+
+[node name="Balloon12" parent="." unique_id=590464656 instance=ExtResource("6_tqv5a")]
+position = Vector2(514, 720)

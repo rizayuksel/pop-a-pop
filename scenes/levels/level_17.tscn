@@ -24,7 +24,7 @@ default_color = Color(0.7993065, 0.44433373, 0, 1)
 
 [node name="Bow" parent="." unique_id=1965107452 instance=ExtResource("3_d6g8c")]
 position = Vector2(192, 616)
-trajectory_length = 80
+trajectory_length = 50
 
 [node name="GhostArrowBalloon" parent="." unique_id=1069062386 instance=ExtResource("5_n50xv")]
 position = Vector2(464, 232)

@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://dpm7h0ln5ldpp" path="res://assets/textures/Bow.png" id="1_rivji"]
 [ext_resource type="Script" uid="uid://nvvsupnkt362" path="res://scripts/bow.gd" id="2_rivji"]
 [ext_resource type="Texture2D" uid="uid://b57srdavv4ip8" path="res://assets/textures/Arrow.png" id="3_rivji"]
+[ext_resource type="Texture2D" uid="uid://dqt6xla5jo4jj" path="res://assets/textures/Cannon.png" id="4_d34jy"]
 
 [node name="Bow" type="Sprite2D" unique_id=1965107452]
 scale = Vector2(0.6, 0.6)
@@ -23,3 +24,8 @@ width = 3.0
 modulate = Color(0.5803922, 0.5803922, 0.5803922, 1)
 points = PackedVector2Array(0, 0)
 width = 4.0
+
+[node name="CannonBall" type="Sprite2D" parent="." unique_id=1781778831]
+visible = false
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("4_d34jy")

@@ -22,7 +22,7 @@ default_color = Color(0.7993065, 0.44433373, 0, 1)
 
 [node name="Bow" parent="." unique_id=1965107452 instance=ExtResource("3_hdpka")]
 position = Vector2(182, 616)
-trajectory_length = 80
+trajectory_length = 50
 
 [node name="TripleArrowBalloon" parent="." unique_id=1069062386 instance=ExtResource("5_u7mae")]
 position = Vector2(384, 600)

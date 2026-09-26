@@ -124,7 +124,17 @@ func change_island(target: int, swipe_direction: int):
 	
 	if target < 1:
 		return
-		
+
+	if target > current_island and current_island == 1:
+		var total_stars = 0
+		for i in range(1, TOTAL_LEVELS + 1):
+			total_stars += int(SaveManager.get_level_stars("level_" + str(i)))
+
+		var required_stars = 25 
+		if total_stars < required_stars:
+			get_tree().change_scene_to_file("res://scenes/ui/target_star.tscn")
+			return
+
 	is_transitioning = true
 
 	var fade_tween = create_tween()
