@@ -15,6 +15,7 @@ var fade_rect: ColorRect
 var touch_start_pos = Vector2.ZERO
 var is_dragging = false
 var swipe_threshold = 100.0
+var is_transitioning = false
 
 var island_data = [
 	{
@@ -29,6 +30,8 @@ var island_data = [
 var current_island_index: int = 0
 var prev_original_x: float
 var next_original_x: float
+var prev_idle_tween: Tween
+var next_idle_tween: Tween
 
 func _ready():
 	if home_btn:
@@ -70,14 +73,16 @@ func _setup_fade_overlay():
 
 func _animate_arrows():
 	if next_island_btn:
-		var tween1 = create_tween().set_loops()
-		tween1.tween_property(next_island_btn, "position:x", next_island_btn.position.x + 15, 0.6).set_trans(Tween.TRANS_SINE)
-		tween1.tween_property(next_island_btn, "position:x", next_island_btn.position.x, 0.6).set_trans(Tween.TRANS_SINE)
+		if next_idle_tween: next_idle_tween.kill()
+		next_idle_tween = create_tween().set_loops()
+		next_idle_tween.tween_property(next_island_btn, "position:x", next_original_x + 15, 0.6).set_trans(Tween.TRANS_SINE)
+		next_idle_tween.tween_property(next_island_btn, "position:x", next_original_x, 0.6).set_trans(Tween.TRANS_SINE)
 		
 	if prev_island_btn:
-		var tween2 = create_tween().set_loops()
-		tween2.tween_property(prev_island_btn, "position:x", prev_island_btn.position.x - 15, 0.6).set_trans(Tween.TRANS_SINE)
-		tween2.tween_property(prev_island_btn, "position:x", prev_island_btn.position.x, 0.6).set_trans(Tween.TRANS_SINE)
+		if prev_idle_tween: prev_idle_tween.kill()
+		prev_idle_tween = create_tween().set_loops()
+		prev_idle_tween.tween_property(prev_island_btn, "position:x", prev_original_x - 15, 0.6).set_trans(Tween.TRANS_SINE)
+		prev_idle_tween.tween_property(prev_island_btn, "position:x", prev_original_x, 0.6).set_trans(Tween.TRANS_SINE)
 
 func update_ui() -> void:
 	var data = island_data[current_island_index]
@@ -104,10 +109,17 @@ func _on_home_pressed():
 	_change_scene("res://scenes/ui/main_menu.tscn")
 
 func _on_prev_pressed():
+	if is_transitioning: return
+	is_transitioning = true
+	
+	if next_idle_tween: next_idle_tween.kill()
+	if prev_idle_tween: prev_idle_tween.kill()
+
 	if prev_island_btn:
 		prev_island_btn.disabled = true
 		var tween = create_tween()
-		tween.tween_property(prev_island_btn, "position:x", prev_island_btn.position.x - 300, 0.25).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
+		tween.tween_property(prev_island_btn, "position:x", prev_original_x - 300, 0.25).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
+		await tween.finished
 
 	if current_island_index > 0:
 		current_island_index -= 1
@@ -116,10 +128,17 @@ func _on_prev_pressed():
 		_change_scene("res://scenes/ui/level_select_horizontal.tscn")
 
 func _on_next_pressed():
+	if is_transitioning: return
+	is_transitioning = true
+	
+	if next_idle_tween: next_idle_tween.kill()
+	if prev_idle_tween: prev_idle_tween.kill()
+
 	if next_island_btn:
 		next_island_btn.disabled = true
 		var tween = create_tween()
-		tween.tween_property(next_island_btn, "position:x", next_island_btn.position.x + 300, 0.25).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
+		tween.tween_property(next_island_btn, "position:x", next_original_x + 300, 0.25).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
+		await tween.finished
 
 	if current_island_index < island_data.size() - 1:
 		current_island_index += 1
@@ -140,9 +159,13 @@ func _play_transition_effect():
 	if next_island_btn:
 		next_island_btn.position.x = next_original_x
 		next_island_btn.disabled = false
+		
+	_animate_arrows()
 	
 	var fade_in = create_tween()
 	fade_in.tween_property(fade_rect, "color:a", 0.0, 0.2)
+	await fade_in.finished
+	is_transitioning = false
 
 func _input(event):
 	if event is InputEventScreenTouch or (event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT):
@@ -155,6 +178,7 @@ func _input(event):
 				_check_swipe(event.position)
 
 func _check_swipe(touch_end_pos: Vector2):
+	if is_transitioning: return
 	var drag_dist = touch_end_pos.x - touch_start_pos.x
 	if abs(drag_dist) > swipe_threshold:
 		if drag_dist > 0:

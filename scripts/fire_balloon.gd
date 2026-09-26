@@ -71,8 +71,8 @@ func _process_target(target):
 		_unfreeze_balloon(target)
 		if "is_frozen" in target:
 			target.is_frozen = false
+		return 
 
-	# Doğrudan Sessiz Patlatma Kontrolü
 	if target.has_method("pop_silently"):
 		target.pop_silently()
 		return

@@ -28,12 +28,12 @@ func setup(num: int, is_unlocked: bool, earned_stars: int, is_boss_level: bool):
 	if lock_icon:
 		lock_icon.visible = not is_level_unlocked
 	
+	var ss_path = "res://assets/textures/levels/thumbnails/level_" + str(level_num) + "_thumb.webp"
+	if ResourceLoader.exists(ss_path):
+		screenshot.texture = load(ss_path)
+	
 	if is_level_unlocked:
 		disabled = false
-		var ss_path = "res://assets/textures/levels/thumbnails/level_" + str(level_num) + "_thumb.webp"
-		if ResourceLoader.exists(ss_path):
-			screenshot.texture = load(ss_path)
-			
 		if is_boss_level:
 			modulate = Color(1.4, 1.0, 1.0)
 		else:

@@ -7,6 +7,10 @@ var fade_rect: ColorRect
 var touch_start_pos = Vector2.ZERO
 var is_dragging = false
 var swipe_threshold = 100.0
+var is_transitioning = false
+
+var prev_original_x: float
+var prev_idle_tween: Tween
 
 func _ready():
 	if home_btn:
@@ -14,6 +18,7 @@ func _ready():
 	_setup_fade_overlay()
 	
 	if prev_island_btn:
+		prev_original_x = prev_island_btn.position.x
 		prev_island_btn.pressed.connect(_on_prev_island_pressed)
 		_animate_arrow()
 
@@ -26,18 +31,26 @@ func _setup_fade_overlay():
 	move_child(fade_rect, get_child_count() - 1)
 
 func _animate_arrow():
-	var tween = create_tween().set_loops()
-	tween.tween_property(prev_island_btn, "position:x", prev_island_btn.position.x - 15, 0.6).set_trans(Tween.TRANS_SINE)
-	tween.tween_property(prev_island_btn, "position:x", prev_island_btn.position.x, 0.6).set_trans(Tween.TRANS_SINE)
+	if prev_island_btn:
+		if prev_idle_tween: prev_idle_tween.kill()
+		prev_idle_tween = create_tween().set_loops()
+		prev_idle_tween.tween_property(prev_island_btn, "position:x", prev_original_x - 15, 0.6).set_trans(Tween.TRANS_SINE)
+		prev_idle_tween.tween_property(prev_island_btn, "position:x", prev_original_x, 0.6).set_trans(Tween.TRANS_SINE)
 
 func _on_home_pressed():
 	get_tree().change_scene_to_file("res://scenes/ui/main_menu.tscn")
 
 func _on_prev_island_pressed():
+	if is_transitioning: return
+	is_transitioning = true
+
+	if prev_idle_tween: prev_idle_tween.kill()
+
 	if prev_island_btn:
 		prev_island_btn.disabled = true
 		var tween = create_tween()
-		tween.tween_property(prev_island_btn, "position:x", prev_island_btn.position.x - 300, 0.25).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
+		tween.tween_property(prev_island_btn, "position:x", prev_original_x - 300, 0.25).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
+		await tween.finished
 
 	var fade_tween = create_tween()
 	fade_tween.tween_property(fade_rect, "color:a", 1.0, 0.25)
@@ -69,13 +82,27 @@ func _on_prev_island_pressed():
 			get_tree().current_scene = target_star_scene
 		else:
 			var level_select_scene = load("res://scenes/ui/level_select_horizontal.tscn").instantiate()
-			level_select_scene.current_island = target_island_id
 			get_tree().root.add_child(level_select_scene)
+			
+			level_select_scene.current_island = target_island_id
+			level_select_scene.target_island = target_island_id
+			level_select_scene._update_ui_for_island()
+			level_select_scene.generate_level_map()
+			
 			get_tree().current_scene.queue_free()
 			get_tree().current_scene = level_select_scene
 			target_star_scene.queue_free()
 	else:
-		get_tree().change_scene_to_file("res://scenes/ui/level_select_horizontal.tscn")
+		var level_select_scene = load("res://scenes/ui/level_select_horizontal.tscn").instantiate()
+		get_tree().root.add_child(level_select_scene)
+		
+		level_select_scene.current_island = 2 
+		level_select_scene.target_island = 2
+		level_select_scene._update_ui_for_island()
+		level_select_scene.generate_level_map()
+		
+		get_tree().current_scene.queue_free()
+		get_tree().current_scene = level_select_scene
 		target_star_scene.queue_free()
 
 func _input(event):
@@ -89,6 +116,7 @@ func _input(event):
 				_check_swipe(event.position)
 
 func _check_swipe(touch_end_pos: Vector2):
+	if is_transitioning: return
 	var drag_dist = touch_end_pos.x - touch_start_pos.x
 	if drag_dist > swipe_threshold:
 		_on_prev_island_pressed()

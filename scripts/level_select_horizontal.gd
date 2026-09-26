@@ -14,6 +14,11 @@ var is_dragging = false
 var swipe_threshold = 100.0
 var fade_rect: ColorRect
 
+var prev_original_x: float
+var next_original_x: float
+var next_idle_tween: Tween
+var prev_idle_tween: Tween
+
 @onready var level_container = $ScrollContainer/MarginContainer/LevelContainer
 @onready var next_island_btn = $NextThemeButton
 @onready var prev_island_btn = $PrevThemeButton
@@ -50,9 +55,14 @@ func _ready():
 
 	current_island = target_island
 
-	home_btn.pressed.connect(_on_home_pressed)
-	next_island_btn.pressed.connect(_on_next_island_pressed)
-	prev_island_btn.pressed.connect(_on_prev_island_pressed)
+	if home_btn:
+		home_btn.pressed.connect(_on_home_pressed)
+	if prev_island_btn:
+		prev_original_x = prev_island_btn.position.x
+		prev_island_btn.pressed.connect(_on_prev_island_pressed)
+	if next_island_btn:
+		next_original_x = next_island_btn.position.x
+		next_island_btn.pressed.connect(_on_next_island_pressed)
 
 	_setup_fade_overlay()
 	_animate_arrows()
@@ -120,11 +130,22 @@ func generate_level_map():
 				card.pressed.connect(_on_level_pressed.bind(level_num))
 
 func change_island(target: int, swipe_direction: int):
-	if is_transitioning: return
-	
 	if target < 1:
+		is_transitioning = false
 		return
 
+	var fade_tween = create_tween()
+	fade_tween.tween_property(fade_rect, "color:a", 1.0, 0.25)
+
+	for card in level_container.get_children():
+		for child in card.get_children():
+			if child.has_node("LockIcon"):
+				var l_icon = child.get_node("LockIcon")
+				var card_tween = create_tween()
+				card_tween.tween_property(l_icon, "modulate:a", 0.0, 0.25)
+				
+	await fade_tween.finished
+	
 	if target > current_island and current_island == 1:
 		var total_stars = 0
 		for i in range(1, TOTAL_LEVELS + 1):
@@ -135,20 +156,6 @@ func change_island(target: int, swipe_direction: int):
 			get_tree().change_scene_to_file("res://scenes/ui/target_star.tscn")
 			return
 
-	is_transitioning = true
-
-	var fade_tween = create_tween()
-	fade_tween.tween_property(fade_rect, "color:a", 1.0, 0.2)
-
-	for card in level_container.get_children():
-		for child in card.get_children():
-			if child.has_node("LockIcon"):
-				var l_icon = child.get_node("LockIcon")
-				var card_tween = create_tween()
-				card_tween.tween_property(l_icon, "modulate:a", 0.0, 0.2)
-				
-	await fade_tween.finished
-	
 	if target > MAX_ISLANDS:
 		target_island = MAX_ISLANDS
 		get_tree().change_scene_to_file("res://scenes/ui/coming_soon.tscn")
@@ -159,6 +166,15 @@ func change_island(target: int, swipe_direction: int):
 	_update_ui_for_island()
 	generate_level_map()
 	
+	if prev_island_btn:
+		prev_island_btn.position.x = prev_original_x
+		prev_island_btn.disabled = false
+	if next_island_btn:
+		next_island_btn.position.x = next_original_x
+		next_island_btn.disabled = false
+		
+	_animate_arrows()
+	
 	await get_tree().process_frame 
 	
 	var scroll_bar = scroll_container.get_h_scroll_bar()
@@ -168,7 +184,7 @@ func change_island(target: int, swipe_direction: int):
 		scroll_bar.value = scroll_bar.max_value
 		
 	var unfade_tween = create_tween()
-	unfade_tween.tween_property(fade_rect, "color:a", 0.0, 0.2)
+	unfade_tween.tween_property(fade_rect, "color:a", 0.0, 0.25)
 	
 	for card in level_container.get_children():
 		for child in card.get_children():
@@ -176,7 +192,7 @@ func change_island(target: int, swipe_direction: int):
 				var l_icon = child.get_node("LockIcon")
 				l_icon.modulate.a = 0.0
 				var card_tween = create_tween()
-				card_tween.tween_property(l_icon, "modulate:a", 1.0, 0.2)
+				card_tween.tween_property(l_icon, "modulate:a", 1.0, 0.25)
 				
 	await unfade_tween.finished
 	
@@ -205,28 +221,32 @@ func _update_ui_for_island():
 
 func _on_next_island_pressed():
 	if is_transitioning: return
-	next_island_btn.disabled = true
-
-	var tween = create_tween()
-	tween.tween_property(next_island_btn, "position:x", next_island_btn.position.x + 300, 0.25).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
-
-	await tween.finished
-	next_island_btn.position.x -= 300 
-	next_island_btn.disabled = false
+	is_transitioning = true
 	
+	if next_idle_tween: next_idle_tween.kill()
+	if prev_idle_tween: prev_idle_tween.kill()
+		
+	if next_island_btn:
+		next_island_btn.disabled = true
+		var tween = create_tween()
+		tween.tween_property(next_island_btn, "position:x", next_original_x + 300, 0.25).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
+		await tween.finished
+
 	change_island(current_island + 1, 1)
 
 func _on_prev_island_pressed():
 	if is_transitioning: return
-	prev_island_btn.disabled = true
-
-	var tween = create_tween()
-	tween.tween_property(prev_island_btn, "position:x", prev_island_btn.position.x - 300, 0.25).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
-
-	await tween.finished
-	prev_island_btn.position.x += 300 
-	prev_island_btn.disabled = false
+	is_transitioning = true
 	
+	if next_idle_tween: next_idle_tween.kill()
+	if prev_idle_tween: prev_idle_tween.kill()
+
+	if prev_island_btn:
+		prev_island_btn.disabled = true
+		var tween = create_tween()
+		tween.tween_property(prev_island_btn, "position:x", prev_original_x - 300, 0.25).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
+		await tween.finished
+
 	change_island(current_island - 1, -1)
 
 func _input(event):
@@ -252,13 +272,17 @@ func _check_overscroll(touch_end_pos: Vector2):
 			_on_prev_island_pressed()
 
 func _animate_arrows():
-	var tween = create_tween().set_loops()
-	tween.tween_property(next_island_btn, "position:x", next_island_btn.position.x + 15, 0.6).set_trans(Tween.TRANS_SINE)
-	tween.tween_property(next_island_btn, "position:x", next_island_btn.position.x, 0.6).set_trans(Tween.TRANS_SINE)
+	if next_island_btn:
+		if next_idle_tween: next_idle_tween.kill()
+		next_idle_tween = create_tween().set_loops()
+		next_idle_tween.tween_property(next_island_btn, "position:x", next_original_x + 15, 0.6).set_trans(Tween.TRANS_SINE)
+		next_idle_tween.tween_property(next_island_btn, "position:x", next_original_x, 0.6).set_trans(Tween.TRANS_SINE)
 	
-	var tween2 = create_tween().set_loops()
-	tween2.tween_property(prev_island_btn, "position:x", prev_island_btn.position.x - 15, 0.6).set_trans(Tween.TRANS_SINE)
-	tween2.tween_property(prev_island_btn, "position:x", prev_island_btn.position.x, 0.6).set_trans(Tween.TRANS_SINE)
+	if prev_island_btn:
+		if prev_idle_tween: prev_idle_tween.kill()
+		prev_idle_tween = create_tween().set_loops()
+		prev_idle_tween.tween_property(prev_island_btn, "position:x", prev_original_x - 15, 0.6).set_trans(Tween.TRANS_SINE)
+		prev_idle_tween.tween_property(prev_island_btn, "position:x", prev_original_x, 0.6).set_trans(Tween.TRANS_SINE)
 
 func _on_home_pressed():
 	get_tree().change_scene_to_file("res://scenes/ui/main_menu.tscn")
